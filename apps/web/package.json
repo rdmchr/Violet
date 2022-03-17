@@ -1,0 +1,29 @@
+{
+  "name": "violet-web",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "firebase": "^9.6.8",
+    "next": "12.1.0",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "react-firebase-hooks": "^5.0.3",
+    "tailwindcss": "3.0.23"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.12",
+    "@types/react": "17.0.37",
+    "@types/tailwindcss": "3.0.9",
+    "config": "*",
+    "eslint": "7.32.0",
+    "next-transpile-modules": "9.0.0",
+    "tsconfig": "*",
+    "typescript": "^4.5.3"
+  }
+}

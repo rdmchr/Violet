@@ -4,7 +4,20 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      gridRowStart: {
+        '8': '8',
+        '9': '9',
+        '10': '10',
+      },
+      gridTemplateRows: {
+        // Used for timetable
+        'timetable': 'max-content repeat(8, 50px)',
+
+        // Complex site-specific row configuration
+        'layout': '200px minmax(900px, 1fr) 100px',
+      }
+    },
   },
   plugins: [],
 }

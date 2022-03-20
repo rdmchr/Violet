@@ -10,4 +10,4 @@ jobs:
         node-version: '14'
     - run: cd apps/functions && npm install
     - name: Run ESLint
-      run: npm run lint
+      run: cd apps/functions && npm run lint

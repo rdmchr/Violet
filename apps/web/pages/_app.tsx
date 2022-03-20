@@ -27,24 +27,28 @@ function MyApp({ Component, pageProps }: AppProps) {
     } else {
       setUser(null);
       setLoading(false);
+
     }
   });
 
   useEffect(() => {
     if (router) {
+      if (route !== router.pathname) {
+        setRoute(router.pathname);
+      }
       router.events.on('routeChangeStart', (url) => {
         setRoute(url);
       })
     }
   }, [router])
 
-  
+  const hiddenMenuRoutes = ['/login', '/settings', '/welcome']
 
   return (
     <UserContext.Provider value={{ user: user, username: "asd", uid: user?.uid, loading: loading }}>
       <div>
         <Component {...pageProps} />
-        <nav className='fixed bottom-0 left-0 w-screen py-2 flex items-center justify-evenly border-t rounded-t-xl border-gray-300 drop-shadow-[0_-5px_25px_rgba(0,0,0,0.15)] bg-white'>
+        <nav className={`fixed bottom-0 left-0 w-screen py-2 flex items-center justify-evenly border-t rounded-t-xl border-gray-300 drop-shadow-[0_-5px_25px_rgba(0,0,0,0.15)] bg-white ${hiddenMenuRoutes.includes(route) ? 'hidden' : 'asdasdasd'}`}>
           <Link passHref href="/">
             <div>
               <HomeIcon className={`text-3xl ${route === "/" ? "fill-violet-800" : ""}`} />

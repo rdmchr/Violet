@@ -6,11 +6,16 @@ import { app } from "../lib/firebase";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { getAuth } from "firebase/auth";
 import { fetchTimetable } from "../lib/data";
+import { SettingsIcon } from "../icons";
+import TextTransition, { presets } from "react-text-transition";
+import { useRouter } from "next/router";
+import Header from "../components/header";
 
 const db = getFirestore(app);
 const auth = getAuth(app);
 
 export default function Web() {
+  const router = useRouter();
   const [day, setDay] = useState<Day | null>(null)
   const [loading, setLoading] = useState(true);
   const [user, authLoading, authError] = useAuthState(auth);
@@ -53,8 +58,12 @@ export default function Web() {
 
   return (
     <main>
-      <div className={"bg-violet-900 text-white rounded-b-xl px-5 py-2 drop-shadow-md"}>
-        <p className="text-sm">Next lesson: {upcomingBreak ? <span>☕</span> : <></>}</p>
+      <Header settings />
+      <div className={"bg-violet-800 text-white rounded-b-xl px-5 py-2 drop-shadow-md"}>
+        <div className="flex items-center justify-between">
+          <p className="text-sm">Next lesson: {upcomingBreak ? <span>☕</span> : <></>}</p>
+          
+        </div>
         {nextLesson ? <>
           <h1>{nextLesson.subject}</h1>
           <p>{nextLesson.room}</p>

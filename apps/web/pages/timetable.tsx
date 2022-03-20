@@ -1,7 +1,6 @@
 import { app } from '../lib/firebase'
 import { doc, getDoc, getFirestore } from "firebase/firestore";
 import { useContext, useEffect, useState } from 'react';
-import { UserContext } from '../lib/context';
 import { Week, Day } from '../lib/types';
 import { getCurrentDay, getCurrentPeriod } from '../lib/util';
 import { useAuthState } from 'react-firebase-hooks/auth';

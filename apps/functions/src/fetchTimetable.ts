@@ -80,8 +80,8 @@ function parseJSON(jsonString: string, uid: string) {
 
 /**
  * 
- * @param data this is data
- * @param uid this is uid
+ * @param data this is JSON with Timetable for week
+ * @param uid this is the userID
  */
 async function uploadToFirestore(data: Week, uid: string) {
   // find the latest monday

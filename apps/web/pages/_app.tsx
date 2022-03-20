@@ -8,6 +8,7 @@ import { getFirestore } from 'firebase/firestore';
 import { ChatIcon, HomeIcon, HornIcon, TableIcon } from '../icons';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 
 const db = getFirestore(app);
 const auth = getAuth(app);
@@ -46,6 +47,9 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <UserContext.Provider value={{ user: user, username: "asd", uid: user?.uid, loading: loading }}>
+      <Head>
+        <title>Violet</title>
+      </Head>
       <div>
         <Component {...pageProps} />
         <nav className={`fixed bottom-0 left-0 w-screen py-2 flex items-center justify-evenly border-t rounded-t-xl border-gray-300 drop-shadow-[0_-5px_25px_rgba(0,0,0,0.15)] bg-white ${hiddenMenuRoutes.includes(route) ? 'hidden' : 'asdasdasd'}`}>

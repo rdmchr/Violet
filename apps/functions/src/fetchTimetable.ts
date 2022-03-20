@@ -1,7 +1,7 @@
-import { db } from "./initApp";
+import {db} from "./initApp";
 import * as functions from "firebase-functions";
 import {CollectionReference} from "firebase-admin/firestore";
-import { fetchData } from "./puppeteerConnector";
+import {fetchData} from "./puppeteerConnector";
 
 const URL = (process.env.WEBSITE_URL as string) || "";
 const sel = "#aktuelleWoche > div > .row > .small-12 > .stundenplan" +
@@ -17,7 +17,7 @@ interface userData {
 
 const store = db;
 
-export const fetchTimetable = 
+export const fetchTimetable =
   functions.https.onCall(async (_data, context) => {
     if (URL.length < 1) {
       throw new Error("No URL specified");
@@ -37,11 +37,11 @@ export const fetchTimetable =
     }
     functions.logger.info(`Running fetch-timetable for ${uid}`,
         {structuredData: true});
-    const timetable = 
+    const timetable =
+    /* eslint-disable */
      await fetchData(userData.xUser, userData.xPass, uid, URL, sel, endpoint, action);
     return parseJSON(JSON.stringify(timetable), uid);
-});
-
+  });
 
 
 /**
@@ -78,21 +78,27 @@ function parseJSON(jsonString: string, uid: string) {
   return week;
 }
 
+/**
+ * 
+ * @param data this is data
+ * @param uid this is uid
+ */
 async function uploadToFirestore(data: Week, uid: string) {
   // find the latest monday
-  var monday = new Date();
+  const monday = new Date();
   monday.setDate(monday.getDate() - (monday.getDay() + 6) % 7);
+  /* eslint-disable */
   const timestamp = `${monday.getFullYear()}-${monday.getMonth() + 1}-${monday.getDate()}`;
   if (data) {
     const docSnap = await store.collection("timetable").doc(uid).get();
     if (docSnap.exists) {
-      await store.collection('timetables').doc(uid).update({
+      await store.collection("timetables").doc(uid).update({
         [timestamp]: JSON.stringify(data),
-      })
+      });
     } else {
-      await store.collection('timetables').doc(uid).set({
+      await store.collection("timetables").doc(uid).set({
         [timestamp]: JSON.stringify(data),
-      })
+      });
     }
   }
 }

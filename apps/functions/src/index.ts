@@ -1,9 +1,9 @@
-import { fetchTimetable } from "./fetchTimetable";
-import { createTestUser } from "./Testlogin";
-import { fetchAnnouncements } from "./fetchAnnouncements";
+import {fetchTimetable} from "./fetchTimetable";
+import {createTestUser} from "./Testlogin";
+import {fetchAnnouncements} from "./fetchAnnouncements";
 
-export{
-  fetchTimetable, 
+export {
+  fetchTimetable,
   createTestUser,
-  fetchAnnouncements
-}
+  fetchAnnouncements,
+};

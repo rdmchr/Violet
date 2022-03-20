@@ -1,5 +1,5 @@
 import * as puppeteer from "puppeteer";
-import { HTTPResponse } from "puppeteer";
+import {HTTPResponse} from "puppeteer";
 
 /**
  * queries the school website and returns the timetable as a typescript object
@@ -12,7 +12,7 @@ import { HTTPResponse } from "puppeteer";
  * @param {string} action the action in the post method's body to listen for
  * parsed into a typescript object
  */
- /* eslint-disable */
+/* eslint-disable */
 export async function fetchData(username: string, password: string, uid: string, URL: string, sel: string, endpoint: string, action: string) {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();

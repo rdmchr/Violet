@@ -44,8 +44,8 @@ export const fetchAnnouncements =
 
 /**
  * 
- * @param messages this is messages
- * @param uid this is uid
+ * @param messages this is the JSON with all announcement data from puppeteer
+ * @param uid this is the userID
  */
 function parseJSON(messages:any, uid:string) {
   JSON.parse(messages)[0].forEach((elem:any) => {
@@ -60,19 +60,17 @@ function parseJSON(messages:any, uid:string) {
 
 /**
  * 
- * @param data this is data
- * @param uid this is uid
- * @param messageId this is messageId
+ * @param data this is the reworked JSON ready to be stored in the DB it contains: message, Teacher and timestamp
+ * @param uid this is the userID
+ * @param messageId this is the messageId which becomes the ID for the doc in DB
  */
 async function uploadToFirestore(data: JSON, uid:string, messageId: string) {
   if (data) {
     const coll = await store.collection("messages").doc(""+messageId).get();
     if (coll.exists) {
-      console.log("still trying");
       await store.collection("messages").doc(""+messageId).update({
         permittedUsers: FieldValue.arrayUnion(uid),
       });
-      console.log("have tried");
     } else {
       await store.collection("messages").doc(""+messageId).set({
         permittedUsers: [uid],

@@ -28,7 +28,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
 export default function Welcome(props) {
     const router = useRouter();
     const { locale, locales, defaultLocale } = router;
-    const [name, setName] = useState("Marc");
+    const [name, setName] = useState("");
     const [stage, setStage] = useState(0);
 
     function nextStage() {
@@ -37,7 +37,7 @@ export default function Welcome(props) {
 
     return (
         <div>
-            <div onClick={nextStage}>
+            <div>
                 <Header small />
             </div>
             <div className="px-2 mt-2">

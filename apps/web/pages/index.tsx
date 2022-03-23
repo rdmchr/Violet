@@ -31,6 +31,9 @@ export default function Web() {
   }, 30 * 1000) */
 
   useEffect(() => {
+    if (!authLoading && !user) {
+      router.push('/login');
+    }
     if (!authLoading && user) {
       console.log(user);
       fetchData();

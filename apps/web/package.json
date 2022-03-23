@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "lingui:extract": "cross-env NODE_ENV=development lingui extract",
-    "lingui:compile": "cross-env NODE_ENV=development lingui compile"
+    "lingui:compile": "lingui compile"
   },
   "dependencies": {
     "@lingui/react": "^3.13.2",

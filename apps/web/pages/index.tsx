@@ -10,6 +10,7 @@ import { SettingsIcon } from "../icons";
 import TextTransition, { presets } from "react-text-transition";
 import { useRouter } from "next/router";
 import Header from "../components/header";
+import { Trans } from "@lingui/macro";
 
 const db = getFirestore(app);
 const auth = getAuth(app);
@@ -39,7 +40,7 @@ export default function Web() {
   async function fetchData() {
     var monday = new Date();
     monday.setDate(monday.getDate() - (monday.getDay() + 6) % 7);
-    const timestamp = `${monday.getFullYear()}-${monday.getMonth() + 1}-${monday.getDate()}`;
+    const timestamp = monday.toISOString().split('T')[0];
     const week = await fetchTimetable(timestamp);
     setTimetable(week);
     const tempDay = week[2]
@@ -53,7 +54,7 @@ export default function Web() {
   }
 
   if (loading) {
-    return <p>Loading...</p>
+    return <p><Trans id="loading">Loading...</Trans></p>
   }
 
   return (
@@ -61,13 +62,12 @@ export default function Web() {
       <Header settings />
       <div className={"bg-violet-800 text-white rounded-b-xl px-5 py-2 drop-shadow-md"}>
         <div className="flex items-center justify-between">
-          <p className="text-sm">Next lesson: {upcomingBreak ? <span>☕</span> : <></>}</p>
-          
+          <p className="text-sm"><Trans id="nextLesson">Next lesson:</Trans></p>
         </div>
         {nextLesson ? <>
           <h1>{nextLesson.subject}</h1>
           <p>{nextLesson.room}</p>
-        </> : <p className="text-lg">You finished school for today</p>}
+        </> : <p className="text-lg"><Trans id="finishedSchool">You finished school for today</Trans></p>}
       </div>
       Hello
     </main>

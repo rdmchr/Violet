@@ -24,6 +24,7 @@ export default function Web() {
   const [nextLesson, setNextLesson] = useState<Lesson | null>(null);
   const [upcomingBreak, setUpcomingBreak] = useState<boolean>(false);
   const currentDay = getCurrentDay();
+  const weekIndex = new Date().getDay() - 1;
 
   /* const periodTracker = setInterval(() => {
     const p = getPeriod(new Date())
@@ -46,7 +47,7 @@ export default function Web() {
     const timestamp = monday.toISOString().split('T')[0];
     const week = await fetchTimetable(timestamp);
     setTimetable(week);
-    const tempDay = week[2]
+    const tempDay = week[weekIndex]
     setDay(tempDay);
     const nextLesson = nextPeriod(tempDay);
     if (nextLesson) {

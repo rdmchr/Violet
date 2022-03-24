@@ -1,0 +1,21 @@
+{
+  "name": "@violet/webhook-server",
+  "version": "0.0.0",
+  "main": "index.js",
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "@types/node": "^17.0.23",
+    "typescript": "^4.6.2"
+  },
+  "scripts": {
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rdmchr/Violet.git"
+  },
+  "bugs": {
+    "url": "https://github.com/rdmchr/Violet/issues"
+  },
+  "homepage": "https://github.com/rdmchr/Violet#readme"
+}

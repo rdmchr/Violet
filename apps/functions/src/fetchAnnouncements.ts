@@ -17,7 +17,7 @@ interface userData {
 const store = db;
 
 export const fetchAnnouncements =
-  functions.https.onCall(async (_data, context) => {
+  functions.region("europe-west3").https.onCall(async (_data, context) => {
     if (URL.length < 1) {
       throw new Error("No URL specified");
     }

@@ -4,12 +4,17 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "cross-env NODE_ENV=development lingui compile && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "lingui:extract": "cross-env NODE_ENV=development lingui extract",
+    "lingui:compile": "lingui compile"
   },
   "dependencies": {
+    "@lingui/react": "^3.13.2",
     "firebase": "^9.6.8",
+    "formik": "^2.2.9",
+    "make-plural": "^7.1.0",
     "next": "12.1.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
@@ -18,10 +23,17 @@
     "tailwindcss": "3.0.23"
   },
   "devDependencies": {
+    "@babel/core": "^7.17.8",
+    "@lingui/cli": "^3.13.2",
+    "@lingui/loader": "^3.13.2",
+    "@lingui/macro": "^3.13.2",
+    "@tailwindcss/line-clamp": "^0.3.1",
     "@types/node": "^17.0.12",
     "@types/react": "17.0.37",
     "@types/tailwindcss": "3.0.9",
+    "babel-plugin-macros": "^3.1.0",
     "config": "*",
+    "cross-env": "^7.0.3",
     "eslint": "7.32.0",
     "next-transpile-modules": "9.0.0",
     "tsconfig": "*",

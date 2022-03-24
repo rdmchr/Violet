@@ -1,0 +1,104 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2022-03-22 22:33+0100\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: de\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
+
+#: pages/_app.tsx:102
+msgid "chats"
+msgstr "Chats"
+
+#: pages/welcome.tsx:72
+msgid "connectToSchool"
+msgstr "Verbinde dich mit deinem Schul-Account"
+
+#: pages/welcome.tsx:75
+msgid "connectToSchoolDisclaimer"
+msgstr "Wir benötigen diese Daten um z.B. deinen Stundenplan zu laden."
+
+#: pages/welcome.tsx:60
+msgid "createAccount"
+msgstr "Erstelle ein neues Konto!"
+
+#: pages/welcome.tsx:63
+msgid "createAccountDisclaimerOne"
+msgstr "Dieser Account wird für Violet benutzt."
+
+#: pages/welcome.tsx:66
+msgid "createAccountDisclaimerTwo"
+msgstr "Er ist komplett unabhängig von deinem Schul Konto."
+
+#: pages/welcome.tsx:216
+msgid "email"
+msgstr "Email"
+
+#: pages/index.tsx:71
+msgid "finishedSchool"
+msgstr "Du hast heute keine weiteren Stunden."
+
+#: pages/welcome.tsx:53
+msgid "getStarted"
+msgstr "Los geht's!"
+
+#: pages/welcome.tsx:47
+msgid "hello"
+msgstr "Hallo!"
+
+#: pages/welcome.tsx:82
+msgid "helloName"
+msgstr "Hallo {name}!"
+
+#: pages/_app.tsx:84
+msgid "home"
+msgstr "Home"
+
+#: pages/index.tsx:58
+msgid "loading"
+msgstr "Lade..."
+
+#: pages/welcome.tsx:211
+msgid "name"
+msgstr "Name"
+
+#: pages/_app.tsx:96
+msgid "news"
+msgstr "News"
+
+#: pages/index.tsx:66
+msgid "nextLesson"
+msgstr "Nächste Stunde:"
+
+#: pages/welcome.tsx:140
+#: pages/welcome.tsx:221
+msgid "password"
+msgstr "Password"
+
+#: pages/welcome.tsx:88
+msgid "pleaseWait"
+msgstr "Bitte geb uns einen Moment. Wir laden deinen Stundenplan."
+
+#: pages/welcome.tsx:50
+msgid "slogan"
+msgstr "Willkommen bei Violet, der bessere Weg online informiert zu bleiben."
+
+#: pages/welcome.tsx:146
+#: pages/welcome.tsx:227
+msgid "submit"
+msgstr "Bestätigen"
+
+#: pages/_app.tsx:90
+msgid "timetable"
+msgstr "Stundenplan"
+
+#: pages/welcome.tsx:135
+msgid "username"
+msgstr "Benutzername"

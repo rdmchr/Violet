@@ -8,6 +8,7 @@ const auth = getAuth(app);
 export async function fetchTimetable(timestamp: string): Promise<Week> {
     const { uid } = auth.currentUser;
     const docSnap = await getDoc(doc(db, 'timetables', uid));
-    const timetable = JSON.parse(await docSnap.data()[timestamp] as string);
+    const data = await docSnap.data() as Week[];
+    const timetable = JSON.parse(data[timestamp] as string);
     return timetable;
 }

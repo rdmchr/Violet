@@ -16,6 +16,9 @@ module.exports = {
 
         // Complex site-specific row configuration
         'layout': '200px minmax(900px, 1fr) 100px',
+      },
+      gridTemplateCols: {
+        'timetable-week': 'repeat(6, max-content)'
       }
     },
   },

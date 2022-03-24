@@ -87,8 +87,7 @@ async function uploadToFirestore(data: Week, uid: string) {
   // find the latest monday
   const monday = new Date();
   monday.setDate(monday.getDate() - (monday.getDay() + 6) % 7);
-  /* eslint-disable */
-  const timestamp = `${monday.getFullYear()}-${monday.getMonth() + 1}-${monday.getDate()}`;
+  const timestamp = monday.toISOString().split('T')[0];
   if (data) {
     const docSnap = await store.collection("timetable").doc(uid).get();
     if (docSnap.exists) {

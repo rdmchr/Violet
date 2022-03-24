@@ -13,7 +13,7 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: pages/_app.tsx:102
+#: pages/_app.tsx:103
 msgid "chats"
 msgstr "Chats"
 
@@ -41,7 +41,7 @@ msgstr "This account is separate from your school account."
 msgid "email"
 msgstr "Email"
 
-#: pages/index.tsx:71
+#: pages/index.tsx:74
 msgid "finishedSchool"
 msgstr "You finished school for today"
 
@@ -57,11 +57,11 @@ msgstr "Hello!"
 msgid "helloName"
 msgstr "Hello, {name}!"
 
-#: pages/_app.tsx:84
+#: pages/_app.tsx:85
 msgid "home"
 msgstr "Home"
 
-#: pages/index.tsx:58
+#: pages/index.tsx:61
 msgid "loading"
 msgstr "Loading..."
 
@@ -69,11 +69,11 @@ msgstr "Loading..."
 msgid "name"
 msgstr "Name"
 
-#: pages/_app.tsx:96
+#: pages/_app.tsx:97
 msgid "news"
 msgstr "News"
 
-#: pages/index.tsx:66
+#: pages/index.tsx:69
 msgid "nextLesson"
 msgstr "Next lesson: {0}"
 
@@ -95,7 +95,7 @@ msgstr "Welcome to Violet, the better way to interact with your school online."
 msgid "submit"
 msgstr "Submit"
 
-#: pages/_app.tsx:90
+#: pages/_app.tsx:91
 msgid "timetable"
 msgstr "Timetable"
 

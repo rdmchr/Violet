@@ -6,5 +6,6 @@ import SettingsIcon from './CarbonSettings';
 import BackIcon from './CarbonArrowLeft';
 import RightArrow from './CarbonArrowRight';
 import CalendarIcon from './CarbonDataTable';
+import CloseIcon from './CarbonClose';
 
-export { HomeIcon, TableIcon, HornIcon, ChatIcon, SettingsIcon, BackIcon, RightArrow, CalendarIcon };
+export { HomeIcon, TableIcon, HornIcon, ChatIcon, SettingsIcon, BackIcon, RightArrow, CalendarIcon, CloseIcon };

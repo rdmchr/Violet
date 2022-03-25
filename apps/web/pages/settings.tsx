@@ -1,14 +1,80 @@
 import { getAuth } from "firebase/auth";
 import { useRouter } from "next/router";
+import { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import CarbonArrowLeft from "../icons/CarbonArrowLeft";
 import { app } from "../lib/firebase";
+import { CloseIcon } from '../icons'
+import { collection, doc, getDoc, getDocs, getFirestore, onSnapshot, query, updateDoc, where, } from "firebase/firestore";
 
 const auth = getAuth(app);
+const db = getFirestore(app);
 
 export default function Settings() {
     const router = useRouter();
     const [user, authLoading, authError] = useAuthState(auth);
+    const [tictactoe, setTictactoe] = useState(false);
+    const [tttState, setTTTState] = useState<[string[]]>([[]]);
+    const [hasTurn, setHasTurn] = useState(false);
+    const [tttID, setTTTID] = useState('');
+    const [tttEnemy, setTTTEnemy] = useState('');
+
+    async function loadTTTState() {
+        const tttRef = collection(db, "tictactoe");
+        const q = await query(tttRef, where("users", "array-contains", user.uid));
+        const tttSnaps = await getDocs(q);
+        let tttId = '';
+        tttSnaps.forEach((doc) => {
+            tttId = doc.id;
+            setTTTID(tttId);
+            doc.data().users.forEach((tttUser) => {
+                console.log({tttUser})
+                if (tttUser !== user.uid) {
+                    setTTTEnemy(tttUser);
+                }
+            });
+        });
+        if (!tttId) {
+            console.log("CREATE NEW GAME");
+        }
+        console.log(tttId);
+        const unsub = onSnapshot(doc(db, "tictactoe", tttId), (doc) => {
+            console.log(tttId)
+            if (doc.exists && doc.data()) {
+                const data = doc.data();
+                console.log("Current data: ", data);
+                console.log(data.turn)
+                setHasTurn(data.turn === user.uid);
+                setTTTState(JSON.parse(data.state));
+            }
+        });
+    }
+
+    let counter = 0;
+    function clickAbout() {
+        counter++;
+        if (counter === 1) {
+            setTictactoe(true);
+            loadTTTState();
+        }
+    }
+
+    async function placePiece(x: number, y: number) {
+        if(!hasTurn) return;
+        const newState = tttState;
+        newState[x][y] = user.uid;
+        setTTTState(newState);
+        const tttRef = doc(db, "tictactoe", tttID);
+        console.log({tttEnemy});
+        await updateDoc(tttRef, {
+            state: JSON.stringify(newState),
+            turn: tttEnemy,
+        })
+    }
+
+    function handlePropagation(e) {
+        e.stopPropagation();
+    }
 
     if (authLoading) {
         return <p>Loading...</p>;
@@ -26,11 +92,39 @@ export default function Settings() {
 
     return (
         <main>
-            <CarbonArrowLeft className="text-2xl ml-2 mt-2" onClick={() => router.back()}/>
+            <CarbonArrowLeft className="text-2xl ml-2 mt-2" onClick={() => router.back()} />
             <h1 className="text-center text-2xl font-semibold mb-2">Settings</h1>
             <div className="px-2 cursor-pointer" onClick={logout}>
                 <p className="font-semibold">Log out</p>
                 <p className="text-gray-400 max-w-screen -mt-1">You are currently logged in as {user.email.length > 15 ? `${user.email.slice(0, 14)}...` : user.email}</p>
+            </div>
+            <div className="px-2 cursor-pointer" onClick={clickAbout}>
+                <p className="font-semibold">About</p>
+                <p className="text-gray-400 max-w-screen -mt-1">A simple App made by Tim and Marc</p>
+            </div>
+            <div className={`absolute top-0 left-0 w-full h-full backdrop-blur-sm backdrop-brightness-90 ${!tictactoe ? "hidden" : "inline"}`} onClick={() => { setTictactoe(false) }}>
+            <div className={`absolute top-1/2 left-0 -translate-y-1/2 w-[100vw] h-[100vw] bg-white z-10 drop-shadow-md`} onClick={handlePropagation}>
+                    <div className="flex items-center w-full mt-2 px-2">
+                        <h1 className="text-center w-full text-lg font-semibold">Tic Tac Toe</h1>
+                        <button onClick={() => (setTictactoe(false))}><CloseIcon className="text-2xl" /></button>
+                    </div>
+                    {tttState.length > 0 && tttState.map((row, i) => {
+                        return (
+                            <div className="flex flex-row w-full mt-2 px-2" key={`${row}${i}`}>
+                                {row.map((cell, j) => {
+                                    return (
+                                        <div className="w-1/3 px-2" key={`${cell}${j}`}>
+                                            <div className="bg-gray-200 rounded-full h-12 w-12 flex items-center justify-center" onClick={() => placePiece(i, j)}>
+                                                <p className="text-center text-lg">{cell ? cell === user.uid ? "X" : "O" : ""}</p>
+                                            </div>
+                                        </div>
+                                    )
+                                })}
+                            </div>
+                        )
+                    })}
+                    <h1 className="text-center mt-2">{hasTurn ? "It's your turn" : "It's your enemies turn"}</h1>
+                </div>
             </div>
         </main>
     )

@@ -1,5 +1,4 @@
-import { initializeApp, getApps } from 'firebase/app'
-import { enableIndexedDbPersistence, getFirestore } from 'firebase/firestore';
+import { initializeApp } from 'firebase/app';
 
 const firebaseConfig = {
     apiKey: "AIzaSyA2h6zoG90Mwo1_JHxuYgmto8oLusb7suM",

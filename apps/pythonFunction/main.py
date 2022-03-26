@@ -60,6 +60,9 @@ def main(request):
         return {'data': {'error': True, 'message': 'Unknown content type: {}'.format(content_type)}}, 400, headers
     if user is None or passw is None:
         return {'data': {'error': True, 'message': 'Missing parameter(s) (user or passw)!'}}, 400, headers
+    
+    # Make sure user name is lowercase
+    user = user.lower()
 
     url = os.environ['WEBSITE_URL']
     # Initialize Firebase

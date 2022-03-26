@@ -80,13 +80,13 @@ function MyApp({ Component, pageProps }: AppProps) {
             <Component {...pageProps} />
             <nav className={`fixed bottom-0 left-0 w-screen py-2 flex items-center justify-evenly border-t rounded-t-xl border-gray-300 drop-shadow-[0_-5px_25px_rgba(0,0,0,0.15)] bg-white ${hiddenMenuRoutes.includes(route) ? 'hidden' : 'asdasdasd'}`}>
               <Link passHref href="/">
-                <div>
+                <div className='flex justify-center items-center flex-col cursor-pointer'>
                   <HomeIcon className={`text-3xl ${route === "/" ? "fill-violet-800" : ""}`} />
                   <p className='text-xs'><Trans id='home'>Home</Trans></p>
                 </div>
               </Link>
               <Link passHref href="/timetable">
-                <div className='flex justify-center items-center flex-col'>
+                <div className='flex justify-center items-center flex-col cursor-pointer'>
                   <TableIcon className={`text-3xl ${route === "/timetable" ? "fill-violet-800" : ""}`} />
                   <p className='text-xs'><Trans id='timetable'>Timetable</Trans></p>
                 </div>
@@ -98,7 +98,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                 </div>
               </Link>
               <Link passHref href="/">
-                <div className='flex justify-center items-center flex-col'>
+                <div className='flex justify-center items-center flex-col cursor-pointer'>
                   <ChatIcon className={`text-3xl ${route === "/chats" ? "fill-violet-800" : ""}`} />
                   <p className='text-xs'><Trans id='chats'>Chats</Trans></p>
                 </div>

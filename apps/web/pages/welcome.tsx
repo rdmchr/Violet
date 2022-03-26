@@ -11,7 +11,7 @@ import { GetStaticProps } from "next";
 import { loadTranslation } from "../lib/transUtil";
 
 const auth = getAuth(app);
-const functions = getFunctions(app);
+const functions = getFunctions(app, 'europe-west3');
 
 export const getStaticProps: GetStaticProps = async (ctx) => {
     const translation = await loadTranslation(

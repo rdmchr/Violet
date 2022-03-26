@@ -91,7 +91,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                   <p className='text-xs'><Trans id='timetable'>Timetable</Trans></p>
                 </div>
               </Link>
-              <Link passHref href="/">
+              <Link passHref href="/news">
                 <div className='flex justify-center items-center flex-col'>
                   <HornIcon className={`text-3xl ${route === "/news" ? "fill-violet-800" : ""}`} />
                   <p className='text-xs'><Trans id='news'>News</Trans></p>

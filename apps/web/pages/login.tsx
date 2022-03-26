@@ -1,11 +1,12 @@
 import { app } from '../lib/firebase'
-import { getAuth, signInWithPopup, EmailAuthProvider, signInWithEmailAndPassword } from 'firebase/auth'
+import { getAuth, signInWithPopup, EmailAuthProvider, signInWithEmailAndPassword, connectAuthEmulator } from 'firebase/auth'
 import { useState } from 'react';
 import { getFunctions, httpsCallable } from 'firebase/functions'
 import Router, { useRouter } from 'next/router';
 import Header from '../components/header';
 
 const auth = getAuth(app);
+connectAuthEmulator(auth, "http://localhost:9099");
 const functions = getFunctions(app);
 
 export default function Login(props) {

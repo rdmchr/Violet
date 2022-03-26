@@ -1,14 +1,19 @@
-import { getAuth } from "firebase/auth";
+import { connectAuthEmulator, getAuth } from "firebase/auth";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import CarbonArrowLeft from "../icons/CarbonArrowLeft";
 import { app } from "../lib/firebase";
 import { CloseIcon } from '../icons'
-import { collection, doc, getDoc, getDocs, getFirestore, onSnapshot, query, updateDoc, where, } from "firebase/firestore";
+import { collection, connectFirestoreEmulator, doc, getDoc, getDocs, getFirestore, onSnapshot, query, updateDoc, where, } from "firebase/firestore";
+import { connectFunctionsEmulator, getFunctions, httpsCallable } from "firebase/functions";
 
 const auth = getAuth(app);
+connectAuthEmulator(auth, "http://localhost:9099");
 const db = getFirestore(app);
+connectFirestoreEmulator(db, 'localhost', 8080);
+const functions = getFunctions(app, 'europe-west3');
+connectFunctionsEmulator(functions, "localhost", 5001);
 
 export default function Settings() {
     const router = useRouter();
@@ -18,12 +23,19 @@ export default function Settings() {
     const [hasTurn, setHasTurn] = useState(false);
     const [tttID, setTTTID] = useState('');
     const [tttEnemy, setTTTEnemy] = useState('');
+    const [tttGame, setTTTGame] = useState(false);
+    const [tttLoading, setTTTLoading] = useState(true);
+    const [tttError, setTTTError] = useState('');
 
     async function loadTTTState() {
         const tttRef = collection(db, "tictactoe");
         const q = await query(tttRef, where("users", "array-contains", user.uid));
         const tttSnaps = await getDocs(q);
         let tttId = '';
+        if (tttSnaps.empty) {
+            setTTTLoading(false);
+            return;
+        }
         tttSnaps.forEach((doc) => {
             tttId = doc.id;
             setTTTID(tttId);
@@ -34,9 +46,6 @@ export default function Settings() {
                 }
             });
         });
-        if (!tttId) {
-            console.log("CREATE NEW GAME");
-        }
         console.log(tttId);
         const unsub = onSnapshot(doc(db, "tictactoe", tttId), (doc) => {
             console.log(tttId)
@@ -48,15 +57,16 @@ export default function Settings() {
                 setTTTState(JSON.parse(data.state));
             }
         });
+        setTTTLoading(false);
     }
 
     let counter = 0;
     function clickAbout() {
         counter++;
-        if (counter === 1) {
+        /* if (counter === 1) {
             setTictactoe(true);
             loadTTTState();
-        }
+        } */
     }
 
     /**
@@ -114,6 +124,16 @@ export default function Settings() {
         });
     }
 
+    async function gameManager() {
+        const addMessage = httpsCallable(functions, 'gameManager');
+        addMessage({ func: "TICTACTOE_CREATE", invitee: '' })
+            .then((result) => {
+                // Read result of the Cloud Function.
+                /** @type {any} */
+                const data = result.data;
+            });
+    }
+
     function handlePropagation(e) {
         e.stopPropagation();
     }
@@ -150,7 +170,7 @@ export default function Settings() {
                         <h1 className="text-center w-full text-lg font-semibold">Tic Tac Toe</h1>
                         <button onClick={() => (setTictactoe(false))} className="absolute top-0 right-2"><CloseIcon className="text-2xl" /></button>
                     </div>
-                    <div className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">
+                    {tttLoading ? <h1>LOADING!</h1> : tttGame ? <div className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">
                         {tttState.length > 0 && tttState.map((row, i) => {
                             return (
                                 <div className="grid grid-cols-[repeat(3,_max-content)] items-center justify-items-center gap-2 mt-2 w-max mx-auto" key={`${row}${i}`}>
@@ -167,7 +187,18 @@ export default function Settings() {
                             )
                         })}
                         <h1 className="text-center mt-2">{hasTurn ? "It's your turn" : "It's your enemies turn"}</h1>
-                    </div>
+                        <button onClick={gameManager}>Game manager</button>
+                    </div> :
+                        <div>
+                            <form className="flex flex-col">
+                                <label>
+                                    Enter someones School username
+                                    <input type="text" className="border" />
+                                </label>
+                                {tttError ? <p className="text-red-500">{tttError}</p> : null}
+                                <button className="mt-2">Start Game</button>
+                            </form>
+                        </div>}
                 </div>
             </div>
         </main>

@@ -41,7 +41,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       i18n.load(locale, pageProps.translation)
       i18n.activate(locale)
     }
-  }, [locale, pageProps.translation])
+  }, [])
 
   // manage auth state
   const auth = getAuth().onAuthStateChanged(async (u) => {
@@ -57,15 +57,13 @@ function MyApp({ Component, pageProps }: AppProps) {
   });
 
   useEffect(() => {
-    if (router) {
-      if (route !== router.pathname) {
-        setRoute(router.pathname);
-      }
-      router.events.on('routeChangeStart', (url) => {
-        setRoute(url);
-      })
+    const hrefs = window.location.href.split('/');
+    if(hrefs.length === 4) {
+      setRoute("/");
+    } else {
+    setRoute("/" + hrefs[hrefs.length - 1]);
     }
-  }, [router, route]);
+  });
 
   const hiddenMenuRoutes = ['/login', '/settings', '/welcome']
 

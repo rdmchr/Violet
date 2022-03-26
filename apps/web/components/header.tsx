@@ -1,12 +1,28 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useState, useEffect } from 'react';
 import TextTransition, { presets } from "react-text-transition";
 import { SettingsIcon } from "../icons";
 
 function Header({ settings = false, small = false }) {
   const router = useRouter();
-  const [topText, setTopText] = useState<string>("Welcome!");
+  let greetings = "Welcome !";
+
+  //useEffect(() => {
+  //  const hrefs = window.location.href.split('/');
+  //  const len = hrefs[3];
+  //
+  //switch (len){
+  //  case "de":
+  //    greetings = "Wilkommen!";
+  //    break;
+  //  default:
+  //    greetings = "Welcome!";
+  //    break;
+  //}
+  //});
+
+  const [topText, setTopText] = useState<string>(greetings);
 
 
   setTimeout(() => {

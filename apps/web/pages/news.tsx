@@ -48,7 +48,7 @@ export default function News() {
     }
 
     function parseMessageText(text: string) {
-        if (!text.includes('<a href="')) {
+        if (!text.includes('<a href="') && !text.includes('<br />')) {
             return (<p>{text}</p>)
         }
         const charArray = text.split('');

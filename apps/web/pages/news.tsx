@@ -25,7 +25,6 @@ export default function News() {
     const [news, setNews] = useState([]);
 
     useEffect(() => {
-        console.log("news", news);
         if (!authLoading && user.uid) {
             fetchNews();
         }
@@ -45,12 +44,11 @@ export default function News() {
             };
             newsList.push(news);
         });
-        console.log(newsList);
         setNews(newsList);
     }
 
     function parseMessageText(text: string) {
-        if (!text.includes('<a href="')) {
+        if (!text.includes('<a href="') && !text.includes('<br />')) {
             return (<p>{text}</p>)
         }
         const charArray = text.split('');
@@ -85,6 +83,19 @@ export default function News() {
             if (charArray[i] === '<' && charArray[i + 1] === '/') {
                 isInClosingTag = true;
             }
+            if (isInTag && charArray[i] === '/' && charArray[i + 1] === '>') {
+                tags.push({
+                    tagName,
+                    start: tagStart,
+                    end: i + 1
+                });
+                tagName = '';
+                tagStart = 0;
+                isInTag = false;
+                href = '';
+                isInClosingTag = false;
+            }
+
             // detect end of closing tag
             if (isInClosingTag && charArray[i] === '>') {
                 isInClosingTag = false;
@@ -101,22 +112,39 @@ export default function News() {
                 href = '';
             }
         }
-        let finalTag = (<></>);
+        let finalTag = (<span className="inline"></span>);
         for (let index = 0; index < tags.length; index++) {
             const tag = tags[index];
             const hasNext = index + 1 < tags.length;
-            if (index !== 0) {
-                finalTag = (<>{finalTag}
-                    <p>{text.substring(tags[index - 1].end + 1, tag.start - 1)}</p>
-                    <a href={tag.href} target="_blank" rel="noreferrer" className="underline">Link</a>
-                    <p>{text.substring(tag.end + 1, hasNext ? tags[index + 1].start - 1 : undefined)}</p>
-                </>);
+            if (tag.tagName === 'a') {
+                if (index !== 0) {
+                    finalTag = (<>{finalTag}
+                        
+                            <a href={tag.href} target="_blank" rel="noreferrer" className="underline">Link</a>
+                            {text.substring(tag.end + 1, hasNext ? tags[index + 1].start : Number.MAX_VALUE)}
+                    </>);
+                } else {
+                    finalTag = (<>
+                        {`${text.substring(0, tag.start)} `}
+                            <a href={tag.href} target="_blank" rel="noreferrer" className="underline text-blue-900">Link</a>
+                            {`${text.substring(tag.end + 1, hasNext ? tags[index + 1].start - 1 : Number.MAX_VALUE)}`}
+                    </>);
+                }
+            } else if (tag.tagName === 'br') {
+                if (index !== 0) {
+                    finalTag = (<>{finalTag}
+                        
+                            <br />
+                            {text.substring(tag.end + 1, hasNext ? tags[index + 1].start : Number.MAX_VALUE)}
+                    </>);
+                } else {
+                    finalTag = (<>
+                        {`${text.substring(0, tag.start)} `}
+                            <br />
+                            {`${text.substring(tag.end + 1, hasNext ? tags[index + 1].start - 1 : Number.MAX_VALUE)}`}
+                    </>);
+                }
             }
-            finalTag = (<>
-                <p>{`${text.substring(0, tag.start - 1)} `}
-                    <a href={tag.href} target="_blank" rel="noreferrer" className="underline text-blue-900">Link</a>
-                    {`${text.substring(tag.end + 1)}`}</p>
-            </>);
         }
         return finalTag;
     }
@@ -129,12 +157,12 @@ export default function News() {
     return (
         <>
             <div className='rounded-b-xl mb-2 drop-shadow-md bg-white py-2'>
-                <h1 className="text-center text-2xl">News</h1>
+                <h1 className="text-center text-2xl font-semibold text-violet-900">News</h1>
             </div>
             {news.length > 0 ? <div className="px-2 mb-24">
                 {news.map((news) => (
                     <div key={news.timestamp} className="max-w-[100vw] border mt-5 p-2 rounded-lg drop-shadow-md bg-white">
-                        {parseMessageText(news.text)}
+                        <span className="inline">{parseMessageText(news.text)}</span>
                         <p className="text-right mt-2 text-gray-500 text-sm">{news.sender}</p>
                         <p className="text-right text-gray-500 text-sm">{formatDate(news.timestamp)}</p>
                     </div>

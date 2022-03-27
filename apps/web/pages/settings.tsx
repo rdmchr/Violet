@@ -3,6 +3,7 @@ import { getAuth } from "firebase/auth";
 import { GetStaticProps } from "next";
 import { useRouter } from "next/router";
 import { useAuthState } from "react-firebase-hooks/auth";
+import Loading from "../components/loading";
 import CarbonArrowLeft from "../icons/CarbonArrowLeft";
 import { app } from "../lib/firebase";
 import { loadTranslation } from "../lib/transUtil";
@@ -26,7 +27,7 @@ export default function Settings() {
     const [user, authLoading, authError] = useAuthState(auth);
 
     if (authLoading) {
-        return <div><Trans id="loading">Loading...</Trans></div>;
+        return (<Loading />);
     }
 
     if (!user) {

@@ -11,6 +11,7 @@ import TextTransition, { presets } from "react-text-transition";
 import { useRouter } from "next/router";
 import Header from "../components/header";
 import { Trans } from "@lingui/macro";
+import Loading from "../components/loading";
 import { GetStaticProps } from "next";
 import { loadTranslation } from "../lib/transUtil";
 
@@ -71,7 +72,7 @@ export default function Web() {
   }
 
   if (loading) {
-    return <p><Trans id="loading">Loading...</Trans></p>
+    return <Loading />
   }
 
   return (

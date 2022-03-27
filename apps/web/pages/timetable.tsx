@@ -7,6 +7,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { getAuth } from 'firebase/auth';
 import { fetchTimetable } from '../lib/data';
 import { TableIcon, CalendarIcon } from '../icons';
+import Loading from '../components/loading';
 import { Trans } from '@lingui/macro';
 import { GetStaticProps } from 'next';
 import { loadTranslation } from '../lib/transUtil';
@@ -98,7 +99,7 @@ export default function Timetable() {
     }
 
     if (loading) {
-        return <div><Trans id="loading">Loading...</Trans></div>;
+        return (<Loading />);
     }
 
     return (

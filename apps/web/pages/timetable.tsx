@@ -7,6 +7,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { getAuth } from 'firebase/auth';
 import { fetchTimetable } from '../lib/data';
 import { TableIcon, CalendarIcon } from '../icons';
+import Loading from '../components/loading';
 
 const db = getFirestore(app);
 const auth = getAuth(app);
@@ -85,7 +86,7 @@ export default function Timetable() {
     }
 
     if (loading) {
-        return <div>Loading...</div>
+        return <Loading />
     }
 
     return (

@@ -25,7 +25,6 @@ export default function News() {
     const [news, setNews] = useState([]);
 
     useEffect(() => {
-        console.log("news", news);
         if (!authLoading && user.uid) {
             fetchNews();
         }
@@ -45,7 +44,6 @@ export default function News() {
             };
             newsList.push(news);
         });
-        console.log(newsList);
         setNews(newsList);
     }
 
@@ -86,7 +84,6 @@ export default function News() {
                 isInClosingTag = true;
             }
             if (isInTag && charArray[i] === '/' && charArray[i + 1] === '>') {
-                console.log(tagName)
                 tags.push({
                     tagName,
                     start: tagStart,
@@ -115,7 +112,6 @@ export default function News() {
                 href = '';
             }
         }
-        console.log(tags);
         let finalTag = (<span className="inline"></span>);
         for (let index = 0; index < tags.length; index++) {
             const tag = tags[index];

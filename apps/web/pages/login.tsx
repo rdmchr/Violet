@@ -38,7 +38,7 @@ function SignInForm() {
 
     return (
         <div className='w-screen absolute top-1/2 left-0 -translate-y-1/2'>
-            <h1 className='text-center text-2xl font-semibold mb-2'><Trans id="logIn">Login</Trans></h1>
+            <h1 className='text-center text-2xl font-semibold mb-2'><Trans id="logIn">Log in</Trans></h1>
             <form onSubmit={signIn} className='flex flex-col px-3'>
                 <label className='flex flex-col font-semibold'>
                     <span className='ml-1'><Trans id="email">Email</Trans></span>

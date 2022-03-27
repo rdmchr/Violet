@@ -91,7 +91,7 @@ msgstr "Loading..."
 #: pages/login.tsx:41
 #: pages/login.tsx:51
 msgid "logIn"
-msgstr "Login"
+msgstr "Log in"
 
 #: pages/settings.tsx:47
 msgid "logOut"

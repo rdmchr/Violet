@@ -3,11 +3,18 @@ service cloud.firestore {
 match /databases/{database}/documents {
     match /userData/{document} {
       allow read: if
+      		request.auth != null &&
           document.matches(request.auth.uid);
     }
     match /timetables/{document} {
       allow read: if
+      		request.auth != null &&
           document.matches(request.auth.uid);
+    }
+    match /messages/{document} {
+    	allow read: if
+      		request.auth != null &&
+          request.auth.uid in resource.data.permittedUsers;
     }
   }
 }

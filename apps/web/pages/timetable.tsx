@@ -103,7 +103,7 @@ export default function Timetable() {
 
     return (
         <main className='w-full'>
-            <div className='border border-gray-400 rounded-b-xl mb-2 drop-shadow-lg md:flex md:items-center md:justify-between md:py-2 md:px-5'>
+            <div className='border border-gray-400 rounded-b-xl mb-2 drop-shadow-lg bg-white md:flex md:items-center md:justify-between md:py-2 md:px-5'>
                 <h1 className='text-center font-bold text-xl mt-5 md:mt-0 text-violet-900'><Trans id="timetable">Timetable</Trans> - {dayString()}</h1>
                 <button onClick={() => setDayView(!dayView)} className="border border-gray-600 rounded-lg flex items-center px-2 py-1 mx-auto my-2 md:mx-0 md:my-0">{dayView ? <Trans id="showWeek">Show week</Trans> : <Trans id="showDay">Show Day</Trans>}<span className='mx-1' />{dayView ? <CalendarIcon /> : <TableIcon />}</button>
             </div>

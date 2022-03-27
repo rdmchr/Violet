@@ -6,7 +6,7 @@ import { SettingsIcon } from "../icons";
 
 function Header({ settings = false, small = false }) {
   const router = useRouter();
-  let greetings = "Welcome !";
+  let greetings = "Welcome!";
 
   //useEffect(() => {
   //  const hrefs = window.location.href.split('/');

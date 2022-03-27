@@ -48,7 +48,7 @@ function SignInForm() {
                     <span className='ml-1'><Trans id="password">Password</Trans></span>
                     <input type="password" value={password} onChange={e => setPassword(e.target.value)} className='border-2 border-black rounded-lg text-xl px-1 py-1' />
                 </label>
-                <button type='submit' className='border-2 border-black mt-3 rounded-lg py-1 text-lg font-semibold border-violet-800'><Trans id="logIn">Login</Trans></button>
+                <button type='submit' className='border-2 border-black mt-3 rounded-lg py-1 text-lg font-semibold border-violet-800'><Trans id="logIn">Log in</Trans></button>
             </form>
         </div>
     );

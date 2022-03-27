@@ -68,15 +68,15 @@ msgstr "Home"
 
 #: pages/welcome.tsx:171
 msgid "invalidEmail"
-msgstr "ungültige Emial"
+msgstr "Ungültige Emial"
 
 #: pages/welcome.tsx:111
 msgid "invalidPassword"
-msgstr "ungültiges Password"
+msgstr "Ungültiges Password"
 
 #: pages/welcome.tsx:105
 msgid "invalidUsername"
-msgstr "ungültiger Nutzername"
+msgstr "Ungültiger Nutzername"
 
 #: pages/timetable.tsx:112
 msgid "lesson"

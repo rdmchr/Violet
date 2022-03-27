@@ -92,7 +92,7 @@ export default function Welcome(props) {
 }
 
 function SchoolPageForm({ nextStage }) {
-    const [error, setError] = useState(null);
+    const [error, setError] = useState("");
     return (
         <Formik
             initialValues={{ username: '', password: '' }}
@@ -149,7 +149,7 @@ function SchoolPageForm({ nextStage }) {
 }
 
 function CreateAccountForm({ nextStage, setName }) {
-    const [error, setError] = useState(null);
+    const [error, setError] = useState("");
 
     return (
         <Formik

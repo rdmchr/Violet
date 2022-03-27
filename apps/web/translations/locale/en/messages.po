@@ -75,10 +75,6 @@ msgid "invalidPassword"
 msgstr "Invalid Password"
 
 #: pages/welcome.tsx:105
-#~ msgid "invalidUname"
-#~ msgstr "Invalid username"
-
-#: pages/welcome.tsx:105
 msgid "invalidUsername"
 msgstr "Invalid username"
 

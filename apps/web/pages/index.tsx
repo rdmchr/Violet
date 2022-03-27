@@ -12,9 +12,23 @@ import { useRouter } from "next/router";
 import Header from "../components/header";
 import { Trans } from "@lingui/macro";
 import Loading from "../components/loading";
+import { GetStaticProps } from "next";
+import { loadTranslation } from "../lib/transUtil";
 
 const db = getFirestore(app);
 const auth = getAuth(app);
+
+export const getStaticProps: GetStaticProps = async (ctx) => {
+  const translation = await loadTranslation(
+      ctx.locale!,
+      process.env.NODE_ENV === 'production'
+  )
+  return {
+      props: {
+          translation
+      }
+  }
+}
 
 export default function Web() {
   const router = useRouter();
@@ -37,7 +51,6 @@ export default function Web() {
       router.push('/login');
     }
     if (!authLoading && user) {
-      console.log(user);
       fetchData();
     }
   }, [authLoading, user]);

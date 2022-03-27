@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { getFunctions, httpsCallable } from 'firebase/functions'
 import Router, { useRouter } from 'next/router';
 import Header from '../components/header';
+import { Trans } from '@lingui/macro';
 
 const auth = getAuth(app);
 const functions = getFunctions(app);
@@ -37,17 +38,17 @@ function SignInForm() {
 
     return (
         <div className='w-screen absolute top-1/2 left-0 -translate-y-1/2'>
-            <h1 className='text-center text-2xl font-semibold mb-2'>Login</h1>
+            <h1 className='text-center text-2xl font-semibold mb-2'><Trans id="logIn">Log in</Trans></h1>
             <form onSubmit={signIn} className='flex flex-col px-3'>
                 <label className='flex flex-col font-semibold'>
-                    <span className='ml-1'>Email</span>
+                    <span className='ml-1'><Trans id="email">Email</Trans></span>
                     <input type="email" value={email} onChange={e => setEmail(e.target.value)} className='border-2 border-black rounded-lg text-xl px-1 py-1' />
                 </label>
                 <label className='flex flex-col font-semibold mt-2'>
-                    <span className='ml-1'>Password</span>
+                    <span className='ml-1'><Trans id="password">Password</Trans></span>
                     <input type="password" value={password} onChange={e => setPassword(e.target.value)} className='border-2 border-black rounded-lg text-xl px-1 py-1' />
                 </label>
-                <button type='submit' className='border-2 border-black mt-3 rounded-lg py-1 text-lg font-semibold border-violet-800'>Sign In</button>
+                <button type='submit' className='border-2 border-black mt-3 rounded-lg py-1 text-lg font-semibold border-violet-800'><Trans id="logIn">Log in</Trans></button>
             </form>
         </div>
     );

@@ -79,10 +79,7 @@ export default function Welcome(props) {
                 <div className={`${stage === 3 ? "" : "hidden"}`}>
                     <div className="absolute top-1/2 left-1/2 w-max h-max -translate-y-1/2 -translate-x-1/2">
                         <h1 className="text-2xl font-bold text-violet-900">
-                            <Trans
-                                id="helloName"
-                                values={{ name }}
-                            >Hello, {name}!</Trans>
+                            <Trans id="helloName" values={{ name }}>Hello, {name}!</Trans>
                         </h1>
                         <h1 className="w-[75vw]">
                             <Trans id="pleaseWait">Please give us one moment, we are fetching your timetable.</Trans>
@@ -100,18 +97,18 @@ function SchoolPageForm({ nextStage }) {
         <Formik
             initialValues={{ username: '', password: '' }}
             validate={values => {
-                const errors: { username?: string, password?: string } = {};
+                const errors: { username?: any, password?: any } = {};
                 // validate username
                 if (!values.username) {
-                    errors.username = 'Required';
+                    errors.username = <Trans id="required">Required</Trans>;
                 } else if (!new RegExp("^[a-zA-Z]{1,}\.[a-zA-Z]{1,5}$").test(values.username)) {
-                    errors.username = 'Invalid username';
+                    errors.username = <Trans id="invalidUsername">Invalid username</Trans>;
                 }
                 // validate password
                 if (!values.password) {
-                    errors.password = 'Required';
+                    errors.password = <Trans id="required">Required</Trans>;
                 } else if (!new RegExp("((?=.*\d)(?=.*[a-zA-ZöäüÖÄÜß-]).{6,})?([0-9]{8})?").test(values.password)) {
-                    errors.password = 'Invalid password';
+                    errors.password = <Trans id="invalidPassword">Invalid Password</Trans>;
                 }
                 return errors;
             }}
@@ -156,28 +153,28 @@ function CreateAccountForm({ nextStage, setName }) {
 
     return (
         <Formik
-            initialValues={{ name: '', email: '', password: '' }}
+            initialValues={{ name: '', email: '', password: ''}}
             validate={values => {
-                const errors: { name?: string, email?: string, password?: string } = {};
+                const errors: { name?: any, email?: any, password?: any } = {};
                 // validate name
                 if (!values.name) {
-                    errors.name = 'Required';
+                    errors.name = <Trans id="required">Required</Trans>;
                 } else if (values.name.length < 3) {
-                    errors.name = 'Must be at least 3 characters';
+                    errors.name = <Trans id="mustBe3Long">Must be at least 3 characters</Trans>;
                 }
                 // validate email
                 if (!values.email) {
-                    errors.email = 'Required';
+                    errors.email = <Trans id="required">Required</Trans>;
                 } else if (
                     !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
                 ) {
-                    errors.email = 'Invalid email address';
+                    errors.email = <Trans id="invalidEmail">Invalid email address</Trans>;
                 }
                 // validate password
                 if (!values.password) {
-                    errors.password = 'Required';
+                    errors.password = <Trans id="required">Required</Trans>;
                 } else if (values.password.length < 8) {
-                    errors.password = 'Must be at least 8 characters';
+                    errors.password = <Trans id="mustBe8Long">Must be at least 8 characters</Trans>;
                 }
                 return errors;
             }}
@@ -187,13 +184,12 @@ function CreateAccountForm({ nextStage, setName }) {
                     console.log(user);
                     nextStage();
                 }, (err) => {
-                    console.error(err.code);
                     switch (err.code) {
                         case "auth/email-already-in-use":
                             setErrors({ email: "This email address is already in use" });
                             break;
                         case "auth/invalid-email":
-                            setErrors({ email: "This email address is invalid" });
+                            setErrors({ email: "This email address is invalid"});
                             break;
                         case "auth/weak-password":
                             setErrors({ password: "This password is too weak" });
@@ -231,6 +227,7 @@ function CreateAccountForm({ nextStage, setName }) {
         </Formik>
     )
 }
+
 
 /* export const getStaticProps = async (context) => {
     return {

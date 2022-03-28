@@ -116,7 +116,7 @@ export function getCurrentDay() {
 export function nextPeriod(day: Day): [Lesson, boolean] | null {
     const last = findLastLesson(day);
     if (day) {
-        for (let i = getCurrentPeriod(new Date("2020-03-03 11:00:00")); i < last; i++) {
+        for (let i = getCurrentPeriod(new Date()); i < last; i++) {
             if (day[i]) {
                 let upcomingBreak = false;
                 if (i === 3) upcomingBreak = true;

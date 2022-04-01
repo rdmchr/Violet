@@ -42,11 +42,11 @@ msgstr "Er ist komplett unabhängig von deinem Schul Konto."
 msgid "email"
 msgstr "Email"
 
-#: pages/index.tsx:87
+#: pages/index.tsx:88
 msgid "finishedSchool"
 msgstr "Du hast heute keine weiteren Stunden."
 
-#: pages/timetable.tsx:119
+#: pages/timetable.tsx:128
 msgid "fri"
 msgstr "Fr"
 
@@ -78,30 +78,30 @@ msgstr "Ungültiges Password"
 msgid "invalidUsername"
 msgstr "Ungültiger Nutzername"
 
-#: pages/timetable.tsx:112
+#: pages/timetable.tsx:121
 msgid "lesson"
 msgstr "Stunde"
 
 #: pages/index.tsx:74
 #: pages/settings.tsx:29
 #: pages/timetable.tsx:101
-msgid "loading"
-msgstr "Lade..."
+#~ msgid "loading"
+#~ msgstr "Lade..."
 
 #: pages/login.tsx:41
 #: pages/login.tsx:51
 msgid "logIn"
 msgstr "Anmelden"
 
-#: pages/settings.tsx:47
+#: pages/settings.tsx:48
 msgid "logOut"
 msgstr "Abmelden"
 
-#: pages/settings.tsx:48
+#: pages/settings.tsx:49
 msgid "loggedInAs"
 msgstr "Momentan angemeldet als "
 
-#: pages/timetable.tsx:115
+#: pages/timetable.tsx:124
 msgid "mon"
 msgstr "Mo"
 
@@ -121,7 +121,7 @@ msgstr "Name"
 msgid "news"
 msgstr "News"
 
-#: pages/index.tsx:82
+#: pages/index.tsx:83
 msgid "nextLesson"
 msgstr "Nächste Stunde:"
 
@@ -143,11 +143,19 @@ msgstr "Bitte gib uns einen Moment. Wir laden deinen Stundenplan."
 msgid "required"
 msgstr "Pflichtfeld"
 
-#: pages/timetable.tsx:108
+#: pages/timetable.tsx:117
+msgid "showCurrentWeek"
+msgstr "Zur aktuellen Woche"
+
+#: pages/timetable.tsx:116
 msgid "showDay"
 msgstr "Zur Tagesansicht"
 
-#: pages/timetable.tsx:108
+#: pages/timetable.tsx:117
+msgid "showNextWeek"
+msgstr "Zur nächsten Woche"
+
+#: pages/timetable.tsx:116
 msgid "showWeek"
 msgstr "Zur Wochenansicht"
 
@@ -160,16 +168,16 @@ msgstr "Willkommen bei Violet, der bessere Weg online informiert zu bleiben."
 msgid "submit"
 msgstr "Bestätigen"
 
-#: pages/timetable.tsx:118
+#: pages/timetable.tsx:127
 msgid "thu"
 msgstr "Do"
 
-#: pages/timetable.tsx:107
+#: pages/timetable.tsx:115
 #: pages/_app.tsx:89
 msgid "timetable"
 msgstr "Stundenplan"
 
-#: pages/timetable.tsx:116
+#: pages/timetable.tsx:125
 msgid "tue"
 msgstr "Di"
 
@@ -177,6 +185,6 @@ msgstr "Di"
 msgid "username"
 msgstr "Benutzername"
 
-#: pages/timetable.tsx:117
+#: pages/timetable.tsx:126
 msgid "wed"
 msgstr "Mi"

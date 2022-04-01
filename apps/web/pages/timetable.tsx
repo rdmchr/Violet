@@ -120,20 +120,13 @@ export default function Timetable() {
                 {dayView ? <>
                     <h1 className='col-start-2 col-span-1 row-start-1 row-span-1 font-semibold'><Trans id="lesson">Lesson</Trans></h1>
                     {iterateDay(day)}
-                </> : nextWeekView ? <>
-                    <h1 className={`col-start-2 col-span-1 row-start-1 row-span-1 font-semibold`}><Trans id="mon">Mon</Trans></h1>
-                    <h1 className={`col-start-3 col-span-1 row-start-1 row-span-1 font-semibold`}><Trans id="tue">Tue</Trans></h1>
-                    <h1 className={`col-start-4 col-span-1 row-start-1 row-span-1 font-semibold`}><Trans id="wed">Wed</Trans></h1>
-                    <h1 className={`col-start-5 col-span-1 row-start-1 row-span-1 font-semibold`}><Trans id="thu">Thu</Trans></h1>
-                    <h1 className={`col-start-6 col-span-1 row-start-1 row-span-1 font-semibold`}><Trans id="fri">Fri</Trans></h1>
-                    {iterateWeek(nextTimetable)}
                 </> : <>
-                    <h1 className={`col-start-2 col-span-1 row-start-1 row-span-1 font-semibold ${weekIndex === 0 ? "text-violet-400" : ""}`}><Trans id="mon">Mon</Trans></h1>
-                    <h1 className={`col-start-3 col-span-1 row-start-1 row-span-1 font-semibold ${weekIndex === 1 ? "text-violet-400" : ""}`}><Trans id="tue">Tue</Trans></h1>
-                    <h1 className={`col-start-4 col-span-1 row-start-1 row-span-1 font-semibold ${weekIndex === 2 ? "text-violet-400" : ""}`}><Trans id="wed">Wed</Trans></h1>
-                    <h1 className={`col-start-5 col-span-1 row-start-1 row-span-1 font-semibold ${weekIndex === 3 ? "text-violet-400" : ""}`}><Trans id="thu">Thu</Trans></h1>
-                    <h1 className={`col-start-6 col-span-1 row-start-1 row-span-1 font-semibold ${weekIndex === 4 ? "text-violet-400" : ""}`}><Trans id="fri">Fri</Trans></h1>
-                    {iterateWeek(timetable)}
+                    <h1 className={`col-start-2 col-span-1 row-start-1 row-span-1 font-semibold ${weekIndex === 0 && !nextWeekView ? "text-violet-400" : ""}`}><Trans id="mon">Mon</Trans></h1>
+                    <h1 className={`col-start-3 col-span-1 row-start-1 row-span-1 font-semibold ${weekIndex === 1 && !nextWeekView ? "text-violet-400" : ""}`}><Trans id="tue">Tue</Trans></h1>
+                    <h1 className={`col-start-4 col-span-1 row-start-1 row-span-1 font-semibold ${weekIndex === 2 && !nextWeekView ? "text-violet-400" : ""}`}><Trans id="wed">Wed</Trans></h1>
+                    <h1 className={`col-start-5 col-span-1 row-start-1 row-span-1 font-semibold ${weekIndex === 3 && !nextWeekView ? "text-violet-400" : ""}`}><Trans id="thu">Thu</Trans></h1>
+                    <h1 className={`col-start-6 col-span-1 row-start-1 row-span-1 font-semibold ${weekIndex === 4 && !nextWeekView ? "text-violet-400" : ""}`}><Trans id="fri">Fri</Trans></h1>
+                    { nextWeekView ? iterateWeek(nextTimetable) : iterateWeek(timetable)}
                 </>
                 }
                 <p className={timestampCss + ` row-start-2 ${current === 1 ? "text-violet-400" : ""}`}>1</p>

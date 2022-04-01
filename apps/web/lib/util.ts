@@ -56,8 +56,6 @@ export function getCurrentPeriod(date: Date) {
         return 1;
     } if (stamp < (10 * 60 + 19)) {
         return 2;
-    } if (stamp < (10 * 60 + 34)) {
-        return 3;
     } if (stamp < (11 * 60 + 47)) {
         return 3;
     } if (stamp < (12 * 60 + 59)) {

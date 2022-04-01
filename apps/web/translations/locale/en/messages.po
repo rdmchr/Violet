@@ -17,48 +17,52 @@ msgstr ""
 msgid "chats"
 msgstr "Chats"
 
-#: pages/welcome.tsx:72
+#: pages/welcome.tsx:97
 msgid "connectToSchool"
 msgstr "Let's connect your account to the school website!"
 
-#: pages/welcome.tsx:75
+#: pages/welcome.tsx:100
 msgid "connectToSchoolDisclaimer"
 msgstr "We need these details to get your timetable."
 
-#: pages/welcome.tsx:60
+#: pages/welcome.tsx:85
 msgid "createAccount"
 msgstr "Let's create your account!"
 
-#: pages/welcome.tsx:63
+#: pages/welcome.tsx:88
 msgid "createAccountDisclaimerOne"
 msgstr "You will use this account to log into Violet."
 
-#: pages/welcome.tsx:66
+#: pages/welcome.tsx:91
 msgid "createAccountDisclaimerTwo"
 msgstr "This account is separate from your school account."
 
 #: pages/login.tsx:44
-#: pages/welcome.tsx:212
+#: pages/welcome.tsx:237
 msgid "email"
 msgstr "Email"
 
-#: pages/index.tsx:87
+#: pages/welcome.tsx:58
+msgid "emailAlreadyInUse"
+msgstr "The Email is already in use"
+
+#: pages/index.tsx:88
 msgid "finishedSchool"
 msgstr "You finished school for today"
 
-#: pages/timetable.tsx:119
+#: pages/timetable.tsx:120
 msgid "fri"
 msgstr "Fri"
 
-#: pages/welcome.tsx:53
+#: pages/welcome.tsx:78
 msgid "getStarted"
 msgstr "Get started"
 
-#: pages/welcome.tsx:47
+#: pages/welcome.tsx:72
 msgid "hello"
 msgstr "Hello!"
 
-#: pages/welcome.tsx:82
+#: pages/welcome.tsx:107
 msgid "helloName"
 msgstr "Hello, {name}!"
 
@@ -66,54 +70,54 @@ msgstr "Hello, {name}!"
 msgid "home"
 msgstr "Home"
 
-#: pages/welcome.tsx:171
+#: pages/welcome.tsx:196
 msgid "invalidEmail"
 msgstr "Invalid email address"
 
-#: pages/welcome.tsx:111
+#: pages/welcome.tsx:136
 msgid "invalidPassword"
 msgstr "Invalid Password"
 
-#: pages/welcome.tsx:105
+#: pages/welcome.tsx:130
 msgid "invalidUsername"
 msgstr "Invalid username"
 
-#: pages/timetable.tsx:112
+#: pages/timetable.tsx:113
 msgid "lesson"
 msgstr "Lesson"
 
 #: pages/index.tsx:74
 #: pages/settings.tsx:29
 #: pages/timetable.tsx:101
-msgid "loading"
-msgstr "Loading..."
+#~ msgid "loading"
+#~ msgstr "Loading..."
 
 #: pages/login.tsx:41
 #: pages/login.tsx:51
 msgid "logIn"
 msgstr "Log in"
 
-#: pages/settings.tsx:47
+#: pages/settings.tsx:48
 msgid "logOut"
 msgstr "Log out"
 
-#: pages/settings.tsx:48
+#: pages/settings.tsx:49
 msgid "loggedInAs"
 msgstr "You are currently logged in as"
 
-#: pages/timetable.tsx:115
+#: pages/timetable.tsx:116
 msgid "mon"
 msgstr "Mon"
 
-#: pages/welcome.tsx:163
+#: pages/welcome.tsx:188
 msgid "mustBe3Long"
 msgstr "Must be at least 3 characters"
 
-#: pages/welcome.tsx:177
+#: pages/welcome.tsx:202
 msgid "mustBe8Long"
 msgstr "Must be at least 8 characters"
 
-#: pages/welcome.tsx:207
+#: pages/welcome.tsx:232
 msgid "name"
 msgstr "Name"
 
@@ -121,62 +125,66 @@ msgstr "Name"
 msgid "news"
 msgstr "News"
 
-#: pages/index.tsx:82
+#: pages/index.tsx:83
 msgid "nextLesson"
-msgstr "Next lesson: {0}"
+msgstr "Next lesson:"
 
 #: pages/login.tsx:48
-#: pages/welcome.tsx:137
-#: pages/welcome.tsx:217
+#: pages/welcome.tsx:162
+#: pages/welcome.tsx:242
 msgid "password"
 msgstr "Password"
 
-#: pages/welcome.tsx:85
+#: pages/welcome.tsx:59
+msgid "passwordTooWeak"
+msgstr "The Password is too weak"
+
+#: pages/welcome.tsx:110
 msgid "pleaseWait"
 msgstr "Please give us one moment, we are fetching your timetable."
 
-#: pages/welcome.tsx:103
-#: pages/welcome.tsx:109
-#: pages/welcome.tsx:161
-#: pages/welcome.tsx:167
-#: pages/welcome.tsx:175
+#: pages/welcome.tsx:128
+#: pages/welcome.tsx:134
+#: pages/welcome.tsx:186
+#: pages/welcome.tsx:192
+#: pages/welcome.tsx:200
 msgid "required"
 msgstr "Required"
 
-#: pages/timetable.tsx:108
+#: pages/timetable.tsx:109
 msgid "showDay"
 msgstr "Show Day"
 
-#: pages/timetable.tsx:108
+#: pages/timetable.tsx:109
 msgid "showWeek"
 msgstr "Show week"
 
-#: pages/welcome.tsx:50
+#: pages/welcome.tsx:75
 msgid "slogan"
 msgstr "Welcome to Violet, the better way to interact with your school online."
 
-#: pages/welcome.tsx:143
-#: pages/welcome.tsx:223
+#: pages/welcome.tsx:168
+#: pages/welcome.tsx:248
 msgid "submit"
 msgstr "Submit"
 
-#: pages/timetable.tsx:118
+#: pages/timetable.tsx:119
 msgid "thu"
 msgstr "Thu"
 
-#: pages/timetable.tsx:107
+#: pages/timetable.tsx:108
 #: pages/_app.tsx:89
 msgid "timetable"
 msgstr "Timetable"
 
-#: pages/timetable.tsx:116
+#: pages/timetable.tsx:117
 msgid "tue"
 msgstr "Tue"
 
-#: pages/welcome.tsx:132
+#: pages/welcome.tsx:157
 msgid "username"
 msgstr "Username"
 
-#: pages/timetable.tsx:117
+#: pages/timetable.tsx:118
 msgid "wed"
 msgstr "Wed"

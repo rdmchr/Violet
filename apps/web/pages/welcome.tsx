@@ -11,7 +11,6 @@ import { GetStaticProps } from "next";
 import { loadTranslation } from "../lib/transUtil";
 import { messages as de} from '../translations/locale/de/messages';
 import { messages as en} from '../translations/locale/en/messages';
-import { fa } from "make-plural";
 
 const auth = getAuth(app);
 const functions = getFunctions(app);

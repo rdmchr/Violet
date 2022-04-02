@@ -1,12 +1,11 @@
 import express from 'express';
-import http from 'http';
-import https from 'https';
-import { readFileSync } from 'fs';
 import multer from 'multer';
 import axios from 'axios';
 import { encrypt } from './utils';
 import * as Sentry from "@sentry/node";
 import * as Tracing from "@sentry/tracing";
+
+const port = process.env.PORT || 8080;
 
 const app = express();
 Sentry.init({
@@ -33,28 +32,16 @@ app.use(Sentry.Handlers.errorHandler());
 app.use(express.json());
 app.use(express.static(__dirname, { dotfiles: 'allow' }));
 
-
-// Certificate
-const privateKey = readFileSync('/etc/letsencrypt/live/whook.radmacher.link/privkey.pem', 'utf8');
-const certificate = readFileSync('/etc/letsencrypt/live/whook.radmacher.link/cert.pem', 'utf8');
-const ca = readFileSync('/etc/letsencrypt/live/whook.radmacher.link/chain.pem', 'utf8');
-
-const credentials = {
-    key: privateKey,
-    cert: certificate,
-    ca: ca
-};
-
-app.get('/', (req, res) => {
+app.get('/', (_req: any, res: any) => {
     res.sendStatus(200);
 });
 
-app.post('/', multer().none(), async (req, res) => {
+app.post('/', multer().none(), async (_req: any, res: any) => {
     console.info('Received webhook without uid.');
     res.sendStatus(200);
 });
 
-app.post('/webhook/:uid', multer().none(), async (req, res) => {
+app.post('/webhook/:uid', multer().none(), async (req: any, res: any) => {
     console.log('received body', req.body.payload);
     console.log('user id', req.params.uid);
     if (!req.body.payload) {
@@ -66,17 +53,7 @@ app.post('/webhook/:uid', multer().none(), async (req, res) => {
     res.sendStatus(200);
 });
 
-// Starting both http & https servers
-const httpServer = http.createServer(app);
-const httpsServer = https.createServer(credentials, app);
-
-httpServer.listen(80, () => {
-    console.log('HTTP Server running on port 80');
-});
-
-httpsServer.listen(443, () => {
-    console.log('HTTPS Server running on port 443');
-});
+app.listen(port, () => console.log(`Node.js server started on port ${port}.`));
 
 async function parseJson(json: any, uid: string) {
     const encryptedUid = encrypt(uid);

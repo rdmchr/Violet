@@ -82,12 +82,6 @@ msgstr "Invalid username"
 msgid "lesson"
 msgstr "Lesson"
 
-#: pages/index.tsx:74
-#: pages/settings.tsx:29
-#: pages/timetable.tsx:101
-#~ msgid "loading"
-#~ msgstr "Loading..."
-
 #: pages/login.tsx:41
 #: pages/login.tsx:51
 msgid "logIn"

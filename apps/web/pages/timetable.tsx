@@ -114,7 +114,7 @@ export default function Timetable() {
             <div className='border border-gray-400 rounded-b-xl mb-2 drop-shadow-lg bg-white md:flex md:items-center md:justify-between md:py-2 md:px-5'>
                 <h1 className='text-center font-bold text-xl mt-5 md:mt-0 text-violet-900'><Trans id="timetable">Timetable</Trans> - {dayString()}</h1>
                 <button onClick={() => {setDayView(!dayView); setNextWeekView(false)}} className="border border-gray-600 rounded-lg flex items-center px-2 py-1 mx-auto my-2 md:mx-0 md:my-0">{dayView ? <Trans id="showWeek">Show week</Trans> : <Trans id="showDay">Show Day</Trans>}<span className='mx-1' />{dayView ? <CalendarIcon /> : <TableIcon />}</button>
-                <button onClick={() => setNextWeekView(!nextWeekView)} className="border border-gray-600 rounded-lg flex items-center px-2 py-1 mx-auto my-2 md:mx-0 md:my-0">{nextWeekView ? <Trans id="showCurrentWeek">Show current week</Trans> : <Trans id="showNextWeek">Show next Week</Trans>}<span className='mx-1' /></button>
+                <button onClick={() => setNextWeekView(!nextWeekView)} className="border border-gray-600 rounded-lg flex items-center px-2 py-1 mx-auto my-2 md:mx-0 md:my-0">{nextWeekView ? <Trans id="showCurrentWeek">Show current week</Trans> : <Trans id="showNextWeek">Show next Week</Trans>}</button>
             </div>
             <div className={`grid grid-rows-timetable gap-x-2 gap-y-2 mx-auto w-max-[100vw] px-4 grid-rows-timetable ${dayView ? "grid-cols-[max-content,max-content]" : "grid-cols-timetable-week"}`}>
                 {dayView ? <>

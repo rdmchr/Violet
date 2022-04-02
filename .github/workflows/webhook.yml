@@ -1,8 +1,11 @@
 name: "Webhook lint"
 on:
+  workflow_dispatch:
   push:
+    branches:
+      - 'dev-**'
     paths:
-    - '**/webhook-server/**'
+      - '**/webhook-server/**'
 
 jobs:
   lint:

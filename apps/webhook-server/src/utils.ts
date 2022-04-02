@@ -1,5 +1,6 @@
 import { privateEncrypt } from 'crypto';
 import { readFileSync } from 'fs';
+import axios from 'axios';
 
 /**
  * encrypts a string with a private key
@@ -39,4 +40,23 @@ export function isDateInThisWeek(date: Date) {
 
     // if date is equal or within the first and last dates of the week
     return date >= firstDayOfWeek && date <= lastDayOfWeek;
+}
+
+/**
+ * call a google cloud function
+ * @param functionName the name of the cloud function
+ * @param payload the payload you want to pass to the function
+ */
+export async function callFirebaseFunction(functionName: string, payload: any) {
+    payload.hello = encrypt('world');
+    await axios.post(
+        `https://europe-west1-rdmchr-violet.cloudfunctions.net/${functionName}`,
+        JSON.stringify({ data: payload }),
+        {
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+        }
+    );
 }

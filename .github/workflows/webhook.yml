@@ -2,7 +2,7 @@ name: Webhook lint
 on:
   push:
     paths:
-    - apps/webhook-server
+    - /apps/webhook-server
 
 jobs:
   lint:

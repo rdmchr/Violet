@@ -19,3 +19,7 @@ The data is then stored in a Firestore collection.
 # Cloud function setup
 - **Timeout**: 20seconds
 - **Memory**: 512 MB
+
+
+# Requirements
+All functions require, that the payload includes the attribute `hello` with the value `world` encrypted using the shared key.

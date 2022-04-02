@@ -55,6 +55,7 @@ app.post('/webhook/:uid', multer().none(), async (req: any, res: any) => {
 
 app.listen(port, () => console.log(`Node.js server started on port ${port}.`));
 
+//TODO: implement missing functions
 async function parseJson(json: any, uid: string) {
     const encryptedUid = encrypt(uid);
     console.log(json);

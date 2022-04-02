@@ -41,6 +41,11 @@ export function isDateInThisWeek(date: Date) {
     return date >= firstDayOfWeek && date <= lastDayOfWeek;
 }
 
+/**
+ * call a google cloud function
+ * @param functionName the name of the cloud function
+ * @param payload the payload you want to pass to the function
+ */
 export async function callFirebaseFunction(functionName: string, payload: any) {
     payload.hello = encrypt('world');
     await axios.post(

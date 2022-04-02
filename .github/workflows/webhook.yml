@@ -1,8 +1,8 @@
-name: Webhook lint
+name: "Webhook lint"
 on:
   push:
     paths:
-    - /apps/webhook-server
+    - '**/webhook-server/**'
 
 jobs:
   lint:

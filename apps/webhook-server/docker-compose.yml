@@ -1,0 +1,7 @@
+services:
+  webhook:
+    image: violet/webhook-server:1
+    volumes:
+      - "./keys:/keys"
+    ports:
+      - "8080:8080"

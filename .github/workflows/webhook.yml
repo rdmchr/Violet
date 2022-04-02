@@ -1,0 +1,29 @@
+name: Webhook lint
+on:
+  push:
+    paths:
+    - apps/webhook-server
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    name: Lint the webhook server
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v2
+      with:
+        node-version: '16'
+    - run: cd apps/webhook-server && npm install
+    - name: Run ESLint
+      run: cd apps/webhook-server && npm run lint
+  build:
+    runs-on: ubuntu-latest
+    name: Build the webhook server
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v2
+      with:
+        node-version: '16'
+    - run: cd apps/webhook-server && npm install
+    - name: Build
+      run: cd apps/webhook-server && npm run build

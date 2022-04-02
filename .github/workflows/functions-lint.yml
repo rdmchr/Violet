@@ -1,5 +1,9 @@
-name: CI
-on: push
+name: Functions lint
+on:
+  push:
+    paths:
+      - apps/functions
+
 jobs:
   build:
     runs-on: ubuntu-latest

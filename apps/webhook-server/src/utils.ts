@@ -1,5 +1,6 @@
 import { privateEncrypt } from 'crypto';
 import { readFileSync } from 'fs';
+import axios from 'axios';
 
 /**
  * encrypts a string with a private key

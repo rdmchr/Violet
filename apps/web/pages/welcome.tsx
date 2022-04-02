@@ -47,7 +47,7 @@ export default function Welcome(props) {
           messages = de;
           break;
         default:
-          messages = en;
+          // no need to override messages, since en is the default
           break;
       }
       });

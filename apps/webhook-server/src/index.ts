@@ -2,14 +2,14 @@ import express from 'express';
 import multer from 'multer';
 import axios from 'axios';
 import { encrypt } from './utils';
-import * as Sentry from "@sentry/node";
-import * as Tracing from "@sentry/tracing";
+import * as Sentry from '@sentry/node';
+import * as Tracing from '@sentry/tracing';
 
 const port = process.env.PORT || 8080;
 
 const app = express();
 Sentry.init({
-    dsn: "https://bb80117b6bfd4a83a44de2e173293152@o1186656.ingest.sentry.io/6306497",
+    dsn: 'https://bb80117b6bfd4a83a44de2e173293152@o1186656.ingest.sentry.io/6306497',
     integrations: [
         // enable HTTP calls tracing
         new Sentry.Integrations.Http({ tracing: true }),
@@ -20,7 +20,7 @@ Sentry.init({
     // Set tracesSampleRate to 1.0 to capture 100%
     // of transactions for performance monitoring.
     // We recommend adjusting this value in production
-    tracesSampleRate: .5,
+    tracesSampleRate: 0.5,
 });
 // RequestHandler creates a separate execution context using domains, so that every
 // transaction/span/breadcrumb is attached to its own Hub instance
@@ -57,12 +57,14 @@ app.listen(port, () => console.log(`Node.js server started on port ${port}.`));
 
 async function parseJson(json: any, uid: string) {
     const encryptedUid = encrypt(uid);
-    console.log(json)
+    console.log(json);
     if (json.Typ) {
         switch (json.Typ) {
             case 1:
                 // there is a change in the timetable
-                await callFirebaseFunction('fetchTimetable', { uid: encryptedUid });
+                await callFirebaseFunction('fetchTimetable', {
+                    uid: encryptedUid,
+                });
                 break;
             case 2:
                 // there is a new chat message
@@ -70,7 +72,9 @@ async function parseJson(json: any, uid: string) {
             case 3:
                 // there is a new news message
                 console.log(`Fetching news for user ${uid}`);
-                await callFirebaseFunction('fetchAnnouncements', { uid: encryptedUid });
+                await callFirebaseFunction('fetchAnnouncements', {
+                    uid: encryptedUid,
+                });
                 break;
             case 4:
                 // there is a new file
@@ -86,20 +90,24 @@ async function parseJson(json: any, uid: string) {
                 break;
             default:
                 // invalid webhook type
-                console.info("Invalid webhook type");
+                console.info('Invalid webhook type');
                 break;
         }
     } else {
-        console.info("No webhook type");
+        console.info('No webhook type');
     }
 }
 
 async function callFirebaseFunction(functionName: string, payload: any) {
     payload.hello = encrypt('world');
-    await axios.post(`https://europe-west1-rdmchr-violet.cloudfunctions.net/${functionName}`, JSON.stringify({ data: payload }), {
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-    });
+    await axios.post(
+        `https://europe-west1-rdmchr-violet.cloudfunctions.net/${functionName}`,
+        JSON.stringify({ data: payload }),
+        {
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+        }
+    );
 }

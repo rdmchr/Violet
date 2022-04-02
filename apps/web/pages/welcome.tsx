@@ -52,6 +52,7 @@ export default function Welcome(props) {
       }
       });
 
+// workaround to prevent lingui from removing translations only used by error messages
       if(false) {
         (<div className='hidden'> 
         <Trans id='emailAlreadyInUse'>The Email is already in use</Trans>

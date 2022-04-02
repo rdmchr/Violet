@@ -40,3 +40,17 @@ export function isDateInThisWeek(date: Date) {
     // if date is equal or within the first and last dates of the week
     return date >= firstDayOfWeek && date <= lastDayOfWeek;
 }
+
+export async function callFirebaseFunction(functionName: string, payload: any) {
+    payload.hello = encrypt('world');
+    await axios.post(
+        `https://europe-west1-rdmchr-violet.cloudfunctions.net/${functionName}`,
+        JSON.stringify({ data: payload }),
+        {
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+        }
+    );
+}

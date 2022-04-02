@@ -1,7 +1,7 @@
 import express from 'express';
 import multer from 'multer';
 import axios from 'axios';
-import { encrypt } from './utils';
+import { encrypt, callFirebaseFunction } from './utils';
 import * as Sentry from '@sentry/node';
 import * as Tracing from '@sentry/tracing';
 
@@ -97,18 +97,4 @@ async function parseJson(json: any, uid: string) {
     } else {
         console.info('No webhook type');
     }
-}
-
-async function callFirebaseFunction(functionName: string, payload: any) {
-    payload.hello = encrypt('world');
-    await axios.post(
-        `https://europe-west1-rdmchr-violet.cloudfunctions.net/${functionName}`,
-        JSON.stringify({ data: payload }),
-        {
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-            },
-        }
-    );
 }

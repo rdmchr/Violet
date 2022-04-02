@@ -36,7 +36,7 @@ export default function Timetable() {
     const [nextTimetable, setNextTimetable] = useState<Week | null>(null); // the complete timetable for next week
     const [current, setCurrent] = useState<number | null>(null); // current period
     const [dayView, setDayView] = useState(false); // true when displaying only one day, false when displaying the whole week
-    const [nextWeekView, setNextWeekView] = useState(false);
+    const [nextWeekView, setNextWeekView] = useState(false); // true when displaying next weeks timetable, false when displaying this week timetable
     const weekIndex = new Date().getDay() - 1;
     const currentDay = getCurrentDay();
     const router = useRouter();

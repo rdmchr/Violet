@@ -4,7 +4,7 @@ import { UserContext } from '../lib/context';
 import { getAuth, User } from 'firebase/auth';
 import { useEffect, useRef, useState } from 'react';
 import { app } from '../lib/firebase';
-import { getFirestore } from 'firebase/firestore';
+import { doc, getDoc, getFirestore } from 'firebase/firestore';
 import { ChatIcon, HomeIcon, HornIcon, TableIcon } from '../icons';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -13,6 +13,7 @@ import { I18nProvider } from '@lingui/react';
 import { i18n } from '@lingui/core'
 import { initTranslation } from '../lib/transUtil';
 import { Trans } from '@lingui/macro'
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 const db = getFirestore(app);
 const auth = getAuth(app);
@@ -23,11 +24,14 @@ i18n.activate('en');
 function MyApp({ Component, pageProps }: AppProps) {
   const firebase = app; // initialize firebase
   const router = useRouter();
-  const [user, setUser] = useState<User | null>(null);
+  //const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [route, setRoute] = useState<string>('');
-  const locale = router.locale || router.defaultLocale!
-  const firstRender = useRef(true)
+  const locale = router.locale || router.defaultLocale!;
+  const firstRender = useRef(true);
+  const [user, userLoading, userError] = useAuthState(auth);
+  const [colorScheme, setColorScheme] = useState<string>('dark');
+  const [name, setName] = useState<string>('');
 
   // run only once on the first render (for server side)
   if (pageProps.translation && firstRender.current) {
@@ -44,28 +48,57 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, [])
 
   // manage auth state
-  const auth = getAuth().onAuthStateChanged(async (u) => {
-    if (u === user) return;
-    if (user) {
-      setUser(u);
-      setLoading(false);
-    } else {
-      setUser(null);
-      setLoading(false);
-
-    }
-  });
+  /*   const authChange = getAuth().onAuthStateChanged(async (u) => {
+      if (u === user) return;
+      if (user) {
+        setUser(u);
+        console.log(user);
+        await fetchUserData(user.uid)
+        setLoading(false);
+      } else {
+        setUser(null);
+        console.log("no user")
+        setLoading(false);
+  
+      }
+    }); */
 
   useEffect(() => {
     setRoute(router.pathname);
   });
+
+  // manage user data and preferences
+  useEffect(() => {
+    if (userLoading) return;
+    if (!user) {
+      // push to login page if no user is logged in
+      if (router.pathname !== '/login' && router.pathname !== '/welcome')
+        router.push('/login');
+    } else {
+      fetchUserData(user.uid);
+      console.log(user);
+    }
+  }, [user, userLoading])
+
+  async function fetchUserData(userId: string) {
+    const userRef = await getDoc(doc(db, 'users', userId));
+    const userData = userRef.data();
+    const colorScheme = userData.colorScheme ? userData.colorScheme : window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    setColorScheme(colorScheme);
+    setName(userData.name);
+    if (colorScheme === 'dark')
+      document.documentElement.classList.add('dark');
+    else
+      document.documentElement.classList.remove('dark');
+    setLoading(false);
+  }
 
   const hiddenMenuRoutes = ['/login', '/settings', '/welcome']
 
   return (
     <>
       <I18nProvider i18n={i18n}>
-        <UserContext.Provider value={{ user: user, username: "asd", uid: user?.uid, loading: loading }}>
+        <UserContext.Provider value={{ user: user, name, uid: user?.uid, loading: loading, colorScheme }}>
           <Head>
             <title>Violet</title>
           </Head>

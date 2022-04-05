@@ -81,3 +81,8 @@ html, body {
 .header {
     @apply bg border-b border-neutral-300 dark:border-gray-800 drop-shadow-md rounded-b-xl;
 }
+
+input:checked ~ .dot {
+    transform: translateX(100%);
+    @apply bg-violet-500;
+}

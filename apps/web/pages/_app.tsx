@@ -71,31 +71,31 @@ function MyApp({ Component, pageProps }: AppProps) {
           </Head>
           <div>
             <Component {...pageProps} />
-            <nav className={`fixed bottom-0 left-0 w-screen py-2 flex items-center justify-evenly border-t rounded-t-xl border-gray-300 drop-shadow-[0_-5px_25px_rgba(0,0,0,0.15)] bg-white ${hiddenMenuRoutes.includes(route) ? 'hidden' : ''}`}>
+            <nav className={`fixed bottom-0 left-0 w-screen py-2 flex items-center justify-evenly border-t rounded-t-xl border-gray-300 dark:border-gray-700 drop-shadow-[0_-5px_25px_rgba(0,0,0,0.15)] bg ${hiddenMenuRoutes.includes(route) ? 'hidden' : ''}`}>
               <Link passHref href="/">
                 <div className='flex justify-center items-center flex-col cursor-pointer'>
-                  <HomeIcon className={`text-3xl ${route === "/" ? "fill-violet-800" : ""}`} />
-                  <p className='text-xs'><Trans id='home'>Home</Trans></p>
+                  <HomeIcon className={`text-3xl ${route === "/" ? "icon-violet" : "icon"}`} />
+                  <p className='text text-xs'><Trans id='home'>Home</Trans></p>
                 </div>
               </Link>
               <Link passHref href="/timetable">
                 <div className='flex justify-center items-center flex-col cursor-pointer'>
-                  <TableIcon className={`text-3xl ${route === "/timetable" ? "fill-violet-800" : ""}`} />
-                  <p className='text-xs'><Trans id='timetable'>Timetable</Trans></p>
+                  <TableIcon className={`text-3xl ${route === "/timetable" ? "icon-violet" : "icon"}`} />
+                  <p className='text text-xs'><Trans id='timetable'>Timetable</Trans></p>
                 </div>
               </Link>
               <Link passHref href="/news">
                 <div className='flex justify-center items-center flex-col'>
-                  <HornIcon className={`text-3xl ${route === "/news" ? "fill-violet-800" : ""}`} />
-                  <p className='text-xs'><Trans id='news'>News</Trans></p>
+                  <HornIcon className={`text-3xl ${route === "/news" ? "icon-violet" : "icon"}`} />
+                  <p className='text text-xs'><Trans id='news'>News</Trans></p>
                 </div>
               </Link>
-              <Link passHref href="/">
+              {/*-<Link passHref href="/">
                 <div className='flex justify-center items-center flex-col cursor-pointer'>
-                  <ChatIcon className={`text-3xl ${route === "/chats" ? "fill-violet-800" : ""}`} />
-                  <p className='text-xs'><Trans id='chats'>Chats</Trans></p>
+                  <ChatIcon className={`text-3xl ${route === "/chats" ? "icon-violet" : "icon"}`} />
+                  <p className='text text-xs'><Trans id='chats'>Chats</Trans></p>
                 </div>
-              </Link>
+  </Link>*/}
             </nav>
           </div>
         </UserContext.Provider>

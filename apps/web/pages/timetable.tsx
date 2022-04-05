@@ -77,8 +77,8 @@ export default function Timetable() {
             return Object.entries(day).map(([key, value]) => {
                 if (value) {
                     return <div key={key} className={`col-start-${2 + dayOffest} col-span-1 row-start-${Number(key) + 1} row-span-1 text-sm sm:text-md`}>
-                        <h1 className='text-ls font-medium'>{value.subject} <span className='text-gray-500 hidden sm:inline'>({value.teacher})</span></h1>
-                        <h1>{value.room}</h1>
+                        <h1 className='text text-ls font-medium'>{value.subject} <span className='text-500 hidden sm:inline'>({value.teacher})</span></h1>
+                        <h1 className='text'>{value.room}</h1>
                     </div>
                 } else {
                     return <div key={key} className={`col-start-${2 + dayOffest} col-span-1 row-start-${Number(key) + 1} row-span-1`}></div> //no lesson
@@ -110,33 +110,33 @@ export default function Timetable() {
     }
 
     return (
-        <main className='w-full'>
-            <div className='border border-gray-400 rounded-b-xl mb-2 drop-shadow-lg bg-white md:flex md:items-center md:justify-between md:py-2 md:px-5'>
-                <h1 className='text-center font-bold text-xl mt-5 md:mt-0 text-violet-900'><Trans id="timetable">Timetable</Trans> - {dayString()}</h1>
-                <button onClick={() => {setDayView(!dayView); setNextWeekView(false)}} className="border border-gray-600 rounded-lg flex items-center px-2 py-1 mx-auto my-2 md:mx-0 md:my-0">{dayView ? <Trans id="showWeek">Show week</Trans> : <Trans id="showDay">Show Day</Trans>}<span className='mx-1' />{dayView ? <CalendarIcon /> : <TableIcon />}</button>
-                <button onClick={() => setNextWeekView(!nextWeekView)} className="border border-gray-600 rounded-lg flex items-center px-2 py-1 mx-auto my-2 md:mx-0 md:my-0">{nextWeekView ? <Trans id="showCurrentWeek">Show current week</Trans> : <Trans id="showNextWeek">Show next Week</Trans>}</button>
+        <main className='w-full min-h-[100vh] bg'>
+            <div className='header mb-2 pt-2 md:flex md:items-center md:justify-between md:py-2 md:px-5'>
+                <h1 className='text-center font-bold text-xl md:mt-0 text-v'><Trans id="timetable">Timetable</Trans></h1>
+                <button onClick={() => {setDayView(!dayView); setNextWeekView(false)}} className="text border border-gray-600 rounded-lg flex items-center px-2 py-1 mx-auto my-2 md:mx-0 md:my-0">{dayView ? <Trans id="showWeek">Show week</Trans> : <Trans id="showDay">Show Day</Trans>}<span className='mx-1' />{dayView ? <CalendarIcon className='icon' /> : <TableIcon className='icon' />}</button>
+                <button onClick={() => setNextWeekView(!nextWeekView)} className="text border border-gray-600 rounded-lg flex items-center px-2 py-1 mx-auto my-2 md:mx-0 md:my-0">{nextWeekView ? <Trans id="showCurrentWeek">Show current week</Trans> : <Trans id="showNextWeek">Show next Week</Trans>}</button>
             </div>
             <div className={`grid grid-rows-timetable gap-x-2 gap-y-2 mx-auto w-max-[100vw] px-4 grid-rows-timetable ${dayView ? "grid-cols-[max-content,max-content]" : "grid-cols-timetable-week"}`}>
                 {dayView ? <>
                     <h1 className='col-start-2 col-span-1 row-start-1 row-span-1 font-semibold'><Trans id="lesson">Lesson</Trans></h1>
                     {iterateDay(day)}
                 </> : <>
-                    <h1 className={`col-start-2 col-span-1 row-start-1 row-span-1 font-semibold ${weekIndex === 0 && !nextWeekView ? "text-violet-400" : ""}`}><Trans id="mon">Mon</Trans></h1>
-                    <h1 className={`col-start-3 col-span-1 row-start-1 row-span-1 font-semibold ${weekIndex === 1 && !nextWeekView ? "text-violet-400" : ""}`}><Trans id="tue">Tue</Trans></h1>
-                    <h1 className={`col-start-4 col-span-1 row-start-1 row-span-1 font-semibold ${weekIndex === 2 && !nextWeekView ? "text-violet-400" : ""}`}><Trans id="wed">Wed</Trans></h1>
-                    <h1 className={`col-start-5 col-span-1 row-start-1 row-span-1 font-semibold ${weekIndex === 3 && !nextWeekView ? "text-violet-400" : ""}`}><Trans id="thu">Thu</Trans></h1>
-                    <h1 className={`col-start-6 col-span-1 row-start-1 row-span-1 font-semibold ${weekIndex === 4 && !nextWeekView ? "text-violet-400" : ""}`}><Trans id="fri">Fri</Trans></h1>
+                    <h1 className={`col-start-2 col-span-1 row-start-1 row-span-1 font-semibold ${weekIndex === 0 && !nextWeekView ? "text-v-light" : "text-600"}`}><Trans id="mon">Mon</Trans></h1>
+                    <h1 className={`col-start-3 col-span-1 row-start-1 row-span-1 font-semibold ${weekIndex === 1 && !nextWeekView ? "text-v-light" : "text-600"}`}><Trans id="tue">Tue</Trans></h1>
+                    <h1 className={`col-start-4 col-span-1 row-start-1 row-span-1 font-semibold ${weekIndex === 2 && !nextWeekView ? "text-v-light" : "text-600"}`}><Trans id="wed">Wed</Trans></h1>
+                    <h1 className={`col-start-5 col-span-1 row-start-1 row-span-1 font-semibold ${weekIndex === 3 && !nextWeekView ? "text-v-light" : "text-600"}`}><Trans id="thu">Thu</Trans></h1>
+                    <h1 className={`col-start-6 col-span-1 row-start-1 row-span-1 font-semibold ${weekIndex === 4 && !nextWeekView ? "text-v-light" : "text-600"}`}><Trans id="fri">Fri</Trans></h1>
                     { nextWeekView ? iterateWeek(nextTimetable) : iterateWeek(timetable)}
                 </>
                 }
-                <p className={timestampCss + ` row-start-2 ${current === 1 ? "text-violet-400" : ""}`}>1</p>
-                <p className={timestampCss + ` row-start-3 ${current === 2 ? "text-violet-400" : ""}`}>2</p>
-                <p className={timestampCss + ` row-start-4 ${current === 3 ? "text-violet-400" : ""}`}>3</p>
-                <p className={timestampCss + ` row-start-5 ${current === 4 ? "text-violet-400" : ""}`}>4</p>
-                <p className={timestampCss + ` row-start-6 ${current === 5 ? "text-violet-400" : ""}`}>5</p>
-                <p className={timestampCss + ` row-start-7 ${current === 6 ? "text-violet-400" : ""}`}>6</p>
-                <p className={timestampCss + ` row-start-8 ${current === 7 ? "text-violet-400" : ""}`}>7</p>
-                <p className={timestampCss + ` row-start-9 ${current === 8 ? "text-violet-400" : ""}`}>8</p>
+                <p className={timestampCss + ` row-start-2 ${current === 1 ? "text-v-light" : "text-600"}`}>1</p>
+                <p className={timestampCss + ` row-start-3 ${current === 2 ? "text-v-light" : "text-600"}`}>2</p>
+                <p className={timestampCss + ` row-start-4 ${current === 3 ? "text-v-light" : "text-600"}`}>3</p>
+                <p className={timestampCss + ` row-start-5 ${current === 4 ? "text-v-light" : "text-600"}`}>4</p>
+                <p className={timestampCss + ` row-start-6 ${current === 5 ? "text-v-light" : "text-600"}`}>5</p>
+                <p className={timestampCss + ` row-start-7 ${current === 6 ? "text-v-light" : "text-600"}`}>6</p>
+                <p className={timestampCss + ` row-start-8 ${current === 7 ? "text-v-light" : "text-600"}`}>7</p>
+                <p className={timestampCss + ` row-start-9 ${current === 8 ? "text-v-light" : "text-600"}`}>8</p>
             </div>
         </main>
     );

@@ -76,7 +76,7 @@ export default function Web() {
   }
 
   return (
-    <main>
+    <main className="bg min-h-[100vh]">
       <Header settings />
       <div className={"bg-violet-800 text-white rounded-b-xl px-5 py-2 drop-shadow-md"}>
         <div className="flex items-center justify-between">
@@ -87,7 +87,7 @@ export default function Web() {
           <p>{nextLesson.room}</p>
         </> : <p className="text-lg"><Trans id="finishedSchool">You finished school for today</Trans></p>}
       </div>
-      Hello
+      <p className="text">Hello</p>
     </main>
   );
 }

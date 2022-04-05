@@ -37,7 +37,7 @@ export default function Welcome(props) {
 
     return (
         <div>
-            <div onClick={() => nextStage()}>
+            <div>
                 <Header small />
             </div>
             <div className="px-2 mt-2">
@@ -313,10 +313,3 @@ function InviteCodeForm({ nextStage }) {
         </Formik>
     )
 }
-
-
-/* export const getStaticProps = async (context) => {
-    return {
-        props: { context },
-    };
-}; */

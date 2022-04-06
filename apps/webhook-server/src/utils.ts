@@ -1,6 +1,7 @@
 import { privateEncrypt } from 'crypto';
 import { readFileSync } from 'fs';
 import axios from 'axios';
+import { db } from './firebase';
 
 /**
  * encrypts a string with a private key
@@ -59,4 +60,18 @@ export async function callFirebaseFunction(functionName: string, payload: any) {
             },
         }
     );
+}
+
+/**
+ * check if a given user was invited
+ * @param uid the uid of the user
+ * @returns true if the user was invited, otherwise false
+ */
+export async function userHasInvite(uid: string): Promise<boolean> {
+    const doc = await db.collection('userData').doc(uid).get();
+    if (!doc.exists) {
+        return false;
+    }
+    const data = doc.data();
+    return data ? data.enlightened : false;
 }

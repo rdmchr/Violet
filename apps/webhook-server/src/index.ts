@@ -1,7 +1,6 @@
 import express from 'express';
 import multer from 'multer';
-import axios from 'axios';
-import { encrypt, callFirebaseFunction } from './utils';
+import { encrypt, callFirebaseFunction, userHasInvite } from './utils';
 import * as Sentry from '@sentry/node';
 import * as Tracing from '@sentry/tracing';
 
@@ -49,7 +48,9 @@ app.post('/webhook/:uid', multer().none(), async (req: any, res: any) => {
         res.sendStatus(200);
         return;
     }
-    parseJson(JSON.parse(req.body.payload), req.params.uid);
+    const hasInvite = await userHasInvite(req.params.uid);
+    // only run function if the user was invited
+    if (hasInvite) parseJson(JSON.parse(req.body.payload), req.params.uid);
     res.sendStatus(200);
 });
 
@@ -63,6 +64,7 @@ async function parseJson(json: any, uid: string) {
         switch (json.Typ) {
             case 1:
                 // there is a change in the timetable
+                console.log(`Fetching timetable for user ${uid}`);
                 await callFirebaseFunction('fetchTimetable', {
                     uid: encryptedUid,
                 });

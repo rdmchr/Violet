@@ -31,8 +31,8 @@ export default function Welcome(props) {
     const [name, setName] = useState("");
     const [stage, setStage] = useState(0);
 
-    function nextStage() {
-        setStage(stage + 1);
+    function nextStage(increaseBy = 1) {
+        setStage(stage + increaseBy);
     }
 
     return (
@@ -81,7 +81,7 @@ export default function Welcome(props) {
                     <p className="mb-5 text-sm">
                         <Trans id="inviteDisclaimerTwo">You can of course still use this app without an invite.</Trans>
                     </p>
-                    <InviteCodeForm nextStage={nextStage} />
+                    <InviteCodeForm nextStage={nextStage} router={router} />
                 </div>
                 <div className={`${stage === 3 ? "" : "hidden"}`}>
                     <h1 className="text-xl font-semi-bold text-center mt-20 mb-5">
@@ -261,7 +261,7 @@ function CreateAccountForm({ nextStage, setName }) {
     )
 }
 
-function InviteCodeForm({ nextStage }) {
+function InviteCodeForm({ nextStage, router }) {
     const [error, setError] = useState("");
 
     return (
@@ -304,7 +304,7 @@ function InviteCodeForm({ nextStage }) {
                         <Trans id="submit">Submit</Trans>
                     </button>
                     <div className="w-full flex pt-1">
-                        <button type="button" disabled={isSubmitting} onClick={() => nextStage()} className="px-2 py-1 rounded-lg mt-2 text-sm mx-auto italic">
+                        <button type="button" disabled={isSubmitting} onClick={() => router.push('/')} className="px-2 py-1 rounded-lg mt-2 text-sm mx-auto italic">
                             <Trans id="skipForNow">Skip this step for now</Trans>
                         </button>
                     </div>

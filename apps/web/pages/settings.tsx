@@ -30,7 +30,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
 export default function Settings() {
     const router = useRouter();
     const [user, authLoading, authError] = useAuthState(auth);
-    const { name, loading, colorScheme } = useContext(UserContext)
+    const { name, loading, colorScheme, setColorScheme } = useContext(UserContext)
 
     if (authLoading || loading) {
         return (<Loading />);
@@ -46,11 +46,12 @@ export default function Settings() {
         router.push("/login");
     }
 
-    function setColorScheme(dark: boolean) {
+    function setScheme(dark: boolean) {
         if (dark)
             document.documentElement.classList.add('dark');
         else
             document.documentElement.classList.remove('dark');
+        setColorScheme(dark ? 'dark' : 'light');
         updateDoc(doc(db, 'users', user.uid), {
             colorScheme: dark ? 'dark' : 'light'
         })
@@ -67,7 +68,7 @@ export default function Settings() {
                         <p className="text-500">Switch the theme to a dark version</p>
                     </div>
                     <div>
-                        <Toggle initialState={colorScheme === "dark"} onClick={(_e, newState) => { setColorScheme(newState) }} />
+                        <Toggle initialState={colorScheme === "dark"} onClick={(_e, newState) => { setScheme(newState) }} />
                     </div>
                 </div>
                 <div className="cursor-pointer" onClick={logout}>

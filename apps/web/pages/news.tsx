@@ -153,7 +153,7 @@ export default function News() {
     }
 
     return (
-        <main className="bg">
+        <main className="bg min-h-[100vh]">
             <div className='header mb-2 py-2'>
                 <h1 className="text-center text-2xl font-semibold text-v">News</h1>
             </div>

@@ -98,7 +98,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <I18nProvider i18n={i18n}>
-        <UserContext.Provider value={{ user: user, name, uid: user?.uid, loading: loading, colorScheme }}>
+        <UserContext.Provider value={{ user: user, name, uid: user?.uid, loading: loading, colorScheme, setColorScheme }}>
           <Head>
             <title>Violet</title>
           </Head>

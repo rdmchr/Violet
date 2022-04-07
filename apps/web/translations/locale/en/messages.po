@@ -50,7 +50,7 @@ msgstr "The Email is already in use"
 msgid "finishedSchool"
 msgstr "You finished school for today"
 
-#: pages/timetable.tsx:120
+#: pages/timetable.tsx:128
 msgid "fri"
 msgstr "Fri"
 
@@ -82,15 +82,9 @@ msgstr "Invalid Password"
 msgid "invalidUsername"
 msgstr "Invalid username"
 
-#: pages/timetable.tsx:113
+#: pages/timetable.tsx:121
 msgid "lesson"
 msgstr "Lesson"
-
-#: pages/index.tsx:74
-#: pages/settings.tsx:29
-#: pages/timetable.tsx:101
-#~ msgid "loading"
-#~ msgstr "Loading..."
 
 #: pages/login.tsx:41
 #: pages/login.tsx:51
@@ -105,7 +99,7 @@ msgstr "Log out"
 msgid "loggedInAs"
 msgstr "You are currently logged in as"
 
-#: pages/timetable.tsx:116
+#: pages/timetable.tsx:124
 msgid "mon"
 msgstr "Mon"
 
@@ -151,11 +145,19 @@ msgstr "Please give us one moment, we are fetching your timetable."
 msgid "required"
 msgstr "Required"
 
-#: pages/timetable.tsx:109
+#: pages/timetable.tsx:117
+msgid "showCurrentWeek"
+msgstr "Show current week"
+
+#: pages/timetable.tsx:116
 msgid "showDay"
 msgstr "Show Day"
 
-#: pages/timetable.tsx:109
+#: pages/timetable.tsx:117
+msgid "showNextWeek"
+msgstr "Show next Week"
+
+#: pages/timetable.tsx:116
 msgid "showWeek"
 msgstr "Show week"
 
@@ -168,16 +170,16 @@ msgstr "Welcome to Violet, the better way to interact with your school online."
 msgid "submit"
 msgstr "Submit"
 
-#: pages/timetable.tsx:119
+#: pages/timetable.tsx:127
 msgid "thu"
 msgstr "Thu"
 
-#: pages/timetable.tsx:108
+#: pages/timetable.tsx:115
 #: pages/_app.tsx:89
 msgid "timetable"
 msgstr "Timetable"
 
-#: pages/timetable.tsx:117
+#: pages/timetable.tsx:125
 msgid "tue"
 msgstr "Tue"
 
@@ -185,6 +187,6 @@ msgstr "Tue"
 msgid "username"
 msgstr "Username"
 
-#: pages/timetable.tsx:118
+#: pages/timetable.tsx:126
 msgid "wed"
 msgstr "Wed"

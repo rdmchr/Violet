@@ -57,12 +57,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   });
 
   useEffect(() => {
-    const hrefs = window.location.href.split('/');
-    if(hrefs.length === 4) {
-      setRoute("/");
-    } else {
-    setRoute("/" + hrefs[hrefs.length - 1]);
-    }
+    setRoute(router.pathname);
   });
 
   const hiddenMenuRoutes = ['/login', '/settings', '/welcome']
@@ -76,7 +71,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           </Head>
           <div>
             <Component {...pageProps} />
-            <nav className={`fixed bottom-0 left-0 w-screen py-2 flex items-center justify-evenly border-t rounded-t-xl border-gray-300 drop-shadow-[0_-5px_25px_rgba(0,0,0,0.15)] bg-white ${hiddenMenuRoutes.includes(route) ? 'hidden' : 'asdasdasd'}`}>
+            <nav className={`fixed bottom-0 left-0 w-screen py-2 flex items-center justify-evenly border-t rounded-t-xl border-gray-300 drop-shadow-[0_-5px_25px_rgba(0,0,0,0.15)] bg-white ${hiddenMenuRoutes.includes(route) ? 'hidden' : ''}`}>
               <Link passHref href="/">
                 <div className='flex justify-center items-center flex-col cursor-pointer'>
                   <HomeIcon className={`text-3xl ${route === "/" ? "fill-violet-800" : ""}`} />

@@ -33,8 +33,10 @@ export default function Timetable() {
     const [loading, setLoading] = useState(true);
     const [user, authLoading, authError] = useAuthState(auth);
     const [timetable, setTimetable] = useState<Week | null>(null); // the complete timetable for the week
+    const [nextTimetable, setNextTimetable] = useState<Week | null>(null); // the complete timetable for next week
     const [current, setCurrent] = useState<number | null>(null); // current period
     const [dayView, setDayView] = useState(false); // true when displaying only one day, false when displaying the whole week
+    const [nextWeekView, setNextWeekView] = useState(false); // true when displaying next weeks timetable, false when displaying this week timetable
     const weekIndex = new Date().getDay() - 1;
     const currentDay = getCurrentDay();
     const router = useRouter();
@@ -54,9 +56,14 @@ export default function Timetable() {
         var monday = new Date();
         monday.setDate(monday.getDate() - (monday.getDay() + 6) % 7);
         const timestamp = monday.toISOString().split('T')[0];
+        var nextMon = new Date();
+        nextMon.setDate((nextMon.getDate() - (nextMon.getDay() + 6) % 7) + 7);
+        const nextStamp = nextMon.toISOString().split('T')[0];
         const week = await fetchTimetable(timestamp);
+        const nextWeek = await fetchTimetable(nextStamp);
         const currentPeriod = getCurrentPeriod(new Date());
         setTimetable(week);
+        setNextTimetable(nextWeek);
         if (weekIndex < 5)
             setDay(week[weekIndex]);
         else
@@ -106,19 +113,20 @@ export default function Timetable() {
         <main className='w-full'>
             <div className='border border-gray-400 rounded-b-xl mb-2 drop-shadow-lg bg-white md:flex md:items-center md:justify-between md:py-2 md:px-5'>
                 <h1 className='text-center font-bold text-xl mt-5 md:mt-0 text-violet-900'><Trans id="timetable">Timetable</Trans> - {dayString()}</h1>
-                <button onClick={() => setDayView(!dayView)} className="border border-gray-600 rounded-lg flex items-center px-2 py-1 mx-auto my-2 md:mx-0 md:my-0">{dayView ? <Trans id="showWeek">Show week</Trans> : <Trans id="showDay">Show Day</Trans>}<span className='mx-1' />{dayView ? <CalendarIcon /> : <TableIcon />}</button>
+                <button onClick={() => {setDayView(!dayView); setNextWeekView(false)}} className="border border-gray-600 rounded-lg flex items-center px-2 py-1 mx-auto my-2 md:mx-0 md:my-0">{dayView ? <Trans id="showWeek">Show week</Trans> : <Trans id="showDay">Show Day</Trans>}<span className='mx-1' />{dayView ? <CalendarIcon /> : <TableIcon />}</button>
+                <button onClick={() => setNextWeekView(!nextWeekView)} className="border border-gray-600 rounded-lg flex items-center px-2 py-1 mx-auto my-2 md:mx-0 md:my-0">{nextWeekView ? <Trans id="showCurrentWeek">Show current week</Trans> : <Trans id="showNextWeek">Show next Week</Trans>}</button>
             </div>
             <div className={`grid grid-rows-timetable gap-x-2 gap-y-2 mx-auto w-max-[100vw] px-4 grid-rows-timetable ${dayView ? "grid-cols-[max-content,max-content]" : "grid-cols-timetable-week"}`}>
                 {dayView ? <>
                     <h1 className='col-start-2 col-span-1 row-start-1 row-span-1 font-semibold'><Trans id="lesson">Lesson</Trans></h1>
                     {iterateDay(day)}
                 </> : <>
-                    <h1 className={`col-start-2 col-span-1 row-start-1 row-span-1 font-semibold ${weekIndex === 0 ? "text-violet-400" : ""}`}><Trans id="mon">Mon</Trans></h1>
-                    <h1 className={`col-start-3 col-span-1 row-start-1 row-span-1 font-semibold ${weekIndex === 1 ? "text-violet-400" : ""}`}><Trans id="tue">Tue</Trans></h1>
-                    <h1 className={`col-start-4 col-span-1 row-start-1 row-span-1 font-semibold ${weekIndex === 2 ? "text-violet-400" : ""}`}><Trans id="wed">Wed</Trans></h1>
-                    <h1 className={`col-start-5 col-span-1 row-start-1 row-span-1 font-semibold ${weekIndex === 3 ? "text-violet-400" : ""}`}><Trans id="thu">Thu</Trans></h1>
-                    <h1 className={`col-start-6 col-span-1 row-start-1 row-span-1 font-semibold ${weekIndex === 4 ? "text-violet-400" : ""}`}><Trans id="fri">Fri</Trans></h1>
-                    {iterateWeek(timetable)}
+                    <h1 className={`col-start-2 col-span-1 row-start-1 row-span-1 font-semibold ${weekIndex === 0 && !nextWeekView ? "text-violet-400" : ""}`}><Trans id="mon">Mon</Trans></h1>
+                    <h1 className={`col-start-3 col-span-1 row-start-1 row-span-1 font-semibold ${weekIndex === 1 && !nextWeekView ? "text-violet-400" : ""}`}><Trans id="tue">Tue</Trans></h1>
+                    <h1 className={`col-start-4 col-span-1 row-start-1 row-span-1 font-semibold ${weekIndex === 2 && !nextWeekView ? "text-violet-400" : ""}`}><Trans id="wed">Wed</Trans></h1>
+                    <h1 className={`col-start-5 col-span-1 row-start-1 row-span-1 font-semibold ${weekIndex === 3 && !nextWeekView ? "text-violet-400" : ""}`}><Trans id="thu">Thu</Trans></h1>
+                    <h1 className={`col-start-6 col-span-1 row-start-1 row-span-1 font-semibold ${weekIndex === 4 && !nextWeekView ? "text-violet-400" : ""}`}><Trans id="fri">Fri</Trans></h1>
+                    { nextWeekView ? iterateWeek(nextTimetable) : iterateWeek(timetable)}
                 </>
                 }
                 <p className={timestampCss + ` row-start-2 ${current === 1 ? "text-violet-400" : ""}`}>1</p>

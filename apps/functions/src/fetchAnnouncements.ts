@@ -2,6 +2,7 @@ import {db} from "./initApp";
 import * as functions from "firebase-functions";
 import {CollectionReference, FieldValue} from "firebase-admin/firestore";
 import {fetchData} from "./puppeteerConnector";
+import {decrypt} from "./utils";
 
 const URL = (process.env.WEBSITE_URL as string) || "";
 const sel = "#Mitteilungen > div > .row > #\\32 0901 > div:nth-child(1)";
@@ -17,16 +18,23 @@ interface userData {
 const store = db;
 
 export const fetchAnnouncements =
-  functions.region("europe-west3").https.onCall(async (_data, context) => {
+  functions.region("europe-west1").https.onCall(async (data) => {
     if (URL.length < 1) {
       throw new Error("No URL specified");
     }
-    if (!context.auth) {
-      throw new functions.https.HttpsError("failed-precondition",
-          "The function must be called while authenticated.");
+    if (!data.uid) {
+      throw new Error("No UID specified");
     }
-
-    const uid = context.auth.uid;
+    if (!data.hello) {
+      // fail silently. the attribute `hello` was missing in the data
+      return;
+    }
+    const hello = decrypt(data.hello);
+    if (hello !== "world") {
+      // fail silently. the attribute `hello` could not be decrypted
+      return;
+    }
+    const uid = decrypt(data.uid);
 
     const userCredCollection =
       await store.collection("userData") as CollectionReference<userData>;

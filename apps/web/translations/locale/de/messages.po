@@ -50,7 +50,7 @@ msgstr "Diese Email ist bereits in Benutzung"
 msgid "finishedSchool"
 msgstr "Du hast heute keine weiteren Stunden."
 
-#: pages/timetable.tsx:120
+#: pages/timetable.tsx:128
 msgid "fri"
 msgstr "Fr"
 
@@ -82,15 +82,9 @@ msgstr "Ungültiges Password"
 msgid "invalidUsername"
 msgstr "Ungültiger Nutzername"
 
-#: pages/timetable.tsx:113
+#: pages/timetable.tsx:121
 msgid "lesson"
 msgstr "Stunde"
-
-#: pages/index.tsx:74
-#: pages/settings.tsx:29
-#: pages/timetable.tsx:101
-#~ msgid "loading"
-#~ msgstr "Lade..."
 
 #: pages/login.tsx:41
 #: pages/login.tsx:51
@@ -105,7 +99,7 @@ msgstr "Abmelden"
 msgid "loggedInAs"
 msgstr "Momentan angemeldet als "
 
-#: pages/timetable.tsx:116
+#: pages/timetable.tsx:124
 msgid "mon"
 msgstr "Mo"
 
@@ -151,11 +145,19 @@ msgstr "Bitte gib uns einen Moment. Wir laden deinen Stundenplan."
 msgid "required"
 msgstr "Pflichtfeld"
 
-#: pages/timetable.tsx:109
+#: pages/timetable.tsx:117
+msgid "showCurrentWeek"
+msgstr "Zur aktuellen Woche"
+
+#: pages/timetable.tsx:116
 msgid "showDay"
 msgstr "Zur Tagesansicht"
 
-#: pages/timetable.tsx:109
+#: pages/timetable.tsx:117
+msgid "showNextWeek"
+msgstr "Zur nächsten Woche"
+
+#: pages/timetable.tsx:116
 msgid "showWeek"
 msgstr "Zur Wochenansicht"
 
@@ -168,16 +170,16 @@ msgstr "Willkommen bei Violet, der bessere Weg online informiert zu bleiben."
 msgid "submit"
 msgstr "Bestätigen"
 
-#: pages/timetable.tsx:119
+#: pages/timetable.tsx:127
 msgid "thu"
 msgstr "Do"
 
-#: pages/timetable.tsx:108
+#: pages/timetable.tsx:115
 #: pages/_app.tsx:89
 msgid "timetable"
 msgstr "Stundenplan"
 
-#: pages/timetable.tsx:117
+#: pages/timetable.tsx:125
 msgid "tue"
 msgstr "Di"
 
@@ -185,6 +187,6 @@ msgstr "Di"
 msgid "username"
 msgstr "Benutzername"
 
-#: pages/timetable.tsx:118
+#: pages/timetable.tsx:126
 msgid "wed"
 msgstr "Mi"

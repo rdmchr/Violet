@@ -17,30 +17,34 @@ msgstr ""
 msgid "chats"
 msgstr "Chats"
 
-#: pages/welcome.tsx:72
+#: pages/welcome.tsx:97
 msgid "connectToSchool"
 msgstr "Verbinde dich mit deinem Schul-Account"
 
-#: pages/welcome.tsx:75
+#: pages/welcome.tsx:100
 msgid "connectToSchoolDisclaimer"
 msgstr "Wir benötigen diese Daten um z.B. deinen Stundenplan zu laden."
 
-#: pages/welcome.tsx:60
+#: pages/welcome.tsx:85
 msgid "createAccount"
 msgstr "Erstelle ein neues Konto!"
 
-#: pages/welcome.tsx:63
+#: pages/welcome.tsx:88
 msgid "createAccountDisclaimerOne"
 msgstr "Dieser Account wird für Violet benutzt."
 
-#: pages/welcome.tsx:66
+#: pages/welcome.tsx:91
 msgid "createAccountDisclaimerTwo"
 msgstr "Er ist komplett unabhängig von deinem Schul Konto."
 
 #: pages/login.tsx:44
-#: pages/welcome.tsx:212
+#: pages/welcome.tsx:237
 msgid "email"
 msgstr "Email"
+
+#: pages/welcome.tsx:58
+msgid "emailAlreadyInUse"
+msgstr "Diese Email ist bereits in Benutzung"
 
 #: pages/index.tsx:88
 msgid "finishedSchool"
@@ -50,15 +54,15 @@ msgstr "Du hast heute keine weiteren Stunden."
 msgid "fri"
 msgstr "Fr"
 
-#: pages/welcome.tsx:53
+#: pages/welcome.tsx:78
 msgid "getStarted"
 msgstr "Los geht's!"
 
-#: pages/welcome.tsx:47
+#: pages/welcome.tsx:72
 msgid "hello"
 msgstr "Hallo!"
 
-#: pages/welcome.tsx:82
+#: pages/welcome.tsx:107
 msgid "helloName"
 msgstr "Hallo {name}!"
 
@@ -66,15 +70,15 @@ msgstr "Hallo {name}!"
 msgid "home"
 msgstr "Home"
 
-#: pages/welcome.tsx:171
+#: pages/welcome.tsx:196
 msgid "invalidEmail"
 msgstr "Ungültige Emial"
 
-#: pages/welcome.tsx:111
+#: pages/welcome.tsx:136
 msgid "invalidPassword"
 msgstr "Ungültiges Password"
 
-#: pages/welcome.tsx:105
+#: pages/welcome.tsx:130
 msgid "invalidUsername"
 msgstr "Ungültiger Nutzername"
 
@@ -99,15 +103,15 @@ msgstr "Momentan angemeldet als "
 msgid "mon"
 msgstr "Mo"
 
-#: pages/welcome.tsx:163
+#: pages/welcome.tsx:188
 msgid "mustBe3Long"
 msgstr "Muss mindestens 3 Zeichen Lang sein"
 
-#: pages/welcome.tsx:177
+#: pages/welcome.tsx:202
 msgid "mustBe8Long"
 msgstr "Muss mindestens 8 Zeichen Lang sein"
 
-#: pages/welcome.tsx:207
+#: pages/welcome.tsx:232
 msgid "name"
 msgstr "Name"
 
@@ -120,20 +124,24 @@ msgid "nextLesson"
 msgstr "Nächste Stunde:"
 
 #: pages/login.tsx:48
-#: pages/welcome.tsx:137
-#: pages/welcome.tsx:217
+#: pages/welcome.tsx:162
+#: pages/welcome.tsx:242
 msgid "password"
 msgstr "Passwort"
 
-#: pages/welcome.tsx:85
+#: pages/welcome.tsx:59
+msgid "passwordTooWeak"
+msgstr "Das Passwort ist zu schwach"
+
+#: pages/welcome.tsx:110
 msgid "pleaseWait"
 msgstr "Bitte gib uns einen Moment. Wir laden deinen Stundenplan."
 
-#: pages/welcome.tsx:103
-#: pages/welcome.tsx:109
-#: pages/welcome.tsx:161
-#: pages/welcome.tsx:167
-#: pages/welcome.tsx:175
+#: pages/welcome.tsx:128
+#: pages/welcome.tsx:134
+#: pages/welcome.tsx:186
+#: pages/welcome.tsx:192
+#: pages/welcome.tsx:200
 msgid "required"
 msgstr "Pflichtfeld"
 
@@ -153,12 +161,12 @@ msgstr "Zur nächsten Woche"
 msgid "showWeek"
 msgstr "Zur Wochenansicht"
 
-#: pages/welcome.tsx:50
+#: pages/welcome.tsx:75
 msgid "slogan"
 msgstr "Willkommen bei Violet, der bessere Weg online informiert zu bleiben."
 
-#: pages/welcome.tsx:143
-#: pages/welcome.tsx:223
+#: pages/welcome.tsx:168
+#: pages/welcome.tsx:248
 msgid "submit"
 msgstr "Bestätigen"
 
@@ -175,7 +183,7 @@ msgstr "Stundenplan"
 msgid "tue"
 msgstr "Di"
 
-#: pages/welcome.tsx:132
+#: pages/welcome.tsx:157
 msgid "username"
 msgstr "Benutzername"
 

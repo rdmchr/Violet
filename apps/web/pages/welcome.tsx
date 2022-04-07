@@ -9,9 +9,12 @@ import { useRouter } from "next/router";
 import { Trans } from '@lingui/macro'
 import { GetStaticProps } from "next";
 import { loadTranslation } from "../lib/transUtil";
+import { messages as de} from '../translations/locale/de/messages';
+import { messages as en} from '../translations/locale/en/messages';
 
 const auth = getAuth(app);
 const functions = getFunctions(app);
+var messages = en;
 
 export const getStaticProps: GetStaticProps = async (ctx) => {
     const translation = await loadTranslation(
@@ -34,6 +37,28 @@ export default function Welcome(props) {
     function nextStage() {
         setStage(stage + 1);
     }
+
+    useEffect(() => {
+        const hrefs = window.location.href.split('/');
+        const len = hrefs[3];
+      
+      switch (len){
+        case "de":
+          messages = de;
+          break;
+        default:
+          // no need to override messages, since en is the default
+          break;
+      }
+      });
+
+// workaround to prevent lingui from removing translations only used by error messages
+      if(false) {
+        (<div className='hidden'> 
+        <Trans id='emailAlreadyInUse'>The Email is already in use</Trans>
+        <Trans id='passwordTooWeak'> The Password is too weak</Trans>
+        </div>)
+      }
 
     return (
         <div>
@@ -186,13 +211,13 @@ function CreateAccountForm({ nextStage, setName }) {
                 }, (err) => {
                     switch (err.code) {
                         case "auth/email-already-in-use":
-                            setErrors({ email: "This email address is already in use" });
+                            setErrors({ email: messages.emailAlreadyInUse });
                             break;
                         case "auth/invalid-email":
-                            setErrors({ email: "This email address is invalid"});
+                            setErrors({ email: messages.invalidEmail });
                             break;
                         case "auth/weak-password":
-                            setErrors({ password: "This password is too weak" });
+                            setErrors({ password: messages.passwordTooWeak });
                             break;
                         default:
                             setError("An unknown error occured");

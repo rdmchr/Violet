@@ -13,17 +13,22 @@ export const createUserData =
       return {error: "No name specified"};
     }
 
-    const userRef = db.collection("userData") as CollectionReference;
-    const user = await userRef.doc(uid).get();
+    const userDataRef = db.collection("userData") as CollectionReference;
+    const userRef = db.collection("users") as CollectionReference;
+    const user = await userDataRef.doc(uid).get();
     if (user.exists) {
       return {error: "User already exists"};
     }
-    await userRef.doc(uid).set({
+    await userDataRef.doc(uid).set({
       enlightened: false,
-      invite: "",
+      invite: null,
       xUser: null,
       xPass: null,
       name,
+    });
+    await userRef.doc(uid).set({
+      name,
+      colorScheme: "light",
     });
     return {success: true};
   });

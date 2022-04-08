@@ -35,9 +35,13 @@ export default function Welcome(props) {
         setStage(stage + increaseBy);
     }
 
+    function prevStage(decreaseBy = 1) {
+        setStage(stage - decreaseBy);
+    }
+
     return (
         <div>
-            <div>
+            <div onClick={() => nextStage()}>
                 <Header small />
             </div>
             <div className="px-2 mt-2">
@@ -93,7 +97,7 @@ export default function Welcome(props) {
                     <p className="text-sm">
                         <Trans id="connectToSchoolDisclaimerTwo">By connecting your account, you grant us access to your school data.</Trans>
                     </p>
-                    <SchoolPageForm nextStage={nextStage} />
+                    <SchoolPageForm nextStage={nextStage} prevStage={prevStage} />
                 </div>
                 <div className={`${stage === 4 ? "" : "hidden"}`}>
                     <div className="absolute top-1/2 left-1/2 w-max h-max -translate-y-1/2 -translate-x-1/2">
@@ -110,8 +114,9 @@ export default function Welcome(props) {
     )
 }
 
-function SchoolPageForm({ nextStage }) {
+function SchoolPageForm({ nextStage, prevStage }) {
     const [error, setError] = useState("");
+    const router = useRouter();
     return (
         <Formik
             initialValues={{ username: '', password: '' }}
@@ -133,13 +138,27 @@ function SchoolPageForm({ nextStage }) {
             }}
             onSubmit={(values, { setSubmitting, setErrors }) => {
                 const addMessage = httpsCallable(functions, 'checkCredentials');
-                addMessage({ "passw": values.password, "user": values.username }).then((result) => {
-                    console.log(result);
+                const fetchData = httpsCallable(functions, 'fetchEverything');
+                const creds = addMessage({ "passw": values.password, "user": values.username }).then((result) => {
+                    console.log("Verified credentials successfully.");
+                    nextStage();
                     const data = result.data as { error: boolean, message: string };
                     if (data.error === true) {
                         setError(data.message);
                     } else {
-                        nextStage();
+                        fetchData().then((result) => {
+                            const data = result.data as { error?: string, success: boolean };
+                            if (data.success) {
+                                router.push('/');
+                            } else {
+                                setError(data.error);
+                                prevStage();
+                            }
+                        }).catch((error) => {
+                            console.log(error);
+                            setError(error.message);
+                            prevStage();
+                        });
                     }
                 });
                 setSubmitting(false);

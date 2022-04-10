@@ -1,5 +1,6 @@
 import * as puppeteer from "puppeteer";
 import {HTTPResponse} from "puppeteer";
+import {News, Users, Week} from "../types";
 import {parseNews, parseTimetable, parseUsers} from "./dataParsers";
 import {uploadNews, uploadTimetable} from "./firestoreHandler";
 
@@ -37,7 +38,7 @@ export async function fetchData(uid: string, username: string, password: string,
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
   const navigationPromise = page.waitForNavigation();
-  let data = {};
+  let data: {timetable?: Week, nextTimetable?: Week, news?: News, users?: Users} = {};
 
   page.on("response", async (response: HTTPResponse) => {
     if (response.status() !== 200) return;
@@ -63,19 +64,17 @@ export async function fetchData(uid: string, username: string, password: string,
     if (timetable && postData.includes("getstdpl") &&
     response.request().url().endsWith("?sto=0")) {
       const timetableData = await parseTimetable(json);
-      if (writeToFirebase) await uploadTimetable(timetableData, uid);
       data = {...data, timetable: timetableData};
     }
     // handle next timetable
     if (nextTimetable && postData.includes("getstdpl") &&
     response.request().url().endsWith("?sto=1")) {
       const timetableData = await parseTimetable(json);
-      if (writeToFirebase) await uploadTimetable(timetableData, uid, false);
       data = {...data, nextTimetable: timetableData};
     }
     // handle user names
     if (users && postData.includes("getUserNames")) {
-      const userData = parseUsers(json[0]);
+      const userData = await parseUsers(json[0]);
       data = {...data, users: userData};
     }
   });
@@ -99,5 +98,10 @@ export async function fetchData(uid: string, username: string, password: string,
   // .small-12 > .stundenplan > tr:nth-child(1) > .header:nth-child(1)");
 
   await browser.close();
+
+  if (writeToFirebase && (timetable && nextTimetable)) {
+    await uploadTimetable(data.timetable!, uid, true);
+    await uploadTimetable(data.nextTimetable!, uid, false);
+  }
   return data;
 }

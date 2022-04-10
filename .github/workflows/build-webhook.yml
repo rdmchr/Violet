@@ -1,10 +1,16 @@
 name: Webhook build
 on:
+  push:
+    branches:
+      - 'dev-**'
+    paths:
+      - '**/webhook-server/**'
   pull_request:
     types: [ labeled ]
 
 jobs:
   lint:
+    if: ${{ github.event.label.name == 'build-webhook' }}
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2

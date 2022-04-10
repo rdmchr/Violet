@@ -54,11 +54,11 @@ msgstr "Do you have an invite code?"
 msgid "email"
 msgstr "Email"
 
-#: pages/index.tsx:88
+#: pages/index.tsx:91
 msgid "finishedSchool"
 msgstr "You finished school for today"
 
-#: pages/timetable.tsx:128
+#: pages/timetable.tsx:131
 msgid "fri"
 msgstr "Fri"
 
@@ -74,7 +74,7 @@ msgstr "Hello!"
 msgid "helloName"
 msgstr "Hello, {name}!"
 
-#: pages/_app.tsx:123
+#: pages/_app.tsx:125
 msgid "home"
 msgstr "Home"
 
@@ -102,24 +102,32 @@ msgstr "Some features of this app are restricted to invited users."
 msgid "inviteDisclaimerTwo"
 msgstr "You can of course still use this app without an invite."
 
-#: pages/timetable.tsx:121
+#: pages/timetable.tsx:124
 msgid "lesson"
 msgstr "Lesson"
+
+#: pages/settings.tsx:84
+msgid "loadingAnimation"
+msgstr "Loading animation"
+
+#: pages/settings.tsx:85
+msgid "loadingAnimationText"
+msgstr "Toggle the loading animation"
 
 #: pages/login.tsx:43
 #: pages/login.tsx:53
 msgid "logIn"
 msgstr "Log in"
 
-#: pages/settings.tsx:75
+#: pages/settings.tsx:93
 msgid "logOut"
 msgstr "Log out"
 
-#: pages/settings.tsx:76
+#: pages/settings.tsx:94
 msgid "loggedInAs"
 msgstr "You are currently logged in as"
 
-#: pages/timetable.tsx:124
+#: pages/timetable.tsx:127
 msgid "mon"
 msgstr "Mon"
 
@@ -143,11 +151,11 @@ msgstr "Name"
 msgid "newHere"
 msgstr "New here?"
 
-#: pages/_app.tsx:135
+#: pages/_app.tsx:137
 msgid "news"
 msgstr "News"
 
-#: pages/index.tsx:83
+#: pages/index.tsx:86
 msgid "nextLesson"
 msgstr "Next lesson: {0}"
 
@@ -170,19 +178,19 @@ msgstr "Please give us one moment, we are fetching your timetable."
 msgid "required"
 msgstr "Required"
 
-#: pages/timetable.tsx:117
+#: pages/timetable.tsx:120
 msgid "showCurrentWeek"
 msgstr "Show current week"
 
-#: pages/timetable.tsx:116
+#: pages/timetable.tsx:119
 msgid "showDay"
 msgstr "Show Day"
 
-#: pages/timetable.tsx:117
+#: pages/timetable.tsx:120
 msgid "showNextWeek"
 msgstr "Show next Week"
 
-#: pages/timetable.tsx:116
+#: pages/timetable.tsx:119
 msgid "showWeek"
 msgstr "Show week"
 
@@ -201,16 +209,16 @@ msgstr "Welcome to Violet, the better way to interact with your school online."
 msgid "submit"
 msgstr "Submit"
 
-#: pages/timetable.tsx:127
+#: pages/timetable.tsx:130
 msgid "thu"
 msgstr "Thu"
 
-#: pages/timetable.tsx:115
-#: pages/_app.tsx:129
+#: pages/timetable.tsx:118
+#: pages/_app.tsx:131
 msgid "timetable"
 msgstr "Timetable"
 
-#: pages/timetable.tsx:125
+#: pages/timetable.tsx:128
 msgid "tue"
 msgstr "Tue"
 
@@ -218,7 +226,7 @@ msgstr "Tue"
 msgid "username"
 msgstr "Username"
 
-#: pages/timetable.tsx:126
+#: pages/timetable.tsx:129
 msgid "wed"
 msgstr "Wed"
 

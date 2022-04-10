@@ -1,8 +1,10 @@
-import { getAuth } from "firebase/auth";
+import { getAuth, User } from 'firebase/auth';
 import { collection, getDocs, getFirestore, query, where } from "firebase/firestore";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from 'react';
 import { useAuthState } from "react-firebase-hooks/auth";
+import Loading from "../components/loading";
 import { app } from "../lib/firebase";
+import { UserContext } from '../lib/context';
 
 const auth = getAuth(app);
 const db = getFirestore(app);
@@ -23,6 +25,8 @@ type Tag = {
 export default function News() {
     const [user, authLoading, authError] = useAuthState(auth);
     const [news, setNews] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const {loadingAnimation} = useContext(UserContext);
 
     useEffect(() => {
         if (!authLoading && user.uid) {
@@ -45,6 +49,8 @@ export default function News() {
             newsList.push(news);
         });
         setNews(newsList);
+        if (loadingAnimation) {await Promise.resolve(new Promise(resolve => setTimeout(resolve, 400)));}
+        setLoading(false);
     }
 
     function parseMessageText(text: string) {
@@ -150,6 +156,10 @@ export default function News() {
     function formatDate(date: string) {
         const dateObj = new Date(date);
         return dateObj.toLocaleDateString();
+    }
+
+    if (authLoading || loading) {
+        return (<Loading />);
     }
 
     return (

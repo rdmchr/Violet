@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@lingui/react": "^3.13.2",
+    "@sentry/nextjs": "^6.19.6",
     "firebase": "^9.6.8",
     "formik": "^2.2.9",
     "make-plural": "^7.1.0",

@@ -84,10 +84,10 @@ function MyApp({ Component, pageProps }: AppProps) {
   async function fetchUserData(userId: string) {
     const userRef = await getDoc(doc(db, 'users', userId));
     const userData = userRef.data();
-    const colorScheme = userData.colorScheme ? userData.colorScheme : window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    setLoadingAnimation(userData.loadingAnimation);
+    const colorScheme = userData?.colorScheme ? userData.colorScheme : window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    setLoadingAnimation(userData?.loadingAnimation);
     setColorScheme(colorScheme);
-    setName(userData.name);
+    setName(userData?.name);
     if (colorScheme === 'dark')
       document.documentElement.classList.add('dark');
     else

@@ -81,8 +81,8 @@ export default function Settings() {
                 <br/>
                 <div className="flex items-center gap-2 justify-between">
                     <div>
-                        <h1 className="text font-semibold">Loading animation</h1>
-                        <p className="text-500">Toggle the loading animation</p>
+                        <h1 className="text font-semibold"><Trans id="loadingAnimation">Loading animation</Trans></h1>
+                        <p className="text-500"><Trans id="loadingAnimationText">Toggle the loading animation</Trans></p>
                     </div>
                     <div>
                         <Toggle initialState={loadingAnimation} onClick={updateLoadingAnimation} />

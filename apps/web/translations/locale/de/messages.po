@@ -13,172 +13,223 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: pages/_app.tsx:101
-msgid "chats"
-msgstr "Chats"
+#: pages/login.tsx:58
+msgid "Sign up"
+msgstr ""
 
-#: pages/welcome.tsx:72
+#: pages/_app.tsx:101
+#~ msgid "chats"
+#~ msgstr "Chats"
+
+#: pages/welcome.tsx:92
 msgid "connectToSchool"
 msgstr "Verbinde dich mit deinem Schul-Account"
 
-#: pages/welcome.tsx:75
+#: pages/welcome.tsx:95
 msgid "connectToSchoolDisclaimer"
 msgstr "Wir benötigen diese Daten um z.B. deinen Stundenplan zu laden."
 
-#: pages/welcome.tsx:60
+#: pages/welcome.tsx:98
+msgid "connectToSchoolDisclaimerTwo"
+msgstr ""
+
+#: pages/welcome.tsx:68
 msgid "createAccount"
 msgstr "Erstelle ein neues Konto!"
 
-#: pages/welcome.tsx:63
+#: pages/welcome.tsx:71
 msgid "createAccountDisclaimerOne"
 msgstr "Dieser Account wird für Violet benutzt."
 
-#: pages/welcome.tsx:66
+#: pages/welcome.tsx:74
 msgid "createAccountDisclaimerTwo"
 msgstr "Er ist komplett unabhängig von deinem Schul Konto."
 
-#: pages/login.tsx:44
-#: pages/welcome.tsx:212
+#: pages/welcome.tsx:80
+msgid "doYouHaveAnInvite"
+msgstr ""
+
+#: pages/login.tsx:46
+#: pages/welcome.tsx:264
 msgid "email"
 msgstr "Email"
 
-#: pages/index.tsx:88
+#: pages/index.tsx:91
 msgid "finishedSchool"
 msgstr "Du hast heute keine weiteren Stunden."
 
-#: pages/timetable.tsx:128
+#: pages/timetable.tsx:131
 msgid "fri"
 msgstr "Fr"
 
-#: pages/welcome.tsx:53
+#: pages/welcome.tsx:61
 msgid "getStarted"
 msgstr "Los geht's!"
 
-#: pages/welcome.tsx:47
+#: pages/welcome.tsx:51
 msgid "hello"
 msgstr "Hallo!"
 
-#: pages/welcome.tsx:82
+#: pages/welcome.tsx:105
 msgid "helloName"
 msgstr "Hallo {name}!"
 
-#: pages/_app.tsx:83
+#: pages/_app.tsx:114
 msgid "home"
 msgstr "Home"
 
-#: pages/welcome.tsx:171
+#: pages/welcome.tsx:214
 msgid "invalidEmail"
 msgstr "Ungültige Emial"
 
-#: pages/welcome.tsx:111
+#: pages/welcome.tsx:135
 msgid "invalidPassword"
 msgstr "Ungültiges Password"
 
-#: pages/welcome.tsx:105
+#: pages/welcome.tsx:129
 msgid "invalidUsername"
 msgstr "Ungültiger Nutzername"
 
-#: pages/timetable.tsx:121
+#: pages/welcome.tsx:317
+msgid "inviteCode"
+msgstr ""
+
+#: pages/welcome.tsx:83
+msgid "inviteDisclaimerOne"
+msgstr ""
+
+#: pages/welcome.tsx:86
+msgid "inviteDisclaimerTwo"
+msgstr ""
+
+#: pages/timetable.tsx:124
 msgid "lesson"
 msgstr "Stunde"
 
-#: pages/login.tsx:41
-#: pages/login.tsx:51
+#: pages/settings.tsx:84
+msgid "loadingAnimation"
+msgstr "Lade-Animation"
+
+#: pages/settings.tsx:85
+msgid "loadingAnimationText"
+msgstr "Schlate die Lade-Animation an bzw. aus"
+
+#: pages/login.tsx:43
+#: pages/login.tsx:53
 msgid "logIn"
 msgstr "Anmelden"
 
-#: pages/settings.tsx:48
+#: pages/settings.tsx:93
 msgid "logOut"
 msgstr "Abmelden"
 
-#: pages/settings.tsx:49
+#: pages/settings.tsx:94
 msgid "loggedInAs"
 msgstr "Momentan angemeldet als "
 
-#: pages/timetable.tsx:124
+#: pages/timetable.tsx:127
 msgid "mon"
 msgstr "Mo"
 
-#: pages/welcome.tsx:163
+#: pages/welcome.tsx:206
 msgid "mustBe3Long"
 msgstr "Muss mindestens 3 Zeichen Lang sein"
 
-#: pages/welcome.tsx:177
+#: pages/welcome.tsx:295
+msgid "mustBe5Long"
+msgstr "Muss mindestens 5 Zeichen Lang sein"
+
+#: pages/welcome.tsx:220
 msgid "mustBe8Long"
 msgstr "Muss mindestens 8 Zeichen Lang sein"
 
-#: pages/welcome.tsx:207
+#: pages/welcome.tsx:259
 msgid "name"
 msgstr "Name"
 
-#: pages/_app.tsx:95
+#: pages/login.tsx:57
+msgid "newHere"
+msgstr ""
+
+#: pages/_app.tsx:126
 msgid "news"
 msgstr "News"
 
-#: pages/index.tsx:83
+#: pages/index.tsx:86
 msgid "nextLesson"
 msgstr "Nächste Stunde:"
 
-#: pages/login.tsx:48
-#: pages/welcome.tsx:137
-#: pages/welcome.tsx:217
+#: pages/login.tsx:50
+#: pages/welcome.tsx:175
+#: pages/welcome.tsx:269
 msgid "password"
 msgstr "Passwort"
 
-#: pages/welcome.tsx:85
+#: pages/welcome.tsx:108
 msgid "pleaseWait"
 msgstr "Bitte gib uns einen Moment. Wir laden deinen Stundenplan."
 
-#: pages/welcome.tsx:103
-#: pages/welcome.tsx:109
-#: pages/welcome.tsx:161
-#: pages/welcome.tsx:167
-#: pages/welcome.tsx:175
+#: pages/welcome.tsx:127
+#: pages/welcome.tsx:133
+#: pages/welcome.tsx:204
+#: pages/welcome.tsx:210
+#: pages/welcome.tsx:218
+#: pages/welcome.tsx:293
 msgid "required"
 msgstr "Pflichtfeld"
 
-#: pages/timetable.tsx:117
+#: pages/timetable.tsx:120
 msgid "showCurrentWeek"
 msgstr "Zur aktuellen Woche"
 
-#: pages/timetable.tsx:116
+#: pages/timetable.tsx:119
 msgid "showDay"
 msgstr "Zur Tagesansicht"
 
-#: pages/timetable.tsx:117
+#: pages/timetable.tsx:120
 msgid "showNextWeek"
 msgstr "Zur nächsten Woche"
 
-#: pages/timetable.tsx:116
+#: pages/timetable.tsx:119
 msgid "showWeek"
 msgstr "Zur Wochenansicht"
 
-#: pages/welcome.tsx:50
+#: pages/welcome.tsx:185
+#: pages/welcome.tsx:327
+msgid "skipForNow"
+msgstr ""
+
+#: pages/welcome.tsx:54
 msgid "slogan"
 msgstr "Willkommen bei Violet, der bessere Weg online informiert zu bleiben."
 
-#: pages/welcome.tsx:143
-#: pages/welcome.tsx:223
+#: pages/welcome.tsx:181
+#: pages/welcome.tsx:275
+#: pages/welcome.tsx:323
 msgid "submit"
 msgstr "Bestätigen"
 
-#: pages/timetable.tsx:127
+#: pages/timetable.tsx:130
 msgid "thu"
 msgstr "Do"
 
-#: pages/timetable.tsx:115
-#: pages/_app.tsx:89
+#: pages/timetable.tsx:118
+#: pages/_app.tsx:120
 msgid "timetable"
 msgstr "Stundenplan"
 
-#: pages/timetable.tsx:125
+#: pages/timetable.tsx:128
 msgid "tue"
 msgstr "Di"
 
-#: pages/welcome.tsx:132
+#: pages/welcome.tsx:170
 msgid "username"
 msgstr "Benutzername"
 
-#: pages/timetable.tsx:126
+#: pages/timetable.tsx:129
 msgid "wed"
 msgstr "Mi"
+
+#: pages/welcome.tsx:58
+msgid "welcomeDataDisclaimer"
+msgstr ""

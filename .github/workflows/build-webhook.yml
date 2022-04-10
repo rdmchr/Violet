@@ -9,8 +9,16 @@ on:
     types: [ labeled ]
 
 jobs:
+  do-not-merge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: check labels
+        uses: mheap/github-action-required-labels@v1
+        with:
+          mode: exactly
+          count: 1
+          labels: "build"
   lint:
-    if: ${{ github.event.label.name == 'build-webhook' }}
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -21,7 +29,6 @@ jobs:
     - name: Run ESLint
       run: cd apps/webhook-server && npm run lint
   push_to_registry:
-    if: ${{ github.event.label.name == 'build-webhook' }}
     needs: lint
     name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest

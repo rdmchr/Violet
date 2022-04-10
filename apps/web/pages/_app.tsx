@@ -71,6 +71,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
     if (userLoading) return;
     if (!user) {
+      setupNoUser();
       // push to login page if no user is logged in
       if (router.pathname !== '/login' && router.pathname !== '/welcome')
         router.push('/login');
@@ -80,12 +81,22 @@ function MyApp({ Component, pageProps }: AppProps) {
     }
   }, [user, userLoading])
 
+  async function setupNoUser() {
+    const colorScheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    setColorScheme(colorScheme);
+    console.log(colorScheme);
+    if (colorScheme === 'dark')
+      document.documentElement.classList.add('dark');
+    else
+      document.documentElement.classList.remove('dark');
+  }
+
   async function fetchUserData(userId: string) {
     const userRef = await getDoc(doc(db, 'users', userId));
     const userData = userRef.data();
-    const colorScheme = userData.colorScheme ? userData.colorScheme : window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    const colorScheme = userData?.colorScheme ? userData.colorScheme : window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     setColorScheme(colorScheme);
-    setName(userData.name);
+    setName(userData?.name);
     if (colorScheme === 'dark')
       document.documentElement.classList.add('dark');
     else

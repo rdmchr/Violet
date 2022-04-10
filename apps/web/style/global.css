@@ -78,6 +78,10 @@
     @apply bg border-b border-neutral-300 dark:border-gray-800 drop-shadow-md rounded-b-xl;
 }
 
+.input {
+    @apply bg border-2 border-black dark:border-white text-lg rounded-lg p-1;
+}
+
 input:checked ~ .dot {
     transform: translateX(100%);
     @apply bg-violet-500;

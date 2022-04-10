@@ -28,6 +28,7 @@ export const createUserData =
           name,
         });
         await userRef.doc(uid).set({
+          enlightened: false,
           name,
           colorScheme: "light",
           loadinganimation: true,

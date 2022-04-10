@@ -33,6 +33,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   const [colorScheme, setColorScheme] = useState<string>('dark');
   const [loadingAnimation, setLoadingAnimation] = useState<boolean>(true);
   const [name, setName] = useState<string>('');
+  const [enlightened, setEnlightened] = useState<boolean>(false); // wether the user used a valid invite code
 
   // run only once on the first render (for server side)
   if (pageProps.translation && firstRender.current) {
@@ -99,6 +100,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     setLoadingAnimation(userData?.loadingAnimation);
     setColorScheme(colorScheme);
     setName(userData?.name);
+    setEnlightened(userData?.enlightened);
     if (colorScheme === 'dark')
       document.documentElement.classList.add('dark');
     else
@@ -111,7 +113,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <I18nProvider i18n={i18n}>
-        <UserContext.Provider value={{ user: user, name, uid: user?.uid, loading: loading, colorScheme, setColorScheme, loadingAnimation, setLoadingAnimation }}>
+        <UserContext.Provider value={{ user: user, name, uid: user?.uid, loading: loading, colorScheme, setColorScheme, loadingAnimation, setLoadingAnimation, enlightened }}>
           <Head>
             <title>Violet</title>
             <link rel="shortcut icon" href="/favicon.ico" />

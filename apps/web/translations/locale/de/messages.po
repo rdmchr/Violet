@@ -74,7 +74,7 @@ msgstr "Hallo!"
 msgid "helloName"
 msgstr "Hallo {name}!"
 
-#: pages/_app.tsx:112
+#: pages/_app.tsx:123
 msgid "home"
 msgstr "Home"
 
@@ -143,7 +143,7 @@ msgstr "Name"
 msgid "newHere"
 msgstr "Neu hier?"
 
-#: pages/_app.tsx:124
+#: pages/_app.tsx:135
 msgid "news"
 msgstr "News"
 
@@ -206,7 +206,7 @@ msgid "thu"
 msgstr "Do"
 
 #: pages/timetable.tsx:115
-#: pages/_app.tsx:118
+#: pages/_app.tsx:129
 msgid "timetable"
 msgstr "Stundenplan"
 

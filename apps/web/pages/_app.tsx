@@ -31,6 +31,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   const firstRender = useRef(true);
   const [user, userLoading, userError] = useAuthState(auth);
   const [colorScheme, setColorScheme] = useState<string>('dark');
+  const [loadingAnimation, setLoadingAnimation] = useState<boolean>(true);
   const [name, setName] = useState<string>('');
 
   // run only once on the first render (for server side)
@@ -95,6 +96,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     const userRef = await getDoc(doc(db, 'users', userId));
     const userData = userRef.data();
     const colorScheme = userData?.colorScheme ? userData.colorScheme : window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    setLoadingAnimation(userData?.loadingAnimation);
     setColorScheme(colorScheme);
     setName(userData?.name);
     if (colorScheme === 'dark')
@@ -109,7 +111,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <I18nProvider i18n={i18n}>
-        <UserContext.Provider value={{ user: user, name, uid: user?.uid, loading: loading, colorScheme, setColorScheme }}>
+        <UserContext.Provider value={{ user: user, name, uid: user?.uid, loading: loading, colorScheme, setColorScheme, loadingAnimation, setLoadingAnimation }}>
           <Head>
             <title>Violet</title>
             <link rel="shortcut icon" href="/favicon.ico" />

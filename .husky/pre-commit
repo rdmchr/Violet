@@ -1,0 +1,5 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+npm run -w violet-web lingui:extract
+npm run -w violet-web lingui:compile

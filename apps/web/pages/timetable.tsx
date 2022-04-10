@@ -118,7 +118,7 @@ export default function Timetable() {
             </div>
             <div className={`grid grid-rows-timetable gap-x-2 gap-y-2 mx-auto w-max-[100vw] px-4 grid-rows-timetable ${dayView ? "grid-cols-[max-content,max-content]" : "grid-cols-timetable-week"}`}>
                 {dayView ? <>
-                    <h1 className='col-start-2 col-span-1 row-start-1 row-span-1 font-semibold'><Trans id="lesson">Lesson</Trans></h1>
+                    <h1 className='col-start-2 col-span-1 row-start-1 row-span-1 font-semibold text'><Trans id="lesson">Lesson</Trans></h1>
                     {iterateDay(day)}
                 </> : <>
                     <h1 className={`col-start-2 col-span-1 row-start-1 row-span-1 font-semibold ${weekIndex === 0 && !nextWeekView ? "text-v-light" : "text-600"}`}><Trans id="mon">Mon</Trans></h1>

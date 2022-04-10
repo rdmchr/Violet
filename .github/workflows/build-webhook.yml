@@ -28,8 +28,6 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-      - name: cd into webhook-server directory
-        run: cd apps/webhook-server
 
       - name: Extract metadata (tags, labels) for Docker
         id: meta
@@ -37,11 +35,8 @@ jobs:
         with:
           images: getviolet/webhook-server
       
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          file: "apps/webhook-server/Dockerfile"
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+      - name: Build  Docker image
+        run: cd apps/webhook-server && docker build -t getviolet/webhook-server:${{ steps.meta.outputs.tags }} .
+      
+      - name: Push image
+        run: docker push getviolet/webhook-server:${{ steps.meta.outputs.tags }}

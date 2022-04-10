@@ -28,13 +28,13 @@ export const fetchTimetable =
     }
     if (!data.hello) {
       // fail silently. the attribute `hello` was missing in the data
-      console.log("hello was not")
+      console.log("hello was not present on data object");
       return;
     }
     const hello = decrypt(data.hello);
     if (hello !== "world") {
       // fail silently. the attribute `hello` could not be decrypted
-      console.log("hello could not be decrypted as world")
+      console.log("hello could not be decrypted as world");
       return;
     }
     const uid = decrypt(data.uid);

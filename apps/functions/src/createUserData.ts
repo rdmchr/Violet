@@ -30,7 +30,7 @@ export const createUserData =
         await userRef.doc(uid).set({
           name,
           colorScheme: "light",
-          loadinganimation: true
+          loadinganimation: true,
         });
         return {success: true};
       });

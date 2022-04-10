@@ -1,6 +1,6 @@
 services:
   webhook:
-    image: violet/webhook-server:latest
+    image: getviolet/webhook-server:latest
     restart: unless-stopped
     container_name: webhook
     hostname: webhook

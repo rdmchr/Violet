@@ -30,7 +30,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
 export default function Settings() {
     const router = useRouter();
     const [user, authLoading, authError] = useAuthState(auth);
-    const { name, loading, colorScheme, setColorScheme } = useContext(UserContext)
+    const { name, loading, colorScheme, setColorScheme, loadingAnimation, setLoadingAnimation } = useContext(UserContext)
 
     if (authLoading || loading) {
         return (<Loading />);
@@ -57,6 +57,13 @@ export default function Settings() {
         })
     }
 
+    function updateLoadingAnimation() {
+        setLoadingAnimation(!loadingAnimation);
+        updateDoc(doc(db, 'users', user.uid), {
+            loadingAnimation
+        })
+    }
+
     return (
         <main className="bg min-h-[100vh] pt-2 px-2">
             <CarbonArrowLeft className="text-2xl icon" onClick={() => router.back()} />
@@ -71,6 +78,17 @@ export default function Settings() {
                         <Toggle initialState={colorScheme === "dark"} onClick={(_e, newState) => { setScheme(newState) }} />
                     </div>
                 </div>
+                <br/>
+                <div className="flex items-center gap-2 justify-between">
+                    <div>
+                        <h1 className="text font-semibold">Loading animation</h1>
+                        <p className="text-500">Toggle the loading animation</p>
+                    </div>
+                    <div>
+                        <Toggle initialState={loadingAnimation} onClick={updateLoadingAnimation} />
+                    </div>
+                </div>
+                <br/>
                 <div className="cursor-pointer" onClick={logout}>
                     <p className="text font-semibold"><Trans id="logOut">Log out</Trans></p>
                     <p className="text-500 max-w-screen -mt-1"><Trans id="loggedInAs">You are currently logged in as</Trans> {name.length > 15 ? `${name.slice(0, 14)}...` : name}</p>

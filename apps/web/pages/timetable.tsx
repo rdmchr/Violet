@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from 'react';
 import { Week, Day } from '../lib/types';
 import { getCurrentDay, getCurrentPeriod } from '../lib/util';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { getAuth } from 'firebase/auth';
+import { getAuth, User } from 'firebase/auth';
 import { fetchTimetable } from '../lib/data';
 import { TableIcon, CalendarIcon } from '../icons';
 import Loading from '../components/loading';
@@ -12,6 +12,7 @@ import { Trans } from '@lingui/macro';
 import { GetStaticProps } from 'next';
 import { loadTranslation } from '../lib/transUtil';
 import { useRouter } from 'next/router';
+import { UserContext } from '../lib/context';
 
 const db = getFirestore(app);
 const auth = getAuth(app);
@@ -40,6 +41,7 @@ export default function Timetable() {
     const weekIndex = new Date().getDay() - 1;
     const currentDay = getCurrentDay();
     const router = useRouter();
+    const { loadingAnimation } = useContext(UserContext);
 
     useEffect(() => {
         if (!authLoading && user) {
@@ -69,6 +71,7 @@ export default function Timetable() {
         else
             setDay(null);
         setCurrent(currentPeriod);
+        if (loadingAnimation) { await Promise.resolve(new Promise(resolve => setTimeout(resolve, 400))); }
         setLoading(false);
     }
 
@@ -105,7 +108,7 @@ export default function Timetable() {
         return `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`;
     }
 
-    if (loading) {
+    if (authLoading || loading) {
         return (<Loading />);
     }
 

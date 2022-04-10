@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from 'react';
 import { Day, Lesson, Week } from "../lib/types";
 import { getCurrentDay, nextPeriod } from "../lib/util";
 import { getFirestore } from "firebase/firestore";
@@ -14,6 +14,7 @@ import { Trans } from "@lingui/macro";
 import Loading from "../components/loading";
 import { GetStaticProps } from "next";
 import { loadTranslation } from "../lib/transUtil";
+import { UserContext } from '../lib/context';
 
 const db = getFirestore(app);
 const auth = getAuth(app);
@@ -40,6 +41,7 @@ export default function Web() {
   const [upcomingBreak, setUpcomingBreak] = useState<boolean>(false);
   const currentDay = getCurrentDay();
   const weekIndex = new Date().getDay() - 1;
+  const {loadingAnimation} = useContext(UserContext);
 
   /* const periodTracker = setInterval(() => {
     const p = getPeriod(new Date())
@@ -68,6 +70,7 @@ export default function Web() {
       setNextLesson(nextLesson[0]);
       setUpcomingBreak(nextLesson[1]);
     }
+    if (loadingAnimation) { await Promise.resolve(new Promise(resolve => setTimeout(resolve, 400))); }
     setLoading(false);
   }
 

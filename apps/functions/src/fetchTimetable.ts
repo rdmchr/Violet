@@ -58,7 +58,7 @@ export const fetchTimetable =
  * @param {string} uid the firebase uid of the user
  * @return {Week} the parsed json as typescript object
  */
-function parseJSON(jsonString: string, uid: string) {
+export async function parseJSON(jsonString: string, uid: string) {
   const json = JSON.parse(jsonString);
   const days = json[1];
   const week: Week = {};
@@ -79,10 +79,9 @@ function parseJSON(jsonString: string, uid: string) {
         day[Number(lessonNum)] = lesson;
       }
     }
-    console.log(day);
     week[dayNum] = day;
   }
-  uploadToFirestore(week, uid);
+  await uploadToFirestore(week, uid);
   return week;
 }
 

@@ -55,14 +55,14 @@ export const fetchAnnouncements =
  * @param messages this is the JSON with all announcement data from puppeteer
  * @param uid this is the userID
  */
-function parseJSON(messages:any, uid:string) {
-  JSON.parse(messages)[0].forEach((elem:any) => {
+export async function parseJSON(messages:any, uid:string) {
+  await JSON.parse(messages)[0].forEach(async (elem:any) => {
     const messageID = elem.splice(0, 1);
     elem.splice(1, 1);
     elem.splice(3, 3);
     elem[1] = JSON.parse(JSON.stringify(elem[1]).substring(0, 4)+"\"");
     const data = JSON.stringify(elem).replaceAll("<br />\\n", "\\n");
-    uploadToFirestore(JSON.parse(data), uid, messageID as string);
+    await uploadToFirestore(JSON.parse(data), uid, messageID as string);
   });
 }
 

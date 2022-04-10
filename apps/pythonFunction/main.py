@@ -76,11 +76,16 @@ def main(request):
                          data={'aktion': 'login', 'regid': f'PHPSESSID={sess}', 'platform': '2', 'user': user,
                                'pass': passw}, cookies=cookies)
     if auth.text == "1":
+        # Get the user's data
+        user_data = db.collection(u'userData').document(uid).get()
         data = {
-            u'xPass': f'{passw}',
-            u'xUser': f'{user}'
+                u'xPass': f'{passw}',
+                u'xUser': f'{user}'
         }
-        doc_ref = db.collection(u'userData').document(f'{uid}').set(data)
+        if user_data.exists:
+            db.collection(u'userData').document(uid).update(data)
+        else:
+            db.collection(u'userData').document(f'{uid}').set(data)
         return {'data': {'error': False, 'message': 'Credentials verified successfully!'}}, 200, headers
     else:
         return {'data': {'error': True, 'message': 'Could not verify credentials'}}, 401, headers

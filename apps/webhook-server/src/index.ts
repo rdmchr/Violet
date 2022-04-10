@@ -1,6 +1,11 @@
 import express from 'express';
 import multer from 'multer';
-import { encrypt, callFirebaseFunction, userHasInvite } from './utils';
+import {
+    encrypt,
+    callFirebaseFunction,
+    userHasInvite,
+    toBase64,
+} from './utils';
 import * as Sentry from '@sentry/node';
 import * as Tracing from '@sentry/tracing';
 
@@ -58,7 +63,7 @@ app.listen(port, () => console.log(`Node.js server started on port ${port}.`));
 
 //TODO: implement missing functions
 async function parseJson(json: any, uid: string) {
-    const encryptedUid = encrypt(uid);
+    const encryptedUid = encrypt(toBase64(uid));
     console.log(json);
     if (json.Typ) {
         switch (json.Typ) {

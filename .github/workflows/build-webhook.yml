@@ -36,7 +36,7 @@ jobs:
           images: getviolet/webhook-server
       
       - name: Build  Docker image
-        run: cd apps/webhook-server && docker build -t getviolet/webhook-server:${{ steps.meta.outputs.tags }} .
+        run: cd apps/webhook-server && docker build -t getviolet/webhook-server:latest .
       
       - name: Push image
-        run: docker push getviolet/webhook-server:${{ steps.meta.outputs.tags }}
+        run: docker push getviolet/webhook-server:latest

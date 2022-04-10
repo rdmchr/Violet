@@ -38,24 +38,24 @@ function SignInForm() {
     }
 
     return (
-        <div>
+        <div className='min-h-[100vh] bg'>
             <div className='w-screen absolute top-1/2 left-0 -translate-y-1/2'>
-                <h1 className='text-center text-2xl font-semibold mb-2'><Trans id="logIn">Log in</Trans></h1>
+                <h1 className='text-center text-2xl font-semibold mb-2 text'><Trans id="logIn">Log in</Trans></h1>
                 <form onSubmit={signIn} className='flex flex-col px-3'>
                     <label className='flex flex-col font-semibold'>
-                        <span className='ml-1'><Trans id="email">Email</Trans></span>
-                        <input type="email" value={email} onChange={e => setEmail(e.target.value)} className='border-2 border-black rounded-lg text-xl px-1 py-1' />
+                        <span className='ml-1 text'><Trans id="email">Email</Trans></span>
+                        <input type="email" value={email} onChange={e => setEmail(e.target.value)} className='border-2 border-black dark:border-white rounded-lg text-xl px-1 py-1 bg text' />
                     </label>
                     <label className='flex flex-col font-semibold mt-2'>
-                        <span className='ml-1'><Trans id="password">Password</Trans></span>
-                        <input type="password" value={password} onChange={e => setPassword(e.target.value)} className='border-2 border-black rounded-lg text-xl px-1 py-1' />
+                        <span className='ml-1 text'><Trans id="password">Password</Trans></span>
+                        <input type="password" value={password} onChange={e => setPassword(e.target.value)} className='border-2 border-black dark:border-white rounded-lg text-xl px-1 py-1 bg text' />
                     </label>
-                    <button type='submit' className='border-2 border-black mt-3 rounded-lg py-1 text-lg font-semibold border-violet-800'><Trans id="logIn">Log in</Trans></button>
+                    <button type='submit' className='border-2 border-black mt-3 rounded-lg py-1 text-lg font-semibold border-violet-800 text'><Trans id="logIn">Log in</Trans></button>
                 </form>
             </div>
             <div className='text-center absolute bottom-2 left-1/2 -translate-x-1/2'>
-                <h1><Trans id="newHere">New here?</Trans></h1>
-                <Link passHref href="/welcome"><p className='font-semibold text-lg underline -mt-1'><Trans>Sign up</Trans></p></Link>
+                <h1 className='text'><Trans id="newHere">New here?</Trans></h1>
+                <Link passHref href="/welcome"><p className='font-semibold text-lg underline -mt-1 text'><Trans>Sign up</Trans></p></Link>
             </div>
         </div>
     );

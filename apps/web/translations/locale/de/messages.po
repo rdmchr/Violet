@@ -15,7 +15,7 @@ msgstr ""
 
 #: pages/login.tsx:58
 msgid "Sign up"
-msgstr ""
+msgstr "Registrieren"
 
 #: pages/_app.tsx:101
 #~ msgid "chats"
@@ -31,7 +31,7 @@ msgstr "Wir benötigen diese Daten um z.B. deinen Stundenplan zu laden."
 
 #: pages/welcome.tsx:98
 msgid "connectToSchoolDisclaimerTwo"
-msgstr ""
+msgstr "Wenn du deine Accounts verknüpfst, werden wir deine Schul Daten für dich speichern."
 
 #: pages/welcome.tsx:68
 msgid "createAccount"
@@ -47,7 +47,7 @@ msgstr "Er ist komplett unabhängig von deinem Schul Konto."
 
 #: pages/welcome.tsx:80
 msgid "doYouHaveAnInvite"
-msgstr ""
+msgstr "Hast du eine Einladung?"
 
 #: pages/login.tsx:46
 #: pages/welcome.tsx:264
@@ -74,7 +74,7 @@ msgstr "Hallo!"
 msgid "helloName"
 msgstr "Hallo {name}!"
 
-#: pages/_app.tsx:114
+#: pages/_app.tsx:123
 msgid "home"
 msgstr "Home"
 
@@ -92,38 +92,30 @@ msgstr "Ungültiger Nutzername"
 
 #: pages/welcome.tsx:317
 msgid "inviteCode"
-msgstr ""
+msgstr "Einladungscode"
 
 #: pages/welcome.tsx:83
 msgid "inviteDisclaimerOne"
-msgstr ""
+msgstr "Manche Funktionen sind eingeladenen Benutzern vorbehalten."
 
 #: pages/welcome.tsx:86
 msgid "inviteDisclaimerTwo"
-msgstr ""
+msgstr "Du kannst Violet jedoch trotzdem benutzen."
 
-#: pages/timetable.tsx:124
+#: pages/timetable.tsx:121
 msgid "lesson"
 msgstr "Stunde"
-
-#: pages/settings.tsx:84
-msgid "loadingAnimation"
-msgstr "Lade-Animation"
-
-#: pages/settings.tsx:85
-msgid "loadingAnimationText"
-msgstr "Schlate die Lade-Animation an bzw. aus"
 
 #: pages/login.tsx:43
 #: pages/login.tsx:53
 msgid "logIn"
 msgstr "Anmelden"
 
-#: pages/settings.tsx:93
+#: pages/settings.tsx:75
 msgid "logOut"
 msgstr "Abmelden"
 
-#: pages/settings.tsx:94
+#: pages/settings.tsx:76
 msgid "loggedInAs"
 msgstr "Momentan angemeldet als "
 
@@ -149,9 +141,9 @@ msgstr "Name"
 
 #: pages/login.tsx:57
 msgid "newHere"
-msgstr ""
+msgstr "Neu hier?"
 
-#: pages/_app.tsx:126
+#: pages/_app.tsx:135
 msgid "news"
 msgstr "News"
 
@@ -197,7 +189,7 @@ msgstr "Zur Wochenansicht"
 #: pages/welcome.tsx:185
 #: pages/welcome.tsx:327
 msgid "skipForNow"
-msgstr ""
+msgstr "Erstmal überspringen"
 
 #: pages/welcome.tsx:54
 msgid "slogan"
@@ -213,8 +205,8 @@ msgstr "Bestätigen"
 msgid "thu"
 msgstr "Do"
 
-#: pages/timetable.tsx:118
-#: pages/_app.tsx:120
+#: pages/timetable.tsx:115
+#: pages/_app.tsx:129
 msgid "timetable"
 msgstr "Stundenplan"
 
@@ -232,4 +224,4 @@ msgstr "Mi"
 
 #: pages/welcome.tsx:58
 msgid "welcomeDataDisclaimer"
-msgstr ""
+msgstr "Damit diese Seite funktioniert, werden Schuldaten erhoben und gespeichert."

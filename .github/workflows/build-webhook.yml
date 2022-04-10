@@ -1,9 +1,23 @@
 name: Webhook build
 on:
+  push:
+    branches:
+      - 'dev-**'
+    paths:
+      - '**/webhook-server/**'
   pull_request:
     types: [ labeled ]
 
 jobs:
+  do-not-merge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: check labels
+        uses: mheap/github-action-required-labels@v1
+        with:
+          mode: exactly
+          count: 1
+          labels: "build"
   lint:
     runs-on: ubuntu-latest
     steps:
@@ -15,7 +29,6 @@ jobs:
     - name: Run ESLint
       run: cd apps/webhook-server && npm run lint
   push_to_registry:
-    if: ${{ github.event.label.name == 'build-webhook' }}
     needs: lint
     name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
@@ -28,17 +41,15 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-      
+
       - name: Extract metadata (tags, labels) for Docker
         id: meta
         uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
         with:
           images: getviolet/webhook-server
       
-      - name: Build and push Docker image
-        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
-        with:
-          context: .
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+      - name: Build  Docker image
+        run: cd apps/webhook-server && docker build -t getviolet/webhook-server:latest .
+      
+      - name: Push image
+        run: docker push getviolet/webhook-server:latest

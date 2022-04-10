@@ -1,14 +1,18 @@
-import { privateEncrypt } from 'crypto';
+import { privateEncrypt, publicEncrypt } from 'crypto';
 import { readFileSync } from 'fs';
 import axios from 'axios';
+import { db } from './firebase';
+import path from 'path';
 
 /**
  * encrypts a string with a private key
  */
 export function encrypt(data: string) {
-    const privateKey = readFileSync('/keys/functions.key', 'utf-8');
+    const privateKey = readFileSync(
+        path.join(__dirname + '/../keys/function.key.pub')
+    );
     const buffer = Buffer.from(data, 'base64');
-    const encrypted = privateEncrypt(privateKey, buffer);
+    const encrypted = publicEncrypt(privateKey, buffer);
     return encrypted.toString('base64');
 }
 
@@ -48,7 +52,9 @@ export function isDateInThisWeek(date: Date) {
  * @param payload the payload you want to pass to the function
  */
 export async function callFirebaseFunction(functionName: string, payload: any) {
-    payload.hello = encrypt('world');
+    console.log('called function ' + functionName);
+    payload.hello = encrypt(toBase64('world'));
+    console.log(encrypt(toBase64('world')));
     await axios.post(
         `https://europe-west1-rdmchr-violet.cloudfunctions.net/${functionName}`,
         JSON.stringify({ data: payload }),
@@ -59,4 +65,28 @@ export async function callFirebaseFunction(functionName: string, payload: any) {
             },
         }
     );
+}
+
+/**
+ * base64 encode a string
+ * @param str the string you want to base64 encode
+ * @returns the encoded string
+ */
+export function toBase64(str: string) {
+    const buffer = Buffer.from(str);
+    return buffer.toString('base64');
+}
+
+/**
+ * check if a given user was invited
+ * @param uid the uid of the user
+ * @returns true if the user was invited, otherwise false
+ */
+export async function userHasInvite(uid: string): Promise<boolean> {
+    const doc = await db.collection('userData').doc(uid).get();
+    if (!doc.exists) {
+        return false;
+    }
+    const data = doc.data();
+    return data ? data.enlightened : false;
 }

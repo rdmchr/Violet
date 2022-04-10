@@ -72,6 +72,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
     if (userLoading) return;
     if (!user) {
+      setupNoUser();
       // push to login page if no user is logged in
       if (router.pathname !== '/login' && router.pathname !== '/welcome')
         router.push('/login');
@@ -80,6 +81,16 @@ function MyApp({ Component, pageProps }: AppProps) {
       console.log(user);
     }
   }, [user, userLoading])
+
+  async function setupNoUser() {
+    const colorScheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    setColorScheme(colorScheme);
+    console.log(colorScheme);
+    if (colorScheme === 'dark')
+      document.documentElement.classList.add('dark');
+    else
+      document.documentElement.classList.remove('dark');
+  }
 
   async function fetchUserData(userId: string) {
     const userRef = await getDoc(doc(db, 'users', userId));

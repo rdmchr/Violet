@@ -40,71 +40,71 @@ export default function Welcome(props) {
     }
 
     return (
-        <div>
+        <div className="min-h-[100vh] bg">
             <div onClick={() => nextStage()}>
                 <Header small />
             </div>
             <div className="px-2 mt-2">
                 <div className={`${stage === 0 ? "" : "hidden"}`}>
                     <div className="absolute top-1/2 left-1/2 w-max h-max -translate-y-1/2 -translate-x-1/2">
-                        <h1 className="text-2xl font-bold text-violet-900">
+                        <h1 className="text-2xl font-bold text-v">
                             <Trans id="hello">Hello!</Trans>
                         </h1>
-                        <h1 className="w-[75vw]">
+                        <h1 className="w-[75vw] text">
                             <Trans id="slogan">Welcome to Violet, the better way to interact with your school online.</Trans>
                         </h1>
                         <br />
-                        <h1 className="w-[75vw]">
+                        <h1 className="w-[75vw] text-600">
                             <Trans id="welcomeDataDisclaimer">To provide this service we will need to store your school related data.</Trans>
                         </h1>
-                        <button className="px-2 py-1 rounded-lg mt-5 text-lg w-full flex items-center" onClick={() => nextStage()}>
+                        <button className="px-2 py-1 rounded-lg mt-5 text-lg w-full flex items-center text" onClick={() => nextStage()}>
                             <Trans id="getStarted">Get started</Trans>
-                            <RightArrow className="text-xl ml-2" />
+                            <RightArrow className="text-xl ml-2 icon" />
                         </button>
                     </div>
                 </div>
                 <div className={`${stage === 1 ? "" : "hidden"}`}>
-                    <h1 className="text-xl font-semi-bold text-center mt-20 mb-5">
+                    <h1 className="text-xl font-semi-bold text-center mt-20 mb-5 text">
                         <Trans id="createAccount">Let&apos;s create your account!</Trans>
                     </h1>
-                    <p className="text-sm">
+                    <p className="text-sm text">
                         <Trans id="createAccountDisclaimerOne">You will use this account to log into Violet.</Trans>
                     </p>
-                    <p className="mb-5 text-sm">
+                    <p className="mb-5 text-sm text">
                         <Trans id="createAccountDisclaimerTwo">This account is separate from your school account.</Trans>
                     </p>
                     <CreateAccountForm nextStage={nextStage} setName={setName} />
                 </div>
                 <div className={`${stage === 2 ? "" : "hidden"}`}>
-                    <h1 className="text-xl font-semi-bold text-center mt-20 mb-5">
+                    <h1 className="text-xl font-semi-bold text-center mt-20 mb-5 text">
                         <Trans id="doYouHaveAnInvite">Do you have an invite code?</Trans>
                     </h1>
-                    <p className="text-sm">
+                    <p className="text-sm text-600">
                         <Trans id="inviteDisclaimerOne">Some features of this app are restricted to invited users.</Trans>
                     </p>
-                    <p className="mb-5 text-sm">
+                    <p className="mb-5 text-sm text-600">
                         <Trans id="inviteDisclaimerTwo">You can of course still use this app without an invite.</Trans>
                     </p>
                     <InviteCodeForm nextStage={nextStage} router={router} />
                 </div>
                 <div className={`${stage === 3 ? "" : "hidden"}`}>
-                    <h1 className="text-xl font-semi-bold text-center mt-20 mb-5">
+                    <h1 className="text-xl font-semi-bold text-center mt-20 mb-5 text">
                         <Trans id="connectToSchool">Let&apos;s connect your account to the school website!</Trans>
                     </h1>
-                    <p className="text-sm">
+                    <p className="text-sm text-600">
                         <Trans id="connectToSchoolDisclaimer">We need these details to get your timetable.</Trans>
                     </p>
-                    <p className="text-sm">
+                    <p className="text-sm text-600">
                         <Trans id="connectToSchoolDisclaimerTwo">By connecting your account, you grant us access to your school data.</Trans>
                     </p>
                     <SchoolPageForm nextStage={nextStage} prevStage={prevStage} />
                 </div>
                 <div className={`${stage === 4 ? "" : "hidden"}`}>
                     <div className="absolute top-1/2 left-1/2 w-max h-max -translate-y-1/2 -translate-x-1/2">
-                        <h1 className="text-2xl font-bold text-violet-900">
+                        <h1 className="text-2xl font-bold text-v">
                             <Trans id="helloName" values={{ name }}>Hello, {name}!</Trans>
                         </h1>
-                        <h1 className="w-[75vw]">
+                        <h1 className="w-[75vw] text">
                             <Trans id="pleaseWait">Please give us one moment, we are fetching your timetable.</Trans>
                         </h1>
                     </div>
@@ -166,22 +166,22 @@ function SchoolPageForm({ nextStage, prevStage }) {
         >
             {({ isSubmitting }) => (
                 <Form>
-                    <label className="flex flex-col mt-2 font-semibold">
+                    <label className="flex flex-col mt-2 font-semibold text">
                         <Trans id="username">Username</Trans>
-                        <Field type="text" name="username" className="border-2 border-black text-lg rounded-lg p-1" />
+                        <Field type="text" name="username" className="input" />
                     </label>
                     <ErrorMessage name="username" component="div" className="text-red-400" />
-                    <label className="flex flex-col mt-2 font-semibold">
+                    <label className="text flex flex-col mt-2 font-semibold">
                         <Trans id="password">Password</Trans>
-                        <Field type="password" name="password" className="border-2 border-black text-lg rounded-lg p-1" />
+                        <Field type="password" name="password" className="input" />
                     </label>
                     <ErrorMessage name="password" component="div" className="text-red-400" />
                     {error && <div className="text-red-400">{error}</div>}
-                    <button type="submit" disabled={isSubmitting} className="border-violet-900 border-2 px-2 py-1 rounded-lg float-right mt-2 text-lg">
+                    <button type="submit" disabled={isSubmitting} className="text border-v border-2 px-2 py-1 rounded-lg float-right mt-2 text-lg">
                         <Trans id="submit">Submit</Trans>
                     </button>
                     <div className="w-full flex pt-1">
-                        <button type="button" disabled={isSubmitting} onClick={() => nextStage()} className="px-2 py-1 rounded-lg mt-2 text-sm mx-auto italic">
+                        <button type="button" disabled={isSubmitting} onClick={() => nextStage()} className="text px-2 py-1 rounded-lg mt-2 text-sm mx-auto italic">
                             <Trans id="skipForNow">Skip this step for now</Trans>
                         </button>
                     </div>
@@ -255,23 +255,23 @@ function CreateAccountForm({ nextStage, setName }) {
         >
             {({ isSubmitting }) => (
                 <Form>
-                    <label className="flex flex-col font-semibold">
+                    <label className="flex flex-col font-semibold text">
                         <Trans id="name">Name</Trans>
-                        <Field type="text" name="name" className="border-2 border-black text-lg rounded-lg p-1" />
+                        <Field type="text" name="name" className="input" />
                     </label>
                     <ErrorMessage name="name" component="div" className="text-red-400" />
-                    <label className="flex flex-col mt-2 font-semibold">
+                    <label className="flex flex-col mt-2 font-semibold text">
                         <Trans id="email">Email</Trans>
-                        <Field type="email" name="email" className="border-2 border-black text-lg rounded-lg p-1" />
+                        <Field type="email" name="email" className="input" />
                     </label>
                     <ErrorMessage name="email" component="div" className="text-red-400" />
-                    <label className="flex flex-col mt-2 font-semibold">
+                    <label className="flex flex-col mt-2 font-semibold text">
                         <Trans id="password">Password</Trans>
-                        <Field type="password" name="password" className="border-2 border-black text-lg rounded-lg p-1" />
+                        <Field type="password" name="password" className="input" />
                     </label>
                     <ErrorMessage name="password" component="div" className="text-red-400" />
                     {error && <div className="text-red-400">{error}</div>}
-                    <button type="submit" disabled={isSubmitting} className="border-violet-900 border-2 px-2 py-1 rounded-lg float-right mt-2 text-lg">
+                    <button type="submit" disabled={isSubmitting} className="text border-violet-900 border-2 px-2 py-1 rounded-lg float-right mt-2 text-lg">
                         <Trans id="submit">Submit</Trans>
                     </button>
                 </Form>
@@ -313,17 +313,17 @@ function InviteCodeForm({ nextStage, router }) {
         >
             {({ isSubmitting }) => (
                 <Form>
-                    <label className="flex flex-col font-semibold">
+                    <label className="flex flex-col font-semibold text">
                         <Trans id="inviteCode">Invite code</Trans>
-                        <Field type="text" name="invite" className="border-2 border-black text-lg rounded-lg p-1" />
+                        <Field type="text" name="invite" className="input" />
                     </label>
                     <ErrorMessage name="invite" component="div" className="text-red-400" />
                     {error && <div className="text-red-400">{error}</div>}
-                    <button type="submit" disabled={isSubmitting} className="border-violet-900 border-2 px-2 py-1 rounded-lg float-right mt-2 text-lg">
+                    <button type="submit" disabled={isSubmitting} className="text border-violet-900 border-2 px-2 py-1 rounded-lg float-right mt-2 text-lg">
                         <Trans id="submit">Submit</Trans>
                     </button>
                     <div className="w-full flex pt-1">
-                        <button type="button" disabled={isSubmitting} onClick={() => router.push('/')} className="px-2 py-1 rounded-lg mt-2 text-sm mx-auto italic">
+                        <button type="button" disabled={isSubmitting} onClick={() => router.push('/')} className="text px-2 py-1 rounded-lg mt-2 text-sm mx-auto italic">
                             <Trans id="skipForNow">Skip this step for now</Trans>
                         </button>
                     </div>

@@ -1,4 +1,4 @@
-import {publicDecrypt} from "crypto";
+import {privateDecrypt} from "crypto";
 
 /**
  * decrypts a given string using a previously exchanged public key
@@ -8,10 +8,9 @@ import {publicDecrypt} from "crypto";
 export function decrypt(data: string): string {
   const key = process.env.WEBHOOK_KEY as string;
   const buffer = Buffer.from(data, "base64");
-  const decrypted = publicDecrypt(key, buffer);
-  return decrypted.toString("base64");
+  const decrypted = privateDecrypt(key, buffer);
+  return decrypted.toString();
 }
-
 
 /**
  * checks if a given string is a valid firebase uid

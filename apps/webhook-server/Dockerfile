@@ -12,12 +12,9 @@ COPY tsconfig.json ./
 # copy source code to /app/src folder
 COPY src /app/src
 
-# check files list
-RUN ls -a
-
 RUN npm install
 RUN npm run build
 
-EXPOSE 7777
+EXPOSE 8080
 
 CMD [ "node", "./dist/index.js" ]

@@ -74,7 +74,7 @@ msgstr "Hello!"
 msgid "helloName"
 msgstr "Hello, {name}!"
 
-#: pages/_app.tsx:114
+#: pages/_app.tsx:123
 msgid "home"
 msgstr "Home"
 
@@ -102,28 +102,20 @@ msgstr "Some features of this app are restricted to invited users."
 msgid "inviteDisclaimerTwo"
 msgstr "You can of course still use this app without an invite."
 
-#: pages/timetable.tsx:124
+#: pages/timetable.tsx:121
 msgid "lesson"
 msgstr "Lesson"
-
-#: pages/settings.tsx:84
-msgid "loadingAnimation"
-msgstr "Loading animation"
-
-#: pages/settings.tsx:85
-msgid "loadingAnimationText"
-msgstr "Toggle the loading animation"
 
 #: pages/login.tsx:43
 #: pages/login.tsx:53
 msgid "logIn"
 msgstr "Log in"
 
-#: pages/settings.tsx:93
+#: pages/settings.tsx:75
 msgid "logOut"
 msgstr "Log out"
 
-#: pages/settings.tsx:94
+#: pages/settings.tsx:76
 msgid "loggedInAs"
 msgstr "You are currently logged in as"
 
@@ -151,7 +143,7 @@ msgstr "Name"
 msgid "newHere"
 msgstr "New here?"
 
-#: pages/_app.tsx:126
+#: pages/_app.tsx:135
 msgid "news"
 msgstr "News"
 
@@ -213,8 +205,8 @@ msgstr "Submit"
 msgid "thu"
 msgstr "Thu"
 
-#: pages/timetable.tsx:118
-#: pages/_app.tsx:120
+#: pages/timetable.tsx:115
+#: pages/_app.tsx:129
 msgid "timetable"
 msgstr "Timetable"
 

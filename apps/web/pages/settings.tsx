@@ -58,10 +58,10 @@ export default function Settings() {
     }
 
     function updateLoadingAnimation() {
-        setLoadingAnimation(!loadingAnimation);
         updateDoc(doc(db, 'users', user.uid), {
-            loadingAnimation
+            loadingAnimation : !loadingAnimation
         })
+        setLoadingAnimation(!loadingAnimation);
     }
 
     return (

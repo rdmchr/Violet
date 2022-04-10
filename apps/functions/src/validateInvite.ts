@@ -1,13 +1,13 @@
 import {db} from "./initApp";
 import * as functions from "firebase-functions";
-import {CollectionReference} from "firebase-admin/firestore";
+import {CollectionReference, Timestamp} from "firebase-admin/firestore";
 
 interface Invite {
-    usedBy: string;
-    usedAt: Date;
+    usedBy: string | null;
+    usedAt: Timestamp | null;
     createdBy: string;
-    createdAt: Date;
-    expiresAt: Date;
+    createdAt: Timestamp;
+    expiresAt: Timestamp;
 }
 
 export const validateInvite =
@@ -33,7 +33,7 @@ export const validateInvite =
       if (inviteData.usedBy) {
         return {error: "Invite already used"};
       }
-      if (inviteData.expiresAt.getTime() < Date.now()) {
+      if (inviteData.expiresAt.toDate().getTime() < Date.now()) {
         return {error: "Invite expired"};
       }
       await invitesRef.doc(inviteId).update({

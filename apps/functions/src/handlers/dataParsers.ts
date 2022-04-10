@@ -36,7 +36,6 @@ export async function parseTimetable(json: any) {
 */
 export async function parseNews(messages: any): Promise<News> {
   const news: any = {};
-  console.log(messages);
   await messages.forEach(async (elem: any) => {
     const messageID = elem.splice(0, 1);
     elem.splice(1, 1);

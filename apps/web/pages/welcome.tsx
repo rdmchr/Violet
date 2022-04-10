@@ -221,9 +221,9 @@ function CreateAccountForm({ nextStage, setName }) {
                 }
                 return errors;
             }}
-            onSubmit={(values, { setSubmitting, setErrors }) => {
+            onSubmit={async (values, { setSubmitting, setErrors }) => {
                 setName(values.name);
-                createUserWithEmailAndPassword(auth, values.email, values.password).then((user) => {
+                await createUserWithEmailAndPassword(auth, values.email, values.password).then((user) => {
                     console.log(user);
                 }, (err) => {
                     switch (err.code) {
@@ -241,7 +241,7 @@ function CreateAccountForm({ nextStage, setName }) {
                     }
                 });
                 const createUserData = httpsCallable(functions, 'createUserData');
-                createUserData({ name: values.name }).then((result) => {
+                await createUserData({ name: values.name }).then((result) => {
                     console.log(result);
                     const data = result.data as { error?: string, success?: boolean };
                     if (data.success) {

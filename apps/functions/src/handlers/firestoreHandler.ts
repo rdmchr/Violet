@@ -6,14 +6,19 @@ import {FieldValue} from "firebase-admin/firestore";
  * Uploads a timetable to firestore
  * @param {Week} data this is JSON with Timetable for week
  * @param {string} uid this is the userID
+ * @param {boolean} currentWeek wether the data represents the current or next week
  */
-export async function uploadTimetable(data: Week, uid: string) {
+export async function uploadTimetable(data: Week, uid: string, currentWeek = true) {
   // find the latest monday
   const monday = new Date();
-  monday.setDate(monday.getDate() - (monday.getDay() + 6) % 7);
+  if (currentWeek) {
+    monday.setDate(monday.getDate() - (monday.getDay() + 6) % 7);
+  } else {
+    monday.setDate((monday.getDate() - (monday.getDay() + 6) % 7) + 7);
+  }
   const timestamp = monday.toISOString().split("T")[0];
   if (data) {
-    const docSnap = await db.collection("timetable").doc(uid).get();
+    const docSnap = await db.collection("timetables").doc(uid).get();
     if (docSnap.exists) {
       await db.collection("timetables").doc(uid).update({
         [timestamp]: JSON.stringify(data),

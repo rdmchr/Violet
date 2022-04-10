@@ -12,7 +12,8 @@ const url = process.env.WEBSITE_URL;
  * 1 for this weeks timetable, 2 for next weeks timetable
  */
 type requiredData = {
-    timetable?: number | null;
+    timetable?: boolean;
+    nextTimetable?: boolean;
     news?: boolean;
     users?: boolean;
 }
@@ -28,7 +29,7 @@ type requiredData = {
  * where the key is the same as param4
  */
 export async function fetchData(uid: string, username: string, password: string,
-    writeToFirebase: boolean, {timetable = null, news = false, users = false}: requiredData) {
+    writeToFirebase: boolean, {timetable = false, nextTimetable = false, news = false, users = false}: requiredData) {
   if (!url) {
     console.error("No URL specified");
     return null;
@@ -58,12 +59,19 @@ export async function fetchData(uid: string, username: string, password: string,
       }
       data = {...data, news: newsData};
     }
-    // handle timetable
+    // handle current timetable
     if (timetable && postData.includes("getstdpl") &&
-    response.request().url().endsWith(`?sto=${timetable}`)) {
+    response.request().url().endsWith("?sto=0")) {
       const timetableData = await parseTimetable(json);
       if (writeToFirebase) await uploadTimetable(timetableData, uid);
       data = {...data, timetable: timetableData};
+    }
+    // handle next timetable
+    if (nextTimetable && postData.includes("getstdpl") &&
+    response.request().url().endsWith("?sto=1")) {
+      const timetableData = await parseTimetable(json);
+      if (writeToFirebase) await uploadTimetable(timetableData, uid, false);
+      data = {...data, nextTimetable: timetableData};
     }
     // handle user names
     if (users && postData.includes("getUserNames")) {

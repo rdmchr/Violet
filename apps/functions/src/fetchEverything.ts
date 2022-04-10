@@ -33,7 +33,7 @@ export const fetchEverything =
         functions.logger.info(`Running fetchEverything for ${uid}`,
             {structuredData: true});
         await fetchData(uid, userData.xUser, userData.xPass, true, {
-          timetable: 0, news: true,
+          timetable: true, nextTimetable: true, news: true,
         });
         return {success: true};
       });

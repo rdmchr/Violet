@@ -1,7 +1,58 @@
 services:
   webhook:
-    image: violet/webhook-server:1
+    image: getviolet/webhook-server:latest
+    restart: unless-stopped
+    container_name: webhook
+    hostname: webhook
+    networks:
+      - traefik-network
     volumes:
       - "./keys:/keys"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.webhook.rule=Host(`webhook.violet.schule`)"
+      - "traefik.http.routers.webhook.entrypoints=websecure"
+      - "traefik.http.routers.webhook.tls.certresolver=myresolver"
+
+
+  traefik:
+    image: traefik:v2.6
+    restart: unless-stopped
+    container_name: traefik
+    hostname: traefik
+    command:
+      - "--api.dashboard=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.websecure.address=:443"
+      - "--certificatesresolvers.myresolver.acme.dnschallenge=true"
+      - "--certificatesresolvers.myresolver.acme.dnschallenge.provider=cloudflare"
+      - "--certificatesresolvers.myresolver.acme.email=YOUR@EMAIL"
+      - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
+      - "--accesslog=true"
+      - "--accesslog.filepath=/log/access.log"
+      - "--accesslog.filters.statuscodes=200,300-399,500-599"
+    networks:
+      - traefik-network
     ports:
-      - "8080:8080"
+      - 443:443
+      - 8080:8080
+    volumes:
+      - "./letsencrypt:/letsencrypt"
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "./log:/log"
+    environment:
+      - CLOUDFLARE_EMAIL=$CLOUDFLARE_EMAIL
+      - CLOUDFLARE_API_KEY=$CLOUDFLARE_KEY
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.dashboard.rule=Host(`traefik.violet.schule`)"
+      - "traefik.http.routers.dashboard.service=api@internal"
+      - "traefik.http.routers.dashboard.entrypoints=websecure"
+      - "traefik.http.routers.dashboard.tls.certresolver=myresolver"
+      - "traefik.http.routers.dashboard.middlewares=traefik-auth"
+      - "traefik.http.middlewares.traefik-auth.basicauth.users="
+
+# networks
+networks:
+  traefik-network:

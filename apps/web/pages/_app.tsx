@@ -101,10 +101,11 @@ function MyApp({ Component, pageProps }: AppProps) {
         <UserContext.Provider value={{ user: user, name, uid: user?.uid, loading: loading, colorScheme, setColorScheme }}>
           <Head>
             <title>Violet</title>
+            <link rel="shortcut icon" href="/favicon.ico" />
           </Head>
-          <div>
+          <div className='grid'>
             <Component {...pageProps} />
-            <nav className={`fixed bottom-0 left-0 w-screen py-2 flex items-center justify-evenly border-t rounded-t-xl border-gray-300 dark:border-gray-700 drop-shadow-[0_-5px_25px_rgba(0,0,0,0.15)] bg ${hiddenMenuRoutes.includes(route) ? 'hidden' : ''}`}>
+            <nav className={`fixed -bottom-1 left-0 w-screen py-2 flex items-center justify-evenly border-t rounded-t-xl border-gray-300 dark:border-gray-700 drop-shadow-[0_-5px_25px_rgba(0,0,0,0.15)] bg ${hiddenMenuRoutes.includes(route) ? 'hidden' : ''}`}>
               <Link passHref href="/">
                 <div className='flex justify-center items-center flex-col cursor-pointer'>
                   <HomeIcon className={`text-3xl ${route === "/" ? "icon-violet" : "icon"}`} />

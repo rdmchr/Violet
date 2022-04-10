@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body {
-    @apply bg;
-}
-
 /* short cuts */
 
 .bg {
@@ -85,4 +81,8 @@ html, body {
 input:checked ~ .dot {
     transform: translateX(100%);
     @apply bg-violet-500;
+}
+
+html, body {
+    @apply bg;
 }

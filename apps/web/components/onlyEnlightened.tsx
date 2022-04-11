@@ -1,9 +1,10 @@
 import { Trans } from "@lingui/macro";
 import { setUser } from "@sentry/nextjs";
 import { getFunctions, httpsCallable } from "firebase/functions";
-import { ReactChild, useState } from "react";
+import { ReactChild, useState, useContext } from 'react';
 import { CloseIcon } from "../icons";
 import { app } from "../lib/firebase";
+import { UserContext } from '../lib/context';
 
 type Props = {
     pageName: string;
@@ -16,6 +17,7 @@ export default function OnlyEnlightened({ pageName }: Props) {
     const [inviteCode, setInviteCode] = useState<string>("");
     const [submitting, setSubmitting] = useState<boolean>(false);
     const [linkingModal, setLinkingModal] = useState<boolean>(true);
+    const [stage, setStage] = useState(0)
 
     async function validateInvite(e) {
         e.preventDefault();
@@ -32,6 +34,7 @@ export default function OnlyEnlightened({ pageName }: Props) {
                 setInviteError(data.error);
             } else {
                 setInviteError("");
+                setStage(1);
                 //setEnlightened(true);
             }
         }, error => {
@@ -43,13 +46,13 @@ export default function OnlyEnlightened({ pageName }: Props) {
 
     return (
         <main className="min-h-[100vh] bg">
-            <div className='header mb-2 py-2'>
+            <div className='header mb-2 py-2' onClick={() => setStage(1)}>
                 <h1 className="text-center text-2xl font-semibold text-v">{pageName}</h1>
             </div>
-            <div className="mt-10">
+            <div className={`${stage === 0 ? "" : "hidden"} mt-10`}>
                 <img src="/KoiDesign.svg" alt="Koi" className="portrait:w-[90vw] landscape:h-[80vh] mx-auto" />
                 <h1 className="text text-2xl text-center font-bold"><Trans id='woahThere'>Whoah there!</Trans></h1>
-                <p className="text text-center"><Trans id="inviteOnlyFeature">You found a invite only feature.</Trans></p>
+                <p className="text text-center"><Trans id="inviteOnlyFeature">You found an invite only feature.</Trans></p>
                 <div className="border-b border-gray-600 mx-2 my-5" />
                 <h1 className="text text-center">Do you have an invite code?</h1>
                 <form className="px-4 mt-2" onSubmit={validateInvite}>
@@ -61,7 +64,9 @@ export default function OnlyEnlightened({ pageName }: Props) {
                     <button id="submit" type="submit" className="text text-lg border-2 border-violet-700 p-1 rounded-lg float-right mt-2" disabled={submitting}>Submit</button>
                 </form>
             </div>
-            {linkingModal && <LinkSchoolAccountForm setModal={setLinkingModal} />}
+            <div className={`${stage === 1 ? "" : "hidden"}`}>
+                {linkingModal && <LinkSchoolAccountForm setModal={setLinkingModal} />}
+            </div>
         </main>
     )
 }
@@ -111,6 +116,7 @@ function LinkSchoolAccountForm({ setModal }) {
                     const data = result.data as { error?: string, success: boolean };
                     if (data.success) {
                         closeModal();
+                        
                     } else {
                         setError(data.error);
                     }

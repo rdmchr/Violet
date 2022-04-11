@@ -5,6 +5,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import Loading from "../components/loading";
 import { app } from "../lib/firebase";
 import { UserContext } from '../lib/context';
+import OnlyEnlightened from '../components/onlyEnlightened';
 
 const auth = getAuth(app);
 const db = getFirestore(app);
@@ -26,11 +27,15 @@ export default function News() {
     const [user, authLoading, authError] = useAuthState(auth);
     const [news, setNews] = useState([]);
     const [loading, setLoading] = useState(true);
-    const {loadingAnimation} = useContext(UserContext);
+    const { loadingAnimation, enlightened } = useContext(UserContext);
 
     useEffect(() => {
-        if (!authLoading && user.uid) {
+        if (!authLoading && user.uid && enlightened) {
             fetchNews();
+        }
+        if (!authLoading && user.uid && !enlightened) {
+            console.log("not enlightened");
+            setLoading(false);
         }
     }, [authLoading, user]);
 
@@ -49,7 +54,7 @@ export default function News() {
             newsList.push(news);
         });
         setNews(newsList);
-        if (loadingAnimation) {await Promise.resolve(new Promise(resolve => setTimeout(resolve, 400)));}
+        if (loadingAnimation) { await Promise.resolve(new Promise(resolve => setTimeout(resolve, 400))); }
         setLoading(false);
     }
 
@@ -160,6 +165,12 @@ export default function News() {
 
     if (authLoading || loading) {
         return (<Loading />);
+    }
+
+    if (!enlightened) {
+        return (
+            <OnlyEnlightened pageName='News' />
+        )
     }
 
     return (

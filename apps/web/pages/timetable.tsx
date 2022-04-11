@@ -75,6 +75,7 @@ export default function Timetable() {
         const currentPeriod = getCurrentPeriod(new Date());
         setTimetable(week);
         setNextTimetable(nextWeek);
+        console.log(week)
         if (weekIndex < 5)
             setDay(week[weekIndex]);
         else
@@ -125,8 +126,8 @@ export default function Timetable() {
         <main className='w-full min-h-[100vh] bg'>
             <div className='header mb-2 pt-2 md:flex md:items-center md:justify-between md:py-2 md:px-5'>
                 <h1 className='text-center font-bold text-xl md:mt-0 text-v'><Trans id="timetable">Timetable</Trans></h1>
-                <button onClick={() => { setDayView(!dayView); setNextWeekView(false) }} className="text border border-gray-600 rounded-lg flex items-center px-2 py-1 mx-auto my-2 md:mx-0 md:my-0">{dayView ? <Trans id="showWeek">Show week</Trans> : <Trans id="showDay">Show Day</Trans>}<span className='mx-1' />{dayView ? <CalendarIcon className='icon' /> : <TableIcon className='icon' />}</button>
-                <button onClick={() => setNextWeekView(!nextWeekView)} className="text border border-gray-600 rounded-lg flex items-center px-2 py-1 mx-auto my-2 md:mx-0 md:my-0">{nextWeekView ? <Trans id="showCurrentWeek">Show current week</Trans> : <Trans id="showNextWeek">Show next Week</Trans>}</button>
+                <button onClick={() => {setDayView(!dayView); setNextWeekView(false)}} className="text border border-gray-600 rounded-lg flex items-center px-2 py-1 mx-auto my-2 md:mx-0 md:my-0">{dayView ? <Trans id="showWeek">Show week</Trans> : <Trans id="showDay">Show Day</Trans>}<span className='mx-1' />{dayView ? <CalendarIcon className='icon' /> : <TableIcon className='icon' />}</button>
+                {nextTimetable ? <button onClick={() => setNextWeekView(!nextWeekView)} className="text border border-gray-600 rounded-lg flex items-center px-2 py-1 mx-auto my-2 md:mx-0 md:my-0">{nextWeekView ? <Trans id="showCurrentWeek">Show current week</Trans> : <Trans id="showNextWeek">Show next Week</Trans>}</button> : null}
             </div>
             <div className={`grid grid-rows-timetable gap-x-2 gap-y-2 mx-auto w-max-[100vw] px-4 grid-rows-timetable ${dayView ? "grid-cols-[max-content,max-content]" : "grid-cols-timetable-week"}`}>
                 {dayView ? <>

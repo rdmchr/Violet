@@ -6,13 +6,10 @@ import Timetable from '../pages/timetable';
 
 const db = getFirestore(app);
 const auth = getAuth(app);
-export async function fetchTimetable(timestamp: string): Promise<Week> {
+export async function fetchTimetable(timestamp: string): Promise<Week | null> {
     const { uid } = auth.currentUser;
     const docSnap = await getDoc(doc(db, 'timetables', uid));
-    const data = await docSnap.data() as Week[];
-    var timetable = null
-    try {
-    timetable = JSON.parse(data[timestamp] as string);
-    } catch (error) {}
-    return timetable;
+    const data = docSnap.data() as Week[];
+    const week = data[timestamp];
+    return week;
 }

@@ -100,6 +100,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     setLoadingAnimation(userData?.loadingAnimation);
     setColorScheme(colorScheme);
     setName(userData?.name);
+    console.log(userData);
     setEnlightened(userData?.enlightened);
     if (colorScheme === 'dark')
       document.documentElement.classList.add('dark');

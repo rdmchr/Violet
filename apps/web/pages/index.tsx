@@ -41,12 +41,8 @@ export default function Web() {
   const [upcomingBreak, setUpcomingBreak] = useState<boolean>(false);
   const currentDay = getCurrentDay();
   const weekIndex = new Date().getDay() - 1;
-  const { loadingAnimation } = useContext(UserContext);
-
-  /* const periodTracker = setInterval(() => {
-    const p = getPeriod(new Date())
-    setPeriod(p);
-  }, 30 * 1000) */
+  const { loadingAnimation, enlightened } = useContext(UserContext);
+  const [noTimetableData, setNoTimetableData] = useState(true);
 
   useEffect(() => {
     if (!authLoading && !user) {
@@ -55,6 +51,9 @@ export default function Web() {
     if (!authLoading && user) {
       fetchData();
     }
+    if (!authLoading && user) {
+      setLoading(false);
+    }
   }, [authLoading, user]);
 
   async function fetchData() {
@@ -62,6 +61,8 @@ export default function Web() {
     monday.setDate(monday.getDate() - (monday.getDay() + 6) % 7);
     const timestamp = monday.toISOString().split('T')[0];
     const week = await fetchTimetable(timestamp);
+    if (week) setNoTimetableData(false);
+    else return;
     setTimetable(week);
     var tempDay = null;
     if (week !== null) {
@@ -84,7 +85,7 @@ export default function Web() {
   return (
     <main className="bg min-h-[100vh]">
       <Header settings />
-      <div className={"bg-violet-800 text-white rounded-b-xl px-5 py-2 drop-shadow-md"}>
+      {noTimetableData ? null : <div className={"bg-violet-800 text-white rounded-b-xl px-5 py-2 drop-shadow-md"}>
         <div className="flex items-center justify-between">
           <p className="text-sm"><Trans id="nextLesson">Next lesson:</Trans></p>
         </div>
@@ -92,7 +93,7 @@ export default function Web() {
           <h1>{nextLesson.subject}</h1>
           <p>{nextLesson.room}</p>
         </> : <p className="text-lg"><Trans id="finishedSchool">You finished school for today</Trans></p>}
-      </div>
+      </div>}
       <p className="text">Hello</p>
     </main>
   );

@@ -48,6 +48,21 @@ function MyApp({ Component, pageProps }: AppProps) {
     }
   }, [])
 
+  async function callMetricsServer() {
+    const user = auth.currentUser;
+    if (!user || !user.uid) return;
+    const token = await user.getIdToken();
+    //const metricsUrl = 'https://metrics.violet.schule/'
+    const metricsUrl = 'http://localhost:5001/'
+    await fetch(metricsUrl, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        token
+      }
+    })
+  }
+
   // manage auth state
   /*   const authChange = getAuth().onAuthStateChanged(async (u) => {
       if (u === user) return;
@@ -77,6 +92,8 @@ function MyApp({ Component, pageProps }: AppProps) {
       if (router.pathname !== '/login' && router.pathname !== '/welcome')
         router.push('/login');
     } else {
+      callMetricsServer();
+      setInterval(callMetricsServer, 60 * 1000);
       fetchUserData(user.uid);
       console.log(user);
     }

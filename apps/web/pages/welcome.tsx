@@ -41,7 +41,7 @@ export default function Welcome(props) {
 
     return (
         <div className="min-h-[100vh] bg">
-            <div onClick={() => nextStage()}>
+            <div>
                 <Header small />
             </div>
             <div className="px-2 mt-2">

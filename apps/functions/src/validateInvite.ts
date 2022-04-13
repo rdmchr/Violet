@@ -40,10 +40,14 @@ export const validateInvite =
         usedBy: uid,
         usedAt: new Date(),
       });
-      const userRef = db.collection("userData") as CollectionReference;
-      await userRef.doc(uid).update({
+      const userDataRef = db.collection("userData") as CollectionReference;
+      await userDataRef.doc(uid).update({
         enlightened: true,
         invite: inviteId,
+      });
+      const userRef = db.collection("users") as CollectionReference;
+      await userRef.doc(uid).update({
+        enlightened: true,
       });
       return {success: true};
     });

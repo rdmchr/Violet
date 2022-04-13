@@ -13,6 +13,7 @@ import { GetStaticProps } from 'next';
 import { loadTranslation } from '../lib/transUtil';
 import { useRouter } from 'next/router';
 import { UserContext } from '../lib/context';
+import NoTimetableData from '../components/noTimtableData';
 
 const db = getFirestore(app);
 const auth = getAuth(app);
@@ -42,6 +43,7 @@ export default function Timetable() {
     const currentDay = getCurrentDay();
     const router = useRouter();
     const { loadingAnimation } = useContext(UserContext);
+    const [noData, setNoData] = useState<boolean>(false)
 
     useEffect(() => {
         if (!authLoading && user) {
@@ -61,8 +63,15 @@ export default function Timetable() {
         var nextMon = new Date();
         nextMon.setDate((nextMon.getDate() - (nextMon.getDay() + 6) % 7) + 7);
         const nextStamp = nextMon.toISOString().split('T')[0];
-        const week = await fetchTimetable(timestamp);
-        const nextWeek = await fetchTimetable(nextStamp);
+        var week = null;
+        var nextWeek = null;
+        week = await fetchTimetable(timestamp);
+        nextWeek = await fetchTimetable(nextStamp);
+        if (week === null) {
+            setLoading(false);
+            setNoData(true);
+            return;
+        }
         const currentPeriod = getCurrentPeriod(new Date());
         setTimetable(week);
         setNextTimetable(nextWeek);
@@ -117,7 +126,7 @@ export default function Timetable() {
             <div className='header mb-2 pt-2 md:flex md:items-center md:justify-between md:py-2 md:px-5'>
                 <h1 className='text-center font-bold text-xl md:mt-0 text-v'><Trans id="timetable">Timetable</Trans></h1>
                 <button onClick={() => {setDayView(!dayView); setNextWeekView(false)}} className="text border border-gray-600 rounded-lg flex items-center px-2 py-1 mx-auto my-2 md:mx-0 md:my-0">{dayView ? <Trans id="showWeek">Show week</Trans> : <Trans id="showDay">Show Day</Trans>}<span className='mx-1' />{dayView ? <CalendarIcon className='icon' /> : <TableIcon className='icon' />}</button>
-                <button onClick={() => setNextWeekView(!nextWeekView)} className="text border border-gray-600 rounded-lg flex items-center px-2 py-1 mx-auto my-2 md:mx-0 md:my-0">{nextWeekView ? <Trans id="showCurrentWeek">Show current week</Trans> : <Trans id="showNextWeek">Show next Week</Trans>}</button>
+                {nextTimetable ? <button onClick={() => setNextWeekView(!nextWeekView)} className="text border border-gray-600 rounded-lg flex items-center px-2 py-1 mx-auto my-2 md:mx-0 md:my-0">{nextWeekView ? <Trans id="showCurrentWeek">Show current week</Trans> : <Trans id="showNextWeek">Show next Week</Trans>}</button> : null}
             </div>
             <div className={`grid grid-rows-timetable gap-x-2 gap-y-2 mx-auto w-max-[100vw] px-4 grid-rows-timetable ${dayView ? "grid-cols-[max-content,max-content]" : "grid-cols-timetable-week"}`}>
                 {dayView ? <>
@@ -129,7 +138,7 @@ export default function Timetable() {
                     <h1 className={`col-start-4 col-span-1 row-start-1 row-span-1 font-semibold ${weekIndex === 2 && !nextWeekView ? "text-v-light" : "text-600"}`}><Trans id="wed">Wed</Trans></h1>
                     <h1 className={`col-start-5 col-span-1 row-start-1 row-span-1 font-semibold ${weekIndex === 3 && !nextWeekView ? "text-v-light" : "text-600"}`}><Trans id="thu">Thu</Trans></h1>
                     <h1 className={`col-start-6 col-span-1 row-start-1 row-span-1 font-semibold ${weekIndex === 4 && !nextWeekView ? "text-v-light" : "text-600"}`}><Trans id="fri">Fri</Trans></h1>
-                    { nextWeekView ? iterateWeek(nextTimetable) : iterateWeek(timetable)}
+                    {nextWeekView ? iterateWeek(nextTimetable) : iterateWeek(timetable)}
                 </>
                 }
                 <p className={timestampCss + ` row-start-2 ${current === 1 ? "text-v-light" : "text-600"}`}>1</p>
@@ -141,6 +150,8 @@ export default function Timetable() {
                 <p className={timestampCss + ` row-start-8 ${current === 7 ? "text-v-light" : "text-600"}`}>7</p>
                 <p className={timestampCss + ` row-start-9 ${current === 8 ? "text-v-light" : "text-600"}`}>8</p>
             </div>
+            {noData ? <NoTimetableData weekMissing={0}/> : <></>}
+            {(nextWeekView && nextTimetable === null) ? <NoTimetableData weekMissing={1}/> : <></>}
         </main>
     );
 }

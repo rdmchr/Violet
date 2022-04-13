@@ -1,32 +1,37 @@
+//this file will become the data converter to parse the data
+//created by drag n drop in order to upload it to the db.
+//it will also load the db data and convert it into data 
+//usable by the drag n drop logic
+
 export const data =
 {
     lessons: {
-        'mathe': {
-            id: 'mathe',
+        '0': {
+            id: '0',
             teacher: 'Sdt',
             subject: 'M',
             room: 'A102',
         },
-        'english': {
-            id: 'english',
+        '1': {
+            id: '1',
             teacher: 'Sta',
             subject: 'E',
             room: 'A101',
         },
-        'info': {
-            id: 'info',
+        '2': {
+            id: '2',
             teacher: 'Brt',
             subject: 'If',
             room: 'F105',
         },
-        'sowi': {
-            id: 'sowi',
+        '3': {
+            id: '3',
             teacher: 'Ban',
             subject: 'Sw',
             room: 'A103',
         },
-        'frei': {
-            id: 'frei',
+        '4': {
+            id: '4',
             teacher: '',
             subject: 'frei',
             room: '',
@@ -35,15 +40,15 @@ export const data =
     days: {
         'mo': {
             id: 'mo',
-            lessons: ['sowi', 'info'],
+            lessons: ['0'],
         },
         'tue': {
             id: 'tue',
-            lessons: ['english'],
+            lessons: ['2'],
         },
         'wed': {
             id: 'wed',
-            lessons: ['mathe'],
+            lessons: ['3'],
         },
         'thu': {
             id: 'thu',
@@ -57,7 +62,7 @@ export const data =
     dashboard: {
         'dabo-1': {
             id: 'dabo-1',
-            lessons: [],
+            lessons: ['1', '4'],
         }
     }
 }

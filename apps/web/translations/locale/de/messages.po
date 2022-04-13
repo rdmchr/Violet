@@ -58,7 +58,7 @@ msgstr "Email"
 msgid "finishedSchool"
 msgstr "Du hast heute keine weiteren Stunden."
 
-#: pages/timetable.tsx:141
+#: pages/timetable.tsx:140
 msgid "fri"
 msgstr "Fr"
 
@@ -102,7 +102,7 @@ msgstr "Manche Funktionen sind eingeladenen Benutzern vorbehalten."
 msgid "inviteDisclaimerTwo"
 msgstr "Du kannst Violet jedoch trotzdem benutzen."
 
-#: pages/timetable.tsx:134
+#: pages/timetable.tsx:133
 msgid "lesson"
 msgstr "Stunde"
 
@@ -127,7 +127,7 @@ msgstr "Abmelden"
 msgid "loggedInAs"
 msgstr "Momentan angemeldet als "
 
-#: pages/timetable.tsx:137
+#: pages/timetable.tsx:136
 msgid "mon"
 msgstr "Mo"
 
@@ -178,19 +178,19 @@ msgstr "Bitte gib uns einen Moment. Wir laden deinen Stundenplan."
 msgid "required"
 msgstr "Pflichtfeld"
 
-#: pages/timetable.tsx:130
+#: pages/timetable.tsx:129
 msgid "showCurrentWeek"
 msgstr "Zur aktuellen Woche"
 
-#: pages/timetable.tsx:129
+#: pages/timetable.tsx:128
 msgid "showDay"
 msgstr "Zur Tagesansicht"
 
-#: pages/timetable.tsx:130
+#: pages/timetable.tsx:129
 msgid "showNextWeek"
 msgstr "Zur nächsten Woche"
 
-#: pages/timetable.tsx:129
+#: pages/timetable.tsx:128
 msgid "showWeek"
 msgstr "Zur Wochenansicht"
 
@@ -209,16 +209,16 @@ msgstr "Willkommen bei Violet, der bessere Weg online informiert zu bleiben."
 msgid "submit"
 msgstr "Bestätigen"
 
-#: pages/timetable.tsx:140
+#: pages/timetable.tsx:139
 msgid "thu"
 msgstr "Do"
 
-#: pages/timetable.tsx:128
+#: pages/timetable.tsx:127
 #: pages/_app.tsx:134
 msgid "timetable"
 msgstr "Stundenplan"
 
-#: pages/timetable.tsx:138
+#: pages/timetable.tsx:137
 msgid "tue"
 msgstr "Di"
 
@@ -226,7 +226,7 @@ msgstr "Di"
 msgid "username"
 msgstr "Benutzername"
 
-#: pages/timetable.tsx:139
+#: pages/timetable.tsx:138
 msgid "wed"
 msgstr "Mi"
 

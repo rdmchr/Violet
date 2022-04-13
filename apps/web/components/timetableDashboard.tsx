@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
+//this file provides additional functionality for the timetableEditor page
+
 type DayProps = {
     day: EditorDay,
     lessons: EditorLesson[],
@@ -30,6 +32,15 @@ export type Data = {
     }
 }
 
+export type Lessons = {
+    [name: string]: {
+        id: string,
+        teacher: string,
+        subject: string,
+        room: string,
+    }
+}
+
 type DashProps = {
     board: EditorDay,
     lessons: EditorLesson[],
@@ -53,6 +64,7 @@ export type EditorLesson = {
     room: string,
 }
 
+//this function renders the daz elements whith droppable elements, that make up the timetable
 export function DayList({ day, lessons }: DayProps) {
 
     return (
@@ -74,17 +86,26 @@ export function DayList({ day, lessons }: DayProps) {
     );
 }
 
+//this renders the Dashboard droppable Area as well as draggables in them through a component found below
 export function DashboardList({ board, lessons }: DashProps) {
 
     return (
         <div className='m-1 border rounded flex'>
-            <div className='text p-1 bg-[rgb(270,0,0,0.5)] grow flex'>
-                {lessons.map((lesson, index) => <LessonElem key={lesson.id} lesson={lesson} horizontal={true} index={index} />)}
-            </div>
+            <Droppable droppableId={board.id} direction='horizontal' isDropDisabled={true}>
+                {(provided) => {
+                    return (
+                        <div className='text p-1 bg-[rgb(270,0,0,0.5)] grow flex' {...provided.droppableProps} ref={provided.innerRef}>
+                            {lessons.map((lesson, index) => <LessonElem key={lesson.id} lesson={lesson} horizontal={true} index={index} />)}
+                            {provided.placeholder}
+                        </div>
+                    )
+                }}
+            </Droppable>
         </div>
     )
 }
 
+//the LessonElem is used to render all draggable Lesson Elements in the timetable creation
 function LessonElem({ lesson, horizontal, index }: LessonProps) {
     return (
         <Draggable draggableId={lesson.id} index={index}>

@@ -109,7 +109,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     setLoading(false);
   }
 
-  const hiddenMenuRoutes = ['/login', '/settings', '/welcome', '/timetableEditor']
+  const hiddenMenuRoutes = ['/login', '/settings', '/welcome']
 
   return (
     <>

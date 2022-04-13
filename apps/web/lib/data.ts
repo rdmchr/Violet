@@ -9,7 +9,13 @@ const auth = getAuth(app);
 export async function fetchTimetable(timestamp: string): Promise<Week | null> {
     const { uid } = auth.currentUser;
     const docSnap = await getDoc(doc(db, 'timetables', uid));
-    const data = docSnap.data() as Week[];
-    const week = data[timestamp];
-    return week;
+    const data = await docSnap.data() as Week[];
+    var timetable = null
+    try {
+    timetable = JSON.parse(data[timestamp] as string);
+    } catch (error) {}
+    return timetable;
+    //const data = docSnap.data() as Week[];
+    //const week = data[timestamp];
+    //return week;
 }

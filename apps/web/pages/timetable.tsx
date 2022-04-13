@@ -75,7 +75,6 @@ export default function Timetable() {
         const currentPeriod = getCurrentPeriod(new Date());
         setTimetable(week);
         setNextTimetable(nextWeek);
-        console.log(week)
         if (weekIndex < 5)
             setDay(week[weekIndex]);
         else

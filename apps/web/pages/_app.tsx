@@ -14,6 +14,7 @@ import { i18n } from '@lingui/core'
 import { initTranslation } from '../lib/transUtil';
 import { Trans } from '@lingui/macro'
 import { useAuthState } from 'react-firebase-hooks/auth';
+import posthog from 'posthog-js';
 
 const db = getFirestore(app);
 const auth = getAuth(app);
@@ -62,6 +63,13 @@ function MyApp({ Component, pageProps }: AppProps) {
     })
   }
 
+  function initPostHog() {
+    if (typeof window === 'undefined') {
+      posthog.init('phc_yuABDyS7icczuDnR0COHympZkHammRDUWcJtnpmatvJ', { api_host: 'https://lithium.violet.schule' });
+      posthog.capture('startup');
+    }
+  }
+
   // manage auth state
   /*   const authChange = getAuth().onAuthStateChanged(async (u) => {
       if (u === user) return;
@@ -85,6 +93,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   // manage user data and preferences
   useEffect(() => {
     if (userLoading) return;
+    initPostHog();
     if (!user) {
       setupNoUser();
       // push to login page if no user is logged in

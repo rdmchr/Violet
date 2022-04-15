@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@influxdata/influxdb-client": "^1.24.0",
+    "@sentry/node": "^6.19.6",
     "cors": "^2.8.5",
     "express": "^4.17.3",
     "firebase-admin": "^10.0.2"

@@ -56,7 +56,7 @@
 			</div>
 		{/if}
 		{#await loadData()}
-			<div class="w-5 h-5 mx-auto my-2"><Spinner /></div>
+			<div />
 		{:then}
 			{#if users}
 				{#each users as user}

@@ -1,0 +1,44 @@
+/* Write your global styles here, in PostCSS syntax */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body {
+	@apply bg
+}
+
+.bg {
+	@apply dark:bg-gray-900;
+}
+
+.border {
+	@apply border-2 border-gray-500 dark:border-gray-50;
+}
+
+.text {
+	@apply text-black dark:text-white;
+}
+
+.text-inverted {
+	@apply !text-white dark:!text-black;
+}
+
+.input {
+	@apply border bg text px-1 py-1 outline-none focus:border-gray-400 dark:focus:border-gray-400 invalid:border-red-400 invalid:text-red-400;
+}
+
+.label {
+	@apply flex flex-col;
+}
+
+.label-text {
+	@apply text text-lg font-semibold;
+}
+
+.button {
+	@apply text border border-2 font-semibold px-2 py-1 disabled:text-gray-400 disabled:border-gray-400;
+}
+
+.icon {
+	@apply fill-black dark:fill-white;
+}

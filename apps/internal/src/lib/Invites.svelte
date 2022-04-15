@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { collection } from 'firebase/firestore';
 	import { auth, db } from '$lib/firebase';
 	import { AddIcon, CloseIcon, CopyIcon, HideIcon, ShowIcon } from './icons';
 	import Spinner from './spinner/Spinner.svelte';
@@ -71,6 +70,8 @@
 	function copyInviteCode() {
 		navigator.clipboard.writeText(inviteCode);
 	}
+
+	const unsubscribe = auth.onAuthStateChanged((_) => fetchData());
 </script>
 
 <div class="border relative">

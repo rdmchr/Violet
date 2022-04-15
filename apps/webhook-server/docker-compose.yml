@@ -8,6 +8,9 @@ services:
       - traefik-network
     volumes:
       - "./keys:/keys"
+      - "./creds:/credentials"
+    environment:
+      - GOOGLE_APPLICATION_CREDENTIALS=/credentials/service-account.json
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.webhook.rule=Host(`webhook.violet.schule`)"

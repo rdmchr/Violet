@@ -6,8 +6,11 @@ services:
     hostname: internal-server
     networks:
       - traefik-network
+    volumes:
+      - "./creds:/credentials"
     environment:
       - CORS_URL=https://internal.violet.schule
+      - GOOGLE_APPLICATION_CREDENTIALS=/credentials/service-account.json
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.internal-api.rule=Host(`internal-api.violet.schule`)"

@@ -34,6 +34,8 @@
 			users.push(user);
 		}
 	}
+	
+	const unsubscribe = auth.onAuthStateChanged((_) => loadData());
 </script>
 
 <section>

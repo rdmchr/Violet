@@ -1,5 +1,5 @@
 services:
-  webhook:
+  internal-server:
     image: getviolet/internal-server:latest
     restart: unless-stopped
     container_name: internal-server
@@ -10,9 +10,9 @@ services:
       - CORS_URL=https://internal.violet.schule
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.webhook.rule=Host(`internal.violet.schule`)"
-      - "traefik.http.routers.webhook.entrypoints=websecure"
-      - "traefik.http.routers.webhook.tls.certresolver=myresolver"
+      - "traefik.http.routers.internal-api.rule=Host(`internal-api.violet.schule`)"
+      - "traefik.http.routers.internal-api.entrypoints=websecure"
+      - "traefik.http.routers.internal-api.tls.certresolver=myresolver"
 
 
   traefik:

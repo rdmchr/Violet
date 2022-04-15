@@ -8,15 +8,22 @@
 
 	export let maxUsers = 10;
 	let users: User[] = [];
+	let userLoading = true;
 
 	const usersRef = collection(db, 'userData');
 	const q = query(usersRef, orderBy('lastSeen'), limit(maxUsers));
 
 	async function loadData() {
-		if (!auth.currentUser) return;
+		if (!auth.currentUser) {
+			console.log('No user logged in');
+			return;
+		}
+		userLoading = true;
+		users = [];
 		const token = await auth.currentUser.getIdToken();
 		const querySnapshot = await getDocs(q);
 		const u = [];
+		const tempU = [];
 		querySnapshot.forEach((doc) => {
 			u.push(doc.id);
 		});
@@ -31,16 +38,23 @@
 			});
 			if (!res.ok) continue;
 			const user = (await res.json()) as User;
-			users.push(user);
+			tempU.push(user);
 		}
+		users = tempU;
+		userLoading = false;
 	}
-	
+
 	const unsubscribe = auth.onAuthStateChanged((_) => loadData());
 </script>
 
 <section>
 	<div class="border px-1 w-full">
 		<h1 class="text font-bold text-center text-lg">Users</h1>
+		{#if userLoading}
+			<div class="w-5 h-5 mx-auto my-2">
+				<Spinner />
+			</div>
+		{/if}
 		{#await loadData()}
 			<div class="w-5 h-5 mx-auto my-2"><Spinner /></div>
 		{:then}

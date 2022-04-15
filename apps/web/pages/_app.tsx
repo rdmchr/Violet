@@ -52,8 +52,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     const user = auth.currentUser;
     if (!user || !user.uid) return;
     const token = await user.getIdToken();
-    //const metricsUrl = 'https://metrics.violet.schule/'
-    const metricsUrl = 'http://localhost:5001/'
+    const metricsUrl = 'https://metrics.violet.schule/';
     await fetch(metricsUrl, {
       method: 'GET',
       headers: {

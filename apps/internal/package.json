@@ -15,7 +15,7 @@
 	},
 	"devDependencies": {
 		"@playwright/test": "^1.20.0",
-		"@sveltejs/adapter-auto": "next",
+		"@sveltejs/adapter-vercel": "next",
 		"@sveltejs/kit": "next",
 		"@types/cookie": "^0.4.1",
 		"@typescript-eslint/eslint-plugin": "^5.10.1",
@@ -37,15 +37,9 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@fontsource/fira-mono": "^4.5.0",
-		"@lukeed/uuid": "^2.0.0",
 		"@sentry/browser": "^6.19.6",
 		"appwrite": "^7.0.0",
-		"cookie": "^0.4.1",
-		"feather-icons": "^4.29.0",
 		"firebase": "^9.6.10",
-		"rxfire": "^6.0.3",
-		"rxjs": "^7.5.5",
 		"svelty-picker": "^1.2.4"
 	}
 }

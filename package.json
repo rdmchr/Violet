@@ -15,9 +15,9 @@
     "prepare": "husky install"
   },
   "devDependencies": {
+    "husky": "^7.0.0",
     "prettier": "^2.5.1",
-    "turbo": "latest",
-    "husky": "^7.0.0"
+    "turbo": "latest"
   },
   "engines": {
     "npm": ">=7.0.0",

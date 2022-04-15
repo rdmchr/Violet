@@ -17,7 +17,7 @@
   "scripts": {
     "build": "tsc",
     "go": "node dist/index.js",
-    "dev": "nodemon src/index.ts",
+    "dev": "set NODE_ENV=development&& nodemon src/index.ts",
     "fix": "eslint --fix src/**/*.ts",
     "lint": "eslint src/**/*.ts"
   },

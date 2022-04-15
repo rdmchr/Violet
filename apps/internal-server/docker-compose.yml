@@ -1,21 +1,21 @@
 services:
-  webhook:
-    image: getviolet/webhook-server:latest
+  internal-server:
+    image: getviolet/internal-server:latest
     restart: unless-stopped
-    container_name: webhook
-    hostname: webhook
+    container_name: internal-server
+    hostname: internal-server
     networks:
       - traefik-network
     volumes:
-      - "./keys:/keys"
       - "./creds:/credentials"
     environment:
+      - CORS_URL=https://internal.violet.schule
       - GOOGLE_APPLICATION_CREDENTIALS=/credentials/service-account.json
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.webhook.rule=Host(`webhook.violet.schule`)"
-      - "traefik.http.routers.webhook.entrypoints=websecure"
-      - "traefik.http.routers.webhook.tls.certresolver=myresolver"
+      - "traefik.http.routers.internal-api.rule=Host(`internal-api.violet.schule`)"
+      - "traefik.http.routers.internal-api.entrypoints=websecure"
+      - "traefik.http.routers.internal-api.tls.certresolver=myresolver"
 
 
   traefik:

@@ -54,7 +54,7 @@ msgstr "Do you have an invite code?"
 msgid "email"
 msgstr "Email"
 
-#: pages/index.tsx:91
+#: pages/index.tsx:95
 msgid "finishedSchool"
 msgstr "You finished school for today"
 
@@ -74,7 +74,7 @@ msgstr "Hello!"
 msgid "helloName"
 msgstr "Hello, {name}!"
 
-#: pages/_app.tsx:150
+#: pages/_app.tsx:142
 msgid "home"
 msgstr "Home"
 
@@ -151,11 +151,11 @@ msgstr "Name"
 msgid "newHere"
 msgstr "New here?"
 
-#: pages/_app.tsx:162
+#: pages/_app.tsx:154
 msgid "news"
 msgstr "News"
 
-#: pages/index.tsx:86
+#: pages/index.tsx:90
 msgid "nextLesson"
 msgstr "Next lesson: {0}"
 
@@ -214,7 +214,7 @@ msgid "thu"
 msgstr "Thu"
 
 #: pages/timetable.tsx:118
-#: pages/_app.tsx:156
+#: pages/_app.tsx:148
 msgid "timetable"
 msgstr "Timetable"
 

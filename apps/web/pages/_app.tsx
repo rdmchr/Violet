@@ -65,26 +65,18 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   function initPostHog() {
     if (typeof window === 'undefined') {
+      console.log('Initializing PostHog')
       posthog.init('phc_yuABDyS7icczuDnR0COHympZkHammRDUWcJtnpmatvJ', { api_host: 'https://lithium.violet.schule' });
       posthog.capture('startup');
     }
   }
 
-  // manage auth state
-  /*   const authChange = getAuth().onAuthStateChanged(async (u) => {
-      if (u === user) return;
-      if (user) {
-        setUser(u);
-        console.log(user);
-        await fetchUserData(user.uid)
-        setLoading(false);
-      } else {
-        setUser(null);
-        console.log("no user")
-        setLoading(false);
-  
-      }
-    }); */
+  function initMetrics() {
+    posthog.init('phc_yuABDyS7icczuDnR0COHympZkHammRDUWcJtnpmatvJ', { api_host: 'https://lithium.violet.schule' });
+
+    callMetricsServer();
+    setInterval(callMetricsServer, 60 * 1000);
+  }
 
   useEffect(() => {
     setRoute(router.pathname);
@@ -100,10 +92,10 @@ function MyApp({ Component, pageProps }: AppProps) {
       if (router.pathname !== '/login' && router.pathname !== '/welcome')
         router.push('/login');
     } else {
-      callMetricsServer();
-      setInterval(callMetricsServer, 60 * 1000);
+      if (process.env.NODE_ENV !== 'development') {
+        initMetrics();
+      }
       fetchUserData(user.uid);
-      console.log(user);
     }
   }, [user, userLoading])
 

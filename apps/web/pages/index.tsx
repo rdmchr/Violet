@@ -21,13 +21,13 @@ const auth = getAuth(app);
 
 export const getStaticProps: GetStaticProps = async (ctx) => {
   const translation = await loadTranslation(
-      ctx.locale!,
-      process.env.NODE_ENV === 'production'
+    ctx.locale!,
+    process.env.NODE_ENV === 'production'
   )
   return {
-      props: {
-          translation
-      }
+    props: {
+      translation
+    }
   }
 }
 
@@ -41,7 +41,7 @@ export default function Web() {
   const [upcomingBreak, setUpcomingBreak] = useState<boolean>(false);
   const currentDay = getCurrentDay();
   const weekIndex = new Date().getDay() - 1;
-  const {loadingAnimation} = useContext(UserContext);
+  const { loadingAnimation } = useContext(UserContext);
 
   /* const periodTracker = setInterval(() => {
     const p = getPeriod(new Date())
@@ -63,6 +63,10 @@ export default function Web() {
     const timestamp = monday.toISOString().split('T')[0];
     const week = await fetchTimetable(timestamp);
     setTimetable(week);
+    if (!week) {
+      setLoading(false);
+      return;
+    }
     const tempDay = week[weekIndex]
     setDay(tempDay);
     const nextLesson = nextPeriod(tempDay);

@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { browser } from '$app/env';
-
 	import { page } from '$app/stores';
 	import { auth, db } from '$lib/firebase';
 	import Spinner from '$lib/spinner/Spinner.svelte';
@@ -8,15 +6,13 @@
 	import { dateToLocalString, timeDifference } from '$lib/utils';
 	import { LockIcon, UnlockIcon } from '$lib/icons';
 	import { variables } from '$lib/variables';
-	import { authState } from 'rxfire/auth';
-	import { goto } from '$app/navigation';
 
 	let loading = false;
 	let resetLink = '';
 
 	let user;
 
-	const unsubscribe = authState(auth).subscribe((u) => {
+	const unsubscribe = auth.onAuthStateChanged((u) => {
 		user = u;
 	});
 

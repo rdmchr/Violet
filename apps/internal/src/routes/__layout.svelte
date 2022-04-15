@@ -1,7 +1,6 @@
 <script lang="ts">
 	import Header from '$lib/header/Header.svelte';
 	import '../app.css';
-	import { authState } from 'rxfire/auth';
 	import { goto } from '$app/navigation';
 	import { browser } from '$app/env';
 	import { auth } from '$lib/firebase';
@@ -20,7 +19,7 @@
 
 	let user;
 
-	const unsubscribe = authState(auth).subscribe((u) => {
+	const unsubscribe = auth.onAuthStateChanged((u) => {
 		user = u;
 		if (browser && u) goto('/');
 		else if (browser && !u) goto('/login');

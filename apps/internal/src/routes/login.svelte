@@ -9,7 +9,6 @@ import { goto } from '$app/navigation';
 
 	import {auth} from '$lib/firebase';
 	import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-    import { authState } from 'rxfire/auth';
 
 	let email = '';
 	let password = '';

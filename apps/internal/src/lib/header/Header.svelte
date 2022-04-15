@@ -2,16 +2,14 @@
 	import { browser } from '$app/env';
 
 	import { page } from '$app/stores';
-	import Icon from '$lib/Icon.svelte';
 	import { MoonIcon, SunIcon } from '$lib/icons';
 	import logo from './V.svg';
-	import { authState } from 'rxfire/auth';
 	import { auth } from '$lib/firebase';
 	import { goto } from '$app/navigation';
 
 	let theme = '';
 	let user;
-	const unsubscribe = authState(auth).subscribe((u) => (user = u));
+	const unsubscribe = auth.onAuthStateChanged((u) => user = u);
 
 	if (browser) {
 		if (

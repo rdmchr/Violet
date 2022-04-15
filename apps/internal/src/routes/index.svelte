@@ -10,9 +10,8 @@
 
 	import Invites from '$lib/Invites.svelte';
 	import Users from '$lib/Users.svelte';
-	import { authState } from 'rxfire/auth';
 
-	const unsubscribe = authState(auth).subscribe((u) => {
+	const unsubscribe = auth.onAuthStateChanged((u) => {
 		if (browser && !u) goto('/login');
 	});
 </script>

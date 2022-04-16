@@ -9,7 +9,8 @@ const moduleExports = withPWA({
     locales: ['en', 'de'],
   },
   pwa: {
-    dest: 'public'
+    dest: 'public',
+    cacheOnFrontEndNav: true
   },
 });
 

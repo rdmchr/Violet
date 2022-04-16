@@ -3,7 +3,7 @@ import type { AppProps } from 'next/app'
 import { UserContext } from '../lib/context';
 import { getAuth, User } from 'firebase/auth';
 import { useEffect, useRef, useState } from 'react';
-import { app, init } from '../lib/firebase';
+import { app } from '../lib/firebase';
 import { doc, enableIndexedDbPersistence, getDoc, getFirestore } from 'firebase/firestore';
 import { ChatIcon, HomeIcon, HornIcon, TableIcon } from '../icons';
 import Link from 'next/link';

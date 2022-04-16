@@ -3,7 +3,7 @@
   "short_name": "Violet",
   "theme_color": "#4c1d95",
   "background_color": "#111827",
-  "display": "minimal-ui",
+  "display": "standalone",
   "orientation": "portrait",
   "scope": "/",
   "start_url": "/",

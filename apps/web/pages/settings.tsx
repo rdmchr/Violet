@@ -76,8 +76,8 @@ export default function Settings() {
             <div className="px-2">
                 <div className="flex items-center gap-2 justify-between">
                     <div>
-                        <h1 className="text font-semibold">Darkmode</h1>
-                        <p className="text-500">Switch the theme to a dark version</p>
+                        <h1 className="text font-semibold"><Trans id="darkmode">Darkmode</Trans></h1>
+                        <p className="text-500"><Trans id="darkmodeText">Switch the theme to a dark version</Trans></p>
                     </div>
                     <div>
                         <Toggle initialState={colorScheme === "dark"} onClick={(_e, newState) => { setScheme(newState) }} />

@@ -49,6 +49,14 @@ msgstr "You will use this account to log into Violet."
 msgid "createAccountDisclaimerTwo"
 msgstr "This account is separate from your school account."
 
+#: pages/settings.tsx:79
+msgid "darkmode"
+msgstr "Darkmode"
+
+#: pages/settings.tsx:80
+msgid "darkmodeText"
+msgstr "Switch the theme to a dark version"
+
 #: pages/welcome.tsx:80
 msgid "doYouHaveAnInvite"
 msgstr "Do you have an invite code?"

@@ -3,8 +3,8 @@ import type { AppProps } from 'next/app'
 import { UserContext } from '../lib/context';
 import { getAuth, User } from 'firebase/auth';
 import { useEffect, useRef, useState } from 'react';
-import { app } from '../lib/firebase';
-import { doc, getDoc, getFirestore } from 'firebase/firestore';
+import { app, init } from '../lib/firebase';
+import { doc, enableIndexedDbPersistence, getDoc, getFirestore } from 'firebase/firestore';
 import { ChatIcon, HomeIcon, HornIcon, TableIcon } from '../icons';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -16,14 +16,14 @@ import { Trans } from '@lingui/macro'
 import { useAuthState } from 'react-firebase-hooks/auth';
 import posthog from 'posthog-js';
 
-const db = getFirestore(app);
-const auth = getAuth(app);
+const db = getFirestore(app());
+const auth = getAuth(app());
 
 initTranslation(i18n);
 i18n.activate('en');
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const firebase = app; // initialize firebase
+  const firebase = app(); // initialize firebase
   const router = useRouter();
   //const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
@@ -63,19 +63,19 @@ function MyApp({ Component, pageProps }: AppProps) {
     })
   }
 
-  function initPostHog() {
-    if (typeof window === 'undefined') {
-      console.log('Initializing PostHog')
-      posthog.init('phc_yuABDyS7icczuDnR0COHympZkHammRDUWcJtnpmatvJ', { api_host: 'https://lithium.violet.schule' });
-      posthog.capture('startup');
-    }
-  }
-
   function initMetrics() {
     posthog.init('phc_yuABDyS7icczuDnR0COHympZkHammRDUWcJtnpmatvJ', { api_host: 'https://lithium.violet.schule' });
 
     callMetricsServer();
     setInterval(callMetricsServer, 60 * 1000);
+  }
+
+  async function enableCaching() {
+    try {
+      await enableIndexedDbPersistence(db);
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   useEffect(() => {
@@ -84,19 +84,20 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   // manage user data and preferences
   useEffect(() => {
-    if (userLoading) return;
-    initPostHog();
-    if (!user) {
-      setupNoUser();
-      // push to login page if no user is logged in
-      if (router.pathname !== '/login' && router.pathname !== '/welcome')
-        router.push('/login');
-    } else {
-      if (process.env.NODE_ENV !== 'development') {
-        initMetrics();
+    enableCaching().then(() => {
+      if (userLoading) return;
+      if (!user) {
+        setupNoUser();
+        // push to login page if no user is logged in
+        if (router.pathname !== '/login' && router.pathname !== '/welcome')
+          router.push('/login');
+      } else {
+        if (process.env.NODE_ENV !== 'development') {
+          initMetrics();
+        }
+        fetchUserData(user.uid);
       }
-      fetchUserData(user.uid);
-    }
+    });
   }, [user, userLoading])
 
   async function setupNoUser() {
@@ -130,8 +131,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <I18nProvider i18n={i18n}>
         <UserContext.Provider value={{ user: user, name, uid: user?.uid, loading: loading, colorScheme, setColorScheme, loadingAnimation, setLoadingAnimation }}>
           <Head>
-            <title>Violet</title>
-            <link rel="shortcut icon" href="/favicon.ico" />
+            <meta name='viewport' content='minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover' />
           </Head>
           <div className='grid'>
             <Component {...pageProps} />

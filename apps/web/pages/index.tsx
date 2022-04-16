@@ -16,8 +16,8 @@ import { GetStaticProps } from "next";
 import { loadTranslation } from "../lib/transUtil";
 import { UserContext } from '../lib/context';
 
-const db = getFirestore(app);
-const auth = getAuth(app);
+const db = getFirestore(app());
+const auth = getAuth(app());
 
 export const getStaticProps: GetStaticProps = async (ctx) => {
   const translation = await loadTranslation(

@@ -10,8 +10,8 @@ import { Trans } from '@lingui/macro'
 import { GetStaticProps } from "next";
 import { loadTranslation } from "../lib/transUtil";
 
-const auth = getAuth(app);
-const functions = getFunctions(app, 'europe-west1');
+const auth = getAuth(app());
+const functions = getFunctions(app(), 'europe-west1');
 
 export const getStaticProps: GetStaticProps = async (ctx) => {
     const translation = await loadTranslation(

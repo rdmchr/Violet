@@ -21,6 +21,10 @@ msgstr "Sign up"
 #~ msgid "chats"
 #~ msgstr "Chats"
 
+#: pages/settings.tsx:101
+msgid "clickToInstall"
+msgstr "Click here to install Violet"
+
 #: pages/welcome.tsx:92
 msgid "connectToSchool"
 msgstr "Let's connect your account to the school website!"
@@ -74,9 +78,18 @@ msgstr "Hello!"
 msgid "helloName"
 msgstr "Hello, {name}!"
 
-#: pages/_app.tsx:142
+#: pages/_app.tsx:160
 msgid "home"
 msgstr "Home"
+
+#: pages/_app.tsx:186
+msgid "installDisclaimer"
+msgstr "To use Violet offline and receive notifications, click the install button."
+
+#: pages/settings.tsx:100
+#: pages/_app.tsx:185
+msgid "installViolet"
+msgstr "Install Violet"
 
 #: pages/welcome.tsx:214
 msgid "invalidEmail"
@@ -106,11 +119,11 @@ msgstr "You can of course still use this app without an invite."
 msgid "lesson"
 msgstr "Lesson"
 
-#: pages/settings.tsx:84
+#: pages/settings.tsx:89
 msgid "loadingAnimation"
 msgstr "Loading animation"
 
-#: pages/settings.tsx:85
+#: pages/settings.tsx:90
 msgid "loadingAnimationText"
 msgstr "Toggle the loading animation"
 
@@ -119,11 +132,11 @@ msgstr "Toggle the loading animation"
 msgid "logIn"
 msgstr "Log in"
 
-#: pages/settings.tsx:93
+#: pages/settings.tsx:107
 msgid "logOut"
 msgstr "Log out"
 
-#: pages/settings.tsx:94
+#: pages/settings.tsx:108
 msgid "loggedInAs"
 msgstr "You are currently logged in as"
 
@@ -151,7 +164,7 @@ msgstr "Name"
 msgid "newHere"
 msgstr "New here?"
 
-#: pages/_app.tsx:154
+#: pages/_app.tsx:172
 msgid "news"
 msgstr "News"
 
@@ -214,7 +227,7 @@ msgid "thu"
 msgstr "Thu"
 
 #: pages/timetable.tsx:118
-#: pages/_app.tsx:148
+#: pages/_app.tsx:166
 msgid "timetable"
 msgstr "Timetable"
 

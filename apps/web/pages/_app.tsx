@@ -1,11 +1,11 @@
 import '../style/global.css'
 import type { AppProps } from 'next/app'
 import { UserContext } from '../lib/context';
-import { getAuth, User } from 'firebase/auth';
+import { getAuth } from 'firebase/auth';
 import { useEffect, useRef, useState } from 'react';
 import { app } from '../lib/firebase';
 import { doc, enableIndexedDbPersistence, getDoc, getFirestore } from 'firebase/firestore';
-import { ChatIcon, HomeIcon, HornIcon, TableIcon } from '../icons';
+import { HomeIcon, HornIcon, TableIcon } from '../icons';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
@@ -15,6 +15,7 @@ import { initTranslation } from '../lib/transUtil';
 import { Trans } from '@lingui/macro'
 import { useAuthState } from 'react-firebase-hooks/auth';
 import posthog from 'posthog-js';
+import * as Sentry from "@sentry/nextjs";
 
 const db = getFirestore(app());
 const auth = getAuth(app());
@@ -34,6 +35,8 @@ function MyApp({ Component, pageProps }: AppProps) {
   const [colorScheme, setColorScheme] = useState<string>('dark');
   const [loadingAnimation, setLoadingAnimation] = useState<boolean>(true);
   const [name, setName] = useState<string>('');
+  const [showingInstallPrompt, setShowingInstallPrompt] = useState<boolean>(false);
+  const [installPWA, setInstallPWA] = useState(null);
 
   // run only once on the first render (for server side)
   if (pageProps.translation && firstRender.current) {
@@ -54,13 +57,23 @@ function MyApp({ Component, pageProps }: AppProps) {
     if (!user || !user.uid) return;
     const token = await user.getIdToken();
     const metricsUrl = 'https://metrics.violet.schule/';
-    await fetch(metricsUrl, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        token
-      }
-    })
+    try {
+      await fetch(metricsUrl, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          token
+        }
+      })
+    } catch (e) {
+      Sentry.captureException(e);
+    }
+  }
+
+  function installPrompt() {
+    installPWA.prompt();
+    setShowingInstallPrompt(false);
+    setInstallPWA(null);
   }
 
   function initMetrics() {
@@ -70,21 +83,12 @@ function MyApp({ Component, pageProps }: AppProps) {
     setInterval(callMetricsServer, 60 * 1000);
   }
 
-  async function enableCaching() {
-    try {
-      await enableIndexedDbPersistence(db);
-    } catch (e) {
-      console.log(e)
-    }
-  }
-
   useEffect(() => {
     setRoute(router.pathname);
   });
 
   // manage user data and preferences
   useEffect(() => {
-    enableCaching().then(() => {
       if (userLoading) return;
       if (!user) {
         setupNoUser();
@@ -97,13 +101,26 @@ function MyApp({ Component, pageProps }: AppProps) {
         }
         fetchUserData(user.uid);
       }
-    });
-  }, [user, userLoading])
+  }, [user, userLoading]);
+
+  // prompt user to install PWA
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      // run only in browser
+      window.addEventListener('beforeinstallprompt', (e) => {
+        // Prevent Chrome 67 and earlier from automatically showing the prompt
+        e.preventDefault();
+        // Stash the event so it can be triggered later.
+        setInstallPWA(e);
+        // Update UI notify the user they can add to home screen
+        setShowingInstallPrompt(true);
+      })
+    }
+  }, [])
 
   async function setupNoUser() {
     const colorScheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     setColorScheme(colorScheme);
-    console.log(colorScheme);
     if (colorScheme === 'dark')
       document.documentElement.classList.add('dark');
     else
@@ -129,9 +146,10 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <I18nProvider i18n={i18n}>
-        <UserContext.Provider value={{ user: user, name, uid: user?.uid, loading: loading, colorScheme, setColorScheme, loadingAnimation, setLoadingAnimation }}>
+        <UserContext.Provider value={{ user: user, name, uid: user?.uid, loading: loading, colorScheme, setColorScheme, loadingAnimation, setLoadingAnimation, installPWA, setInstallPWA }}>
           <Head>
             <meta name='viewport' content='minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover' />
+            <title>Violet</title>
           </Head>
           <div className='grid'>
             <Component {...pageProps} />
@@ -162,6 +180,16 @@ function MyApp({ Component, pageProps }: AppProps) {
   </Link>*/}
             </nav>
           </div>
+          {showingInstallPrompt ?
+            <div className='z-10 fixed bottom-0 left-0 w-[100vw] bg border-t border-gray-500 shadow-[0_-1px_10px_3px_rgba(0,0,0,0.3)]'>
+              <h1 className='text text-center text-2xl font-semibold mt-2'><Trans id="installViolet">Install Violet</Trans></h1>
+              <p className='text text-center px-2'><Trans id="installDisclaimer">To use Violet offline and receive notifications, click the install button.</Trans></p>
+              <div className='flex w-max mx-auto gap-x-2 my-2'>
+                <button className='border-2 border-red-400 px-2 py-1 text text-lg font-medium rounded-lg' onClick={() => setShowingInstallPrompt(false)}>Cancel</button>
+                <button className='border-2 border-green-400 px-2 py-1 text text-lg font-medium rounded-lg' onClick={installPrompt}>Install</button>
+              </div>
+            </div> : null
+          }
         </UserContext.Provider>
       </I18nProvider>
     </>

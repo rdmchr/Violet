@@ -10,7 +10,8 @@ const moduleExports = withPWA({
   },
   pwa: {
     dest: 'public',
-    runtimeCaching: [cache]
+    runtimeCaching: cache,
+    maximumFileSizeToCacheInBytes: 8 * 1024 * 1024,
   },
 });
 

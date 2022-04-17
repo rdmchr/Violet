@@ -1,5 +1,6 @@
 const { withSentryConfig } = require('@sentry/nextjs');
 const withPWA = require('next-pwa');
+const cache = require('./cache');
 
 const moduleExports = withPWA({
   reactStrictMode: true,
@@ -9,7 +10,7 @@ const moduleExports = withPWA({
   },
   pwa: {
     dest: 'public',
-    cacheOnFrontEndNav: true
+    runtimeCaching: [cache]
   },
 });
 

@@ -81,7 +81,7 @@ define(['./workbox-d4a15e01'], (function (workbox) { 'use strict';
   * See https://goo.gl/2aRDsh
   */
 
-  importScripts();
+  importScripts("fallback-development.js");
   self.skipWaiting();
   workbox.clientsClaim();
   workbox.registerRoute("/", new workbox.NetworkFirst({
@@ -103,11 +103,19 @@ define(['./workbox-d4a15e01'], (function (workbox) { 'use strict';
 
         return response;
       }
+    }, {
+      handlerDidError: async ({
+        request
+      }) => self.fallback(request)
     }]
   }), 'GET');
   workbox.registerRoute(/.*/i, new workbox.NetworkOnly({
     "cacheName": "dev",
-    plugins: []
+    plugins: [{
+      handlerDidError: async ({
+        request
+      }) => self.fallback(request)
+    }]
   }), 'GET');
 
 }));

@@ -12,8 +12,8 @@ import { UserContext } from "../lib/context";
 import { app } from "../lib/firebase";
 import { loadTranslation } from "../lib/transUtil";
 
-const auth = getAuth(app);
-const db = getFirestore(app);
+const auth = getAuth(app());
+const db = getFirestore(app());
 
 export const getStaticProps: GetStaticProps = async (ctx) => {
     const translation = await loadTranslation(
@@ -30,7 +30,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
 export default function Settings() {
     const router = useRouter();
     const [user, authLoading, authError] = useAuthState(auth);
-    const { name, loading, colorScheme, setColorScheme, loadingAnimation, setLoadingAnimation } = useContext(UserContext)
+    const { name, loading, colorScheme, setColorScheme, loadingAnimation, setLoadingAnimation, installPWA, setInstallPWA } = useContext(UserContext)
 
     if (authLoading || loading) {
         return (<Loading />);
@@ -59,9 +59,14 @@ export default function Settings() {
 
     function updateLoadingAnimation() {
         updateDoc(doc(db, 'users', user.uid), {
-            loadingAnimation : !loadingAnimation
+            loadingAnimation: !loadingAnimation
         })
         setLoadingAnimation(!loadingAnimation);
+    }
+
+    function installPrompt() {
+        installPWA.prompt();
+        setInstallPWA(null);
     }
 
     return (
@@ -71,14 +76,14 @@ export default function Settings() {
             <div className="px-2">
                 <div className="flex items-center gap-2 justify-between">
                     <div>
-                        <h1 className="text font-semibold">Darkmode</h1>
-                        <p className="text-500">Switch the theme to a dark version</p>
+                        <h1 className="text font-semibold"><Trans id="darkmode">Darkmode</Trans></h1>
+                        <p className="text-500"><Trans id="darkmodeText">Switch the theme to a dark version</Trans></p>
                     </div>
                     <div>
                         <Toggle initialState={colorScheme === "dark"} onClick={(_e, newState) => { setScheme(newState) }} />
                     </div>
                 </div>
-                <br/>
+                <br />
                 <div className="flex items-center gap-2 justify-between">
                     <div>
                         <h1 className="text font-semibold"><Trans id="loadingAnimation">Loading animation</Trans></h1>
@@ -88,7 +93,16 @@ export default function Settings() {
                         <Toggle initialState={loadingAnimation} onClick={updateLoadingAnimation} />
                     </div>
                 </div>
-                <br/>
+                <br />
+                {installPWA ?
+                    <>
+                        <div className="cursor-pointer" onClick={installPrompt}>
+                            <p className="text font-semibold"><Trans id="installViolet">Install Violet</Trans></p>
+                            <p className="text-500 max-w-screen -mt-1"><Trans id="clickToInstall">Click here to install Violet</Trans></p>
+                        </div>
+                        <br />
+                    </>
+                    : null}
                 <div className="cursor-pointer" onClick={logout}>
                     <p className="text font-semibold"><Trans id="logOut">Log out</Trans></p>
                     <p className="text-500 max-w-screen -mt-1"><Trans id="loggedInAs">You are currently logged in as</Trans> {name.length > 15 ? `${name.slice(0, 14)}...` : name}</p>

@@ -90,3 +90,14 @@ input:checked ~ .dot {
 html, body {
     @apply bg;
 }
+
+#__next {
+    margin: 0 auto;
+}
+
+html, body, #__next {
+    height: 100%;
+  }
+  #__next {
+    margin: 0 auto;
+}

@@ -1,3 +1,5 @@
 pages/test.tsx
 # Sentry
 .sentryclirc
+# PWA
+public/*.map

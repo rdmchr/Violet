@@ -17,9 +17,9 @@ msgstr ""
 msgid "Sign up"
 msgstr "Registrieren"
 
-#: pages/_app.tsx:101
-#~ msgid "chats"
-#~ msgstr "Chats"
+#: pages/settings.tsx:101
+msgid "clickToInstall"
+msgstr "Klicke um Violet zu installieren"
 
 #: pages/welcome.tsx:92
 msgid "connectToSchool"
@@ -44,6 +44,14 @@ msgstr "Dieser Account wird für Violet benutzt."
 #: pages/welcome.tsx:74
 msgid "createAccountDisclaimerTwo"
 msgstr "Er ist komplett unabhängig von deinem Schul Konto."
+
+#: pages/settings.tsx:79
+msgid "darkmode"
+msgstr "Darkmode"
+
+#: pages/settings.tsx:80
+msgid "darkmodeText"
+msgstr "Wechsel zwischen hell und dunkel."
 
 #: pages/welcome.tsx:80
 msgid "doYouHaveAnInvite"
@@ -74,9 +82,18 @@ msgstr "Hallo!"
 msgid "helloName"
 msgstr "Hallo {name}!"
 
-#: pages/_app.tsx:142
+#: pages/_app.tsx:160
 msgid "home"
 msgstr "Home"
+
+#: pages/_app.tsx:186
+msgid "installDisclaimer"
+msgstr "Um Violet auch ohne Internet Verbindung zu nutzen, kannst du es nun installieren."
+
+#: pages/settings.tsx:100
+#: pages/_app.tsx:185
+msgid "installViolet"
+msgstr "Installiere Violet"
 
 #: pages/welcome.tsx:214
 msgid "invalidEmail"
@@ -106,11 +123,11 @@ msgstr "Du kannst Violet jedoch trotzdem benutzen."
 msgid "lesson"
 msgstr "Stunde"
 
-#: pages/settings.tsx:84
+#: pages/settings.tsx:89
 msgid "loadingAnimation"
 msgstr "Lade-Animation"
 
-#: pages/settings.tsx:85
+#: pages/settings.tsx:90
 msgid "loadingAnimationText"
 msgstr "Schalte die Lade-Animation an bzw. aus"
 
@@ -119,11 +136,11 @@ msgstr "Schalte die Lade-Animation an bzw. aus"
 msgid "logIn"
 msgstr "Anmelden"
 
-#: pages/settings.tsx:93
+#: pages/settings.tsx:107
 msgid "logOut"
 msgstr "Abmelden"
 
-#: pages/settings.tsx:94
+#: pages/settings.tsx:108
 msgid "loggedInAs"
 msgstr "Momentan angemeldet als "
 
@@ -151,7 +168,7 @@ msgstr "Name"
 msgid "newHere"
 msgstr "Neu hier?"
 
-#: pages/_app.tsx:154
+#: pages/_app.tsx:172
 msgid "news"
 msgstr "News"
 
@@ -214,7 +231,7 @@ msgid "thu"
 msgstr "Do"
 
 #: pages/timetable.tsx:118
-#: pages/_app.tsx:148
+#: pages/_app.tsx:166
 msgid "timetable"
 msgstr "Stundenplan"
 

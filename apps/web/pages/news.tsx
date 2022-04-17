@@ -6,8 +6,8 @@ import Loading from "../components/loading";
 import { app } from "../lib/firebase";
 import { UserContext } from '../lib/context';
 
-const auth = getAuth(app);
-const db = getFirestore(app);
+const auth = getAuth(app());
+const db = getFirestore(app());
 
 type News = {
     sender: string;

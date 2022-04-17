@@ -1,4 +1,4 @@
-import { initializeApp, getApps } from 'firebase/app'
+import { initializeApp } from 'firebase/app'
 import { enableIndexedDbPersistence, getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
@@ -10,4 +10,16 @@ const firebaseConfig = {
     appId: "1:478025473645:web:94ca06c796cb4bdef2e964"
 };
 
-export const app = initializeApp(firebaseConfig);
+export const app = () => {
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore();
+    try {
+        enableIndexedDbPersistence(db);
+        console.log('IndexedDB persistence is enabled');
+    } catch (e) {
+        if (e.code !== 'failed-precondition') {
+            console.log(e);
+        }
+    }
+    return app;
+};
